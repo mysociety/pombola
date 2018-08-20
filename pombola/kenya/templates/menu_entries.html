@@ -10,32 +10,32 @@
 {% endcomment %}
 
 
-<li><a href="{% url "home" %}" role="menuitem">Home</a></li>
+<li><a href="{% url 'home' %}" role="menuitem">Home</a></li>
 
 <li class="has-submenu">
-    <a href="{% url "info_page" slug='democracy-resources' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Democracy Resources</a>
+    <a href="{% url 'info_page' slug='democracy-resources' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Democracy Resources</a>
     {% if include_sub_menu_entries %}
     <ul id="democracy-resources" class="js-hover-dropdown" role="menu">
         <li>
-            <a href="{% url "info_page" slug='citizens-rights' %}" role="menuitem">Citizens Rights &amp; Responsibilities</a>
+            <a href="{% url 'info_page' slug='citizens-rights' %}" role="menuitem">Citizens Rights &amp; Responsibilities</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='how-democracy-works' %}" role="menuitem">How Our Democracy Works</a>
+            <a href="{% url 'info_page' slug='how-democracy-works' %}" role="menuitem">How Our Democracy Works</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='democracy-faq' %}" role="menuitem">Democracy FAQs</a>
+            <a href="{% url 'info_page' slug='democracy-faq' %}" role="menuitem">Democracy FAQs</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='ministry-overview' %}" role="menuitem">Ministry Overview</a>
+            <a href="{% url 'info_page' slug='ministry-overview' %}" role="menuitem">Ministry Overview</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='constitution-2010' %}" role="menuitem">Constitution 2010</a>
+            <a href="{% url 'info_page' slug='constitution-2010' %}" role="menuitem">Constitution 2010</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='election-legislation' %}" role="menuitem">Election Legislation</a>
+            <a href="{% url 'info_page' slug='election-legislation' %}" role="menuitem">Election Legislation</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='democracy-documents' %}" role="menuitem">Democracy Documents</a>
+            <a href="{% url 'info_page' slug='democracy-documents' %}" role="menuitem">Democracy Documents</a>
         </li>
     </ul>
     {% endif %}
@@ -43,46 +43,46 @@
 
 
 <li class="has-submenu">
-  <a href="{% url "position_pt" pt_slug='member-national-assembly' %}?view=grid" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>MPs</a>
+  <a href="{% url 'position_pt' pt_slug='member-national-assembly' %}?view=grid" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>MPs</a>
   {% if include_sub_menu_entries %}
   <ul id="parliament-overview" class="js-hover-dropdown" role="menu">
-    <li><a href="{% url "position_pt" pt_slug='member-national-assembly' %}?view=grid" role="menuitem">NA Members</a></li>
-    <li><a href="{% url "position_pt" pt_slug='senator' %}?view=grid" role="menuitem">Senators</a></li>
-    <li><a href="{% url "female-reps" %}" role="menuitem">Women</a></li>
-    <li><a href="{% url "young-reps" %}" role="menuitem">Youthful MPs</a></li>
-    <li><a href="{% url "organisation_kind" slug='coalition' %}" role="menuitem">Coalitions</a></li>
+    <li><a href="{% url 'position_pt' pt_slug='member-national-assembly' %}?view=grid" role="menuitem">NA Members</a></li>
+    <li><a href="{% url 'position_pt' pt_slug='senator' %}?view=grid" role="menuitem">Senators</a></li>
+    <li><a href="{% url 'female-reps' %}" role="menuitem">Women</a></li>
+    <li><a href="{% url 'young-reps' %}" role="menuitem">Youthful MPs</a></li>
+    <li><a href="{% url 'organisation_kind' slug='coalition' %}" role="menuitem">Coalitions</a></li>
   </ul>
   {% endif %}
 </li>
 
 <li class="has-submenu">
-    <a href="{% url "info_page" slug='parliament-overview' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Parliament</a>
+    <a href="{% url 'info_page' slug='parliament-overview' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>Parliament</a>
     {% if include_sub_menu_entries %}
     <ul id="parliament-overview" class="js-hover-dropdown" role="menu">
         <li>
-            <a href="{% url "info_page" slug='parliament-overview' %}" role="menuitem">Parliament Overview</a>
+            <a href="{% url 'info_page' slug='parliament-overview' %}" role="menuitem">Parliament Overview</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='committee-overview' %}" role="menuitem">Committee Overview</a>
+            <a href="{% url 'info_page' slug='committee-overview' %}" role="menuitem">Committee Overview</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='bills-overview' %}" role="menuitem">Bills Overview</a>
+            <a href="{% url 'info_page' slug='bills-overview' %}" role="menuitem">Bills Overview</a>
         </li>
 
         {% if settings.ENABLED_FEATURES.bills %}
             <li>
-                <a href="{% url "bills:index" %}" role="menuitem">Bills List</a>
+                <a href="{% url 'bills:index' %}" role="menuitem">Bills List</a>
             </li>
         {% endif %}
 
         {% if settings.ENABLED_FEATURES.hansard %}
             <li>
-                <a href="{% url "hansard:index" %}" role="menuitem">Hansard</a>
+                <a href="{% url 'hansard:index' %}" role="menuitem">Hansard</a>
             </li>
         {% endif %}
 
         <li>
-            <a href="{% url "organisation_kind" slug='party' %}" role="menuitem">Political Parties</a>
+            <a href="{% url 'organisation_kind' slug='party' %}" role="menuitem">Political Parties</a>
         </li>
     </ul>
     {% endif %}
@@ -96,62 +96,62 @@
             <a href="{% url 'women' %}" role="menuitem">Debunking Myths on Women MPs</a>
         </li>
         <li>
-            <a href="{% url "shujaaz-finalists-2015" %}" role="menuitem">People’s Shujaaz Awards</a>
+            <a href="{% url 'shujaaz-finalists-2015' %}" role="menuitem">People’s Shujaaz Awards</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug="proposed-bills" %}" role="menuitem">National Youth Employment Authority</a>
+            <a href="{% url 'info_page' slug='proposed-bills' %}" role="menuitem">National Youth Employment Authority</a>
         </li>
     </ul>
 </li>
 {% endif %}
 
 <li class="has-submenu">
-    <a href="{% url "info_page" slug='news' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>News</a>
+    <a href="{% url 'info_page' slug='news' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>News</a>
     {% if include_sub_menu_entries %}
     <ul id="news-overview" class="js-hover-dropdown" role="menu">
         <li>
           <a href="http://mzalendo.com/blog/" role="menuitem">Blog</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='newsletter' %}" role="menuitem">Newsletter</a>
+            <a href="{% url 'info_page' slug='newsletter' %}" role="menuitem">Newsletter</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='press' %}" role="menuitem">Press</a>
+            <a href="{% url 'info_page' slug='press' %}" role="menuitem">Press</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='infographics' %}" role="menuitem">Infographics</a>
+            <a href="{% url 'info_page' slug='infographics' %}" role="menuitem">Infographics</a>
         </li>
     </ul>
     {% endif %}
 </li>
 
 <li class="has-submenu">
-    <a href="{% url "info_page" slug='mzalendo-overview' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>About</a>
+    <a href="{% url 'info_page' slug='mzalendo-overview' %}" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>About</a>
     {% if include_sub_menu_entries %}
     <ul id="mzalendo-overview" class="js-hover-dropdown" role="menu">
         <li>
-            <a href="{% url "info_page" slug='mzalendo-overview' %}" role="menuitem">Mzalendo Overview</a>
+            <a href="{% url 'info_page' slug='mzalendo-overview' %}" role="menuitem">Mzalendo Overview</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='site-faq' %}" role="menuitem">Site FAQs</a>
+            <a href="{% url 'info_page' slug='site-faq' %}" role="menuitem">Site FAQs</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='policies' %}" role="menuitem">Policies</a>
+            <a href="{% url 'info_page' slug='policies' %}" role="menuitem">Policies</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='founders' %}" role="menuitem">Founders</a>
+            <a href="{% url 'info_page' slug='founders' %}" role="menuitem">Founders</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='management' %}" role="menuitem">Management</a>
+            <a href="{% url 'info_page' slug='management' %}" role="menuitem">Management</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='partners' %}" role="menuitem">Partners</a>
+            <a href="{% url 'info_page' slug='partners' %}" role="menuitem">Partners</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='scorecard-faq' %}" role="menuitem">Scorecard FAQs</a>
+            <a href="{% url 'info_page' slug='scorecard-faq' %}" role="menuitem">Scorecard FAQs</a>
         </li>
         <li>
-            <a href="{% url "info_page" slug='contact' %}" role="menuitem">Contact</a>
+            <a href="{% url 'info_page' slug='contact' %}" role="menuitem">Contact</a>
         </li>
         {% if settings.POPIT_API_URL %}
         <li>
