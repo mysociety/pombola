@@ -7,7 +7,7 @@ class SACommitteesView(ListView):
     queryset = Organisation.objects.filter(
         kind__name='National Assembly Committees',
         contacts__kind__slug='email'
-    ).distinct()
+    ).distinct().order_by('short_name')
     context_object_name = 'committees'
     template_name = 'south_africa/committee_list.html'
 
