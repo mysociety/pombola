@@ -18,7 +18,7 @@ class CommitteesPopoloJson(ListView):
                 'persons': [
                     {
                         'id': str(committee.id),
-                        'name': committee.name,
+                        'name': committee.short_name,
                         'email': committee.contacts.filter(kind__slug='email')[0].value,
                         'contact_details': []
                     }
