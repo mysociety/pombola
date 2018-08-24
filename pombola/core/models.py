@@ -726,6 +726,7 @@ class OrganisationQuerySet(models.query.GeoQuerySet):
 
 class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     name = models.CharField(max_length=200)
+    short_name = models.CharField(max_length=200, editable=False)
     slug = models.SlugField(
         max_length=200,
         unique=True,
@@ -766,6 +767,24 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
             now = datetime.date.today()
             now_approx = ApproximateDate(year=now.year, month=now.month, day=now.day)
             return now_approx <= self.ended
+
+    def __shorten_name(self):
+
+        name = self.name
+
+        strip_phrases = [
+            'Portfolio Committee on',
+            'Standing Committee on',
+        ]
+
+        for phrase in strip_phrases:
+            name = re.sub('(?i)' + re.escape(phrase), '', name)
+
+        return name.strip()
+
+    def save(self, *args, **kwargs):
+        self.short_name = self.__shorten_name()
+        super(Organisation, self).save(*args, **kwargs)
 
 
 class PlaceKind(ModelBase):

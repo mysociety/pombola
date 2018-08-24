@@ -23,7 +23,7 @@
         <li class="list-of-things-item {{ committee.css_class }}-list-item{% if not committee.show_active %} inactive{% endif %}">
             <p>
                 <a href="{{ committee.get_absolute_url }}" class="committee-list__name">
-                {{ committee.name }}
+                {{ committee.short_name }}
                 </a>
             </p>
            
