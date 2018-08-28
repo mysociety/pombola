@@ -152,6 +152,14 @@ class ModelBase(models.Model):
         )
         return url
 
+    def get_disqus_thread_data(self, request):
+        return {
+            'disqus_canonical_url':
+            request.build_absolute_uri(self.get_absolute_url()),
+            'disqus_identifier':
+            '{0}-{1}'.format(self.css_class(), self.id)
+        }
+
     def get_popolo_id(self, id_scheme):
         table_name = self._meta.db_table
         return '{1}:{2}'.format(id_scheme, table_name, self.id)
