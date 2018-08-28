@@ -161,16 +161,17 @@ def person_summary(request, slug):
 
     lifetime_summary = entries_qs.monthly_appearance_counts()
 
-
+    context = {
+        'person':           person,
+        'entry_count':      entries_qs.count(),
+        'recent_entries':   entries_qs.all().order_by('-sitting__start_date')[0:5],
+        'lifetime_summary': lifetime_summary,
+    }
+    context.update(person.get_disqus_thread_data(request))
 
     return render_to_response(
         'hansard/person_summary.html',
-        {
-            'person':           person,
-            'entry_count':      entries_qs.count(),
-            'recent_entries':   entries_qs.all().order_by('-sitting__start_date')[0:5],
-            'lifetime_summary': lifetime_summary,
-        },
+        context,
         context_instance=RequestContext(request)
     )
 
@@ -180,6 +181,7 @@ class PersonAllAppearancesView(ListView):
     def get_context_data(self, **kwargs):
         context = super(PersonAllAppearancesView, self).get_context_data(**kwargs)
         context['object'] = self.person
+        context.update(self.person.get_disqus_thread_data(self.request))
         return context
 
     def get_queryset(self):
