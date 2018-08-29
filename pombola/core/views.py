@@ -148,7 +148,14 @@ class SubSlugRedirectMixin(SlugRedirectMixin):
         return redirect(url)
 
 
-class BasePersonDetailView(SkipHidden, DetailView):
+class BaseDetailView(DetailView):
+    def get_context_data(self, **kwargs):
+        context = super(BaseDetailView, self).get_context_data(**kwargs)
+        context.update(self.object.get_disqus_thread_data(self.request))
+        return context
+
+
+class BasePersonDetailView(SkipHidden, BaseDetailView):
     model = models.Person
 
     def get_context_data(self, **kwargs):
@@ -185,7 +192,7 @@ class PersonSpeakerMappingsMixin(object):
             return None
 
 
-class BasePlaceDetailView(DetailView):
+class BasePlaceDetailView(BaseDetailView):
     model = models.Place
 
     def get_context_data(self, **kwargs):
@@ -508,7 +515,7 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
     )
 
 
-class OrganisationDetailView(SlugRedirectMixin, DetailView):
+class OrganisationDetailView(SlugRedirectMixin, BaseDetailView):
     model = models.Organisation
 
     def get_context_data(self, **kwargs):
@@ -520,7 +527,7 @@ class OrganisationDetailView(SlugRedirectMixin, DetailView):
         return context
 
 
-class OrganisationDetailSub(SubSlugRedirectMixin, DetailView):
+class OrganisationDetailSub(SubSlugRedirectMixin, BaseDetailView):
     model = models.Organisation
     sub_page = None
 
