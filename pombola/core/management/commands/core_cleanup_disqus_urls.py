@@ -72,4 +72,5 @@ class Command(LabelCommand):
 
         writer = csv.writer(sys.stdout)
         for old, new in new_mapping:
-            writer.writerow([old, new])
+            if old != new:
+                writer.writerow([old, new])
