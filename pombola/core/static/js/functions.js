@@ -38,6 +38,15 @@ $(function(){
         + $('#home-featured-person').height() + 'px"><p>loading...</p></div>';
     }
 
+    $('.js-expanded-toggle').on('click', function(e){
+      e.preventDefault();
+      if ( $(this).attr('aria-expanded') === 'true' ) {
+        $(this).attr('aria-expanded', false);
+      } else {
+        $(this).attr('aria-expanded', true);
+      }
+    });
+
     // important to delegate this (with on()) because the contents change each auto-advance
     $('#home-featured-person').on("click", '.feature-nav > a', function(e, is_auto_advancing){
       e.preventDefault();

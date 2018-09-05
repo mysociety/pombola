@@ -1,79 +1,53 @@
-@mixin input-placeholder-color($color){
-  &::-webkit-input-placeholder {
-    color: $color;
-  }
-  &:-moz-placeholder {
-    color: $color;
-  }
-  &::-moz-placeholder {
-    color: $color;
-  }
-  &:-ms-input-placeholder {
-    color: $color;
-  }
-}
-
 $logo-height-small: 25px;
 $logo-width-small: 103px;
 $logo-height-large: 40px;
 $logo-width-large: 165px;
 
-#site-header {
-    background-image: none; // remove gradient
+.site-header {
+    @include clearfix();
+    background-image: none;
     background-color: $colour_deep_green;
+    padding: 10px 0;
 
-    // Black and red "wedges" either side of the header in modern browsers.
-    //
-    // This requires multiple backgrounds (a linear-gradient for the infinite
-    // length black and red edges, and a fixed width image for the 1060px
-    // black-green-red central portion).
-    // Pretty much all browsers which support multiple backgrounds also
-    // support SVG, so there's no need for PNG fallbacks here.
-    // We do however have to provide a few different gradient syntaxes.
-    //
-    // Browsers that don't support multiple backgrounds (IE7-8, mainly)
-    // will fall back to just the plain green header.
-    // Browsers that don't support gradients (IE9, mainly) will ignore
-    // the entire background-image rule and fall back to plain green too.
+    @media (min-width: 640px), print {
+        padding: 1em 0;
+    }
 
-    @media (min-width: 960px) {
-        background-image: url('/static/images/mzalendo-header-background.svg'), -webkit-linear-gradient(90deg, #000 50%, #C32810 50%);
-        background-image: url('/static/images/mzalendo-header-background.svg'), linear-gradient(90deg, #000 50%, #C32810 50%);
-        // SVG should be 1060px wide and 100% height of #site-header,
-        // while gradient should be 100% width of #site-header.
-        background-size: 1060px 100%, 100%;
-        background-position: center center;
-        background-repeat: no-repeat;
+    // Naughtily overload the wrapper to also *vertically* centre it contents,
+    // in addition to the horizontal padding/centering you'd normally expect.
+    .wrapper {
+        @include display-flex();
+        @include align-items(center);
     }
 }
 
-.logo {
-    height: 35px;
+.site-header__logo-svg,
+.site-header__no-svg-fallback-logo {
+    height: $logo-height-small;
     width: $logo-width-small;
-    margin-left: 20px;
-    display: inline-block;
+    display: block;
+
+    .site-header & {
+        float: left;
+    }
 
     @media (min-width: 640px), print {
         height: $logo-height-large;
         width: $logo-width-large;
-        top: 10px;
-        position: relative;
-        margin-left: 0;
         padding: 0;
     }
 }
 
-.site-logo-svg {
+.site-header__logo-svg {
     display: none;
 
     .svg & {
-        display: inline-block;
+        display: block;
     }
 
     svg {
         height: $logo-height-small;
         width: $logo-width-small;
-        margin-top: (35px - $logo-height-small) * 0.5;
 
         @media (min-width: 640px), print {
             height: $logo-height-large;
@@ -83,7 +57,7 @@ $logo-width-large: 165px;
     }
 }
 
-.no-svg-fallback-logo {
+.site-header__no-svg-fallback-logo {
     background: url('/static/images/mzalendo-logo-small.png') left center no-repeat;
     background-size: $logo-width-small;
     overflow: hidden;
@@ -100,119 +74,64 @@ $logo-width-large: 165px;
     }
 }
 
-#tagline {
-  display: block;
-  position: absolute;
-  top: 15px;
-  left: -999px;
-  height: 34px;
-  line-height: 34px;
-  color: mix($colour_primary_mid, #fff, 30%);
+.site-header__tagline {
+    display: none;
+    color: mix($colour_deep_green, #fff, 30%);
+    margin-left: 1em;
 
-  @media only all and (min-width: 640px), print {
-    left: 200px;
-  }
-
+    @media (min-width: 640px), print {
+        display: block;
+    }
 }
 
-menu#mobile-top-tools {
-  ul {
+.site-header__social {
+    @include unstyled-list();
+    float: right;
+    margin: 0 0 0 auto;
+
     li {
-      padding: 0 10px;
-      a {
+        float: left;
+        margin: 0;
+    }
+
+    a {
         display: block;
-        margin-top: 10px;
-        text-transform: uppercase;
-        img {
-          vertical-align: -3px; } } } } }
+        margin-left: 1em;
 
-#header-search {
-  position: absolute;
-  top: 17px;
-  right: 0;
-  height: auto;
-  border: none;
-  float: none;
-  border: none;
-  margin: 0;
+        svg {
+            display: block; // avoid whitespace below svg
+            width: 24px;
+            height: 24px;
 
-  @media only all and (min-width: 640px), print {
-    display: block;
-  }
-
-  @media print {
-    display: none;
-  }
-
-  input {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0 40px 0 7px;
-    margin: 0;
-    width: 5em;
-    height: 26px;
-    font-size: 14px;
-    line-height: 16px;
-    border: 1px solid transparent;
-    background-color: transparent;
-    -webkit-appearance: none;
-    color: #fff;
-
-    float: none;
-
-    @include border-radius(0);
-    @include transition(border 100ms linear, width 100ms linear);
-    @include input-placeholder-color(#fff);
-
-    &:hover {
-      border-color: mix($colour_primary_mid, #fff, 60%);
+            @media (min-width: 640px), print {
+                width: 36px;
+                height: 36px;
+            }
+        }
     }
 
-    &:focus, &:hover:focus {
-      width: 10em;
-      background-color: transparent;
-      border-color: #fff;
-      outline: none;
-      -webkit-box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
-      box-shadow: 0 0 3px 0 mix($colour_primary_mid, #fff, 50%);
-      @include input-placeholder-color(mix($colour_primary_mid, #fff, 50%));
+    a[href*="youtube.com"] {
+        display: none;
+
+        @media (min-width: 400px), print {
+            display: block;
+        }
+
+        svg {
+            width: (24px / 36 * 52);
+
+            @media (min-width: 640px), print {
+                width: 52px;
+            }
+        }
     }
+}
 
-  }
+#ms_srv_wrapper {
+    background-color: $colour_red;
 
-  button {
-    float: none;
-    margin: 0;
-    @include border-radius(0);
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 32px;
-    height: 28px;
-    background: transparent url(../images/search-icon.png) center no-repeat;
-
-    -webkit-transition: background 100ms linear;
-    -moz-transition: background 100ms linear;
-    -ms-transition: background 100ms linear;
-    -o-transition: background 100ms linear;
-    transition: background 100ms linear;
-
-    &:hover {
-      background-color: mix($colour_primary_mid, #fff, 60%);
+    & + .site-menu {
+        // No need for red border if red survey bar is present.
+        border-top: none;
     }
-
-    &:focus {
-      outline: none;
-      -webkit-box-shadow: none;
-      box-shadow: none;
-    }
-
-  }
-
-  &:hover input {
-    border-color: mix($colour_primary_mid, #fff, 60%);
-  }
-
 }

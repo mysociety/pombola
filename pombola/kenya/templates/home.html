@@ -14,6 +14,8 @@
   {% endif %}
 {% endblock%}
 
+{% block body_attributes %}class="home"{% endblock %}
+
 {% block js_end_of_body %}
   {{ block.super }}
   {% javascript 'feeds' %}
@@ -23,95 +25,215 @@
     {# Hide bread crumbs on the home page #}
 {% endblock %}
 
-{% block content %}
+{% block page %}
 
-<div id="home-intro">
-
-    <div id="home-quote">
-        <img src="{% static 'images/parliament-400px.jpg' %}"
+<div class="homepage-intro wrapper">
+    <div class="mz-grid-row">
+        <div class="homepage-intro__photo mz-grid-col-4">
+            <img src="{% static 'images/parliament-400px.jpg' %}"
             sizes="(min-width: 640px) 400px, 100vw"
             srcset="{% static 'images/parliament-600px.jpg' %} 600w,
             {% static 'images/parliament-400px.jpg' %} 400w">
-        <p>All Sovereign power belongs to the people of Kenya and shall be exercised only in accordance with this Constitution</p>
-        <footer>
-            &ndash; <cite>Article 1 (i), Constitution of Kenya August 2010</cite>
-        </footer>
+        </div>
+        <blockquote class="homepage-intro__quote mz-grid-col-4">
+            <p>All Sovereign power belongs to the people of Kenya and shall be exercised only in accordance with this Constitution</p>
+            <footer>
+                <cite>Article 1 (i), Constitution of Kenya, 2010</cite>
+            </footer>
+        </blockquote>
+        <div class="mz-grid-col-4">
+            <div class="homepage-intro__popular">
+                <h2>Popular pages:</h2>
+                <ul>
+                    <li><a href="{% url 'core_search' %}">Find your Representatives</a></li>
+                    <li><a href="{% url 'hansard:index' %}">Read the Hansard</a></li>
+                    <li><a href="{% url 'female-reps' %}">Women Representatives</a></li>
+                    <li><a href="{% url 'young-reps' %}">Youthful Representatives</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-
-    <div id="home-cta">
-        <a class="home-cta home-cta--bonga " href="sms:21516">
-            <strong>Bonga-Na-Mzalendo</strong>
-            SMS 21516
-        </a>
-        <a class="home-cta home-cta--representatives" href="{% url "core_search" %}"><strong>Find your Representatives</strong> MPs, Senators, and Women Representatives</a>
-        <a class="home-cta home-cta--hansard" href="{% url "hansard:index" %}"><strong>The Hansard</strong> Read transcripts of what was said in&nbsp;parliament</a>
-    </div>
-
 </div>
 
-<div id="home-editorial">
-
-    <ul class="home-editorial__actions">
-        <li>
-            <a href="https://dokeza.mzalendo.com/">
-                <strong>Dokeza</strong>Click here to give input on bills
+<div class="homepage-tabs wrapper">
+    <div class="mz-grid-row">
+        <div class="homepage-tabs__sms mz-grid-col-4">
+            <a href="sms:21516">
+                <strong>Bonga-na-Mzalendo!</strong>
+                SMS 21516
             </a>
-        </li>
-        <li>
-            <a href="{% url "info_page" slug='newsletter' %}">
-                Subscribe to
-                <strong>our newsletter</strong>
+        </div>
+        <div class="homepage-tabs__dokeza mz-grid-col-4">
+            <a href="https://dokeza.mzalendo.com">
+                <strong>Dokeza:</strong>
+                Give your input on bills
             </a>
-        </li>
-    </ul>
-
-  {% if featured_person != None %}
-    <div id="home-featured-person">
-        <h2>Featured Person</h2>
-        {% include 'core/person_feature.html' %}
+        </div>
+        <div class="homepage-tabs__newsletter mz-grid-col-4">
+            <a href="{% url 'info_page' slug='newsletter' %}">
+                <strong>Subscribe</strong>
+                to our newsletter
+            </a>
+        </div>
     </div>
-  {% endif %}
+</div>
 
-  {% if settings.BLOG_RSS_FEED %}
-    <div id="home-blog">
-        <h2>Editorial</h2>
-        <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-            <li>
-                Loading news&hellip;
-            </li>
+<div class="homepage-sms">
+    <div class="wrapper">
+        <h2 class="homepage-sms__title">This week’s SMS question:</h2>
+        <div class="mz-grid-row">
+            <div class="homepage-sms__question mz-grid-col-8">
+                <h3>Do you think women are fully represented in Kenyan parliament?</h3>
+            </div>
+            <div class="mz-grid-col-4">
+                <a href="sms:21516" class="homepage-sms__cta">
+                    Have your say
+                    <strong>SMS 21516</strong>
+                </a>
+            </div>
+        </div>
+        <div class="homepage-sms__responses mz-grid-row">
+            <div class="mz-grid-col-4">
+                <div class="homepage-sms__response">
+                    <p>“Women will never be equal until we have a woman president!”</p>
+                    <footer>
+                        <p>1 hour ago</p>
+                    </footer>
+                </div>
+            </div>
+            <div class="mz-grid-col-4">
+                <div class="homepage-sms__response">
+                    <p>“Women are represented just as well as everyone else.”</p>
+                    <footer>
+                        <p>5 hours ago</p>
+                    </footer>
+                </div>
+            </div>
+            <div class="mz-grid-col-4">
+                <div class="homepage-sms__response">
+                    <p>“Sabina Wanjiru Chege is my hero. She has done a lot for womens causes in Parliament.”</p>
+                    <footer>
+                        <p>1 day ago</p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="homepage-editorial">
+    <div class="wrapper">
+        <div class="mz-grid-row">
+            <div class="mz-grid-col-4">
+
+              {% if featured_person != None %}
+                <!-- {% include 'core/person_feature.html' %} -->
+              {% else %}
+                <!-- TODO: fill this space if featured person not set -->
+              {% endif %}
+
+                <div class="homepage-featured-person">
+                    <header>
+                        <h2>Featured person</h2>
+                        <a href="#" class="homepage-featured-person__previous">Previous person</a>
+                        <a href="#" class="homepage-featured-person__next">Next person</a>
+                    </header>
+                    <a href="#">
+                        <img src="http://info.mzalendo.com/media_root/cache/68/62/6862426421874a9421acc795b9441ac1.jpg" height="140" width="140" alt="">
+                    </a>
+                    <a href="#" class="homepage-featured-person__name">
+                        <h3>Sabina Wanjiru Chege</h3>
+                    </a>
+                    <p class="homepage-featured-person__role">
+                        Politician
+                    </p>
+                    <p class="homepage-featured-person__description">
+                        Sabina Chege is a woman of many talents and used to be an actor at Kenya National Theatre. She served as a radio presenter for many years where she addressed development and women issues. Transforming…
+                    </p>
+                </div>
+            </div>
+            <div class="mz-grid-col-8">
+
+              {% if settings.BLOG_RSS_FEED %}
+                <!-- <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
+                    <li>Loading news&hellip;</li>
+                </ul> -->
+              {% else %}
+                <!-- TODO: fill this space if blog rss feed not supplied -->
+              {% endif %}
+
+                <div class="homepage-news">
+                    <header>
+                        <h2>Editorial</h2>
+                        <a href="#">Read more on the Mzalendo blog</a>
+                    </header>
+                    <div class="mz-grid-row">
+                        <div class="homepage-news__story mz-grid-col-6">
+                            <a href="#" class="homepage-news__story__title">
+                                <h3>When greed appears to be our national ethos then we the people will always be at the bottom of the food chain</h3>
+                            </a>
+                            <p class="homepage-news__story__date">
+                                29 Jul 2018
+                            </p>
+                            <p class="homepage-news__story__content">
+                                This week people have been making jokes about the government stealing from the government then investigating the government as a way of mocking the whole corruption exercise. Others have taken the same approach on the MAU forest issue, saying the government is warning the government against evictions. The whole point being we seem to be […]
+                            </p>
+                        </div>
+                        <div class="homepage-news__story mz-grid-col-6">
+                            <a href="#" class="homepage-news__story__title">
+                                <h3>We need to be sober about two-thirds gender debate and the Green Amendment Campaign is on track</h3>
+                            </a>
+                            <p class="homepage-news__story__date">
+                                21 Jul 2018
+                            </p>
+                            <p class="homepage-news__story__content">
+                                In Kenya, the law is always very clear until it is not. A few months ago when opposition was toying with the idea of the People’s Assembly, politicians from both sides kept shouting the law is very clear and then would proceed to make very incoherent statements that left the public more confused. This week, […]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+
+    <div class="homepage-social">
+        <div class="mz-grid-row">
+            <div class="mz-grid-col-6">
+            {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
+                {% include 'twitter_widget.html' %}
+            {% else %}
+                <!-- TODO: what to do if no Twitter details? -->
+            {% endif %}
+            </div>
+            <div class="mz-grid-col-1"></div>
+            <div class="mz-grid-col-5">
+                <ul class="homepage-social__buttons">
+                    <li><a href="https://youtube.com/user/MzalendoKenya">Subscribe to Mzalendo on YouTube</a></li>
+                    <li><a href="https://facebook.com/MzalendoWatch">Follow Mzalendo on Facebook</a></li>
+                    <li><a href="https://instagram.com/mzalendowatch">Follow Mzalendo on Instagram</a></li>
+                    <li><a href="https://twitter.com/MzalendoWatch">Follow Mzalendo on Twitter</a></li>
+                    <li><a href="{% url 'info_page' slug='newsletter' %}">Subscribe to our email newsletter</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="homepage-about">
+        <p class="homepage-about__vision">
+            Mzalendo is a non-partisan entity that keeps an eye on Kenyan Parliament with a mission to facilitate public participation in Parliamentary processes through Information Sharing, Research and Networking. Our vision is to see informed, empowered and engaged citizens transforming society by holding their leaders to account. We are proud to be supported by:
+        </p>
+        <ul class="homepage-about__supporters">
+            <li><a href="https://indigotrust.org.uk"><img src="{% static 'images/logo-indigo.png' %}" width="150" height="64" alt="The Indigo Trust"></a></li>
+            <li><a href="https://www.boell.de/en/"><img src="{% static 'images/logo-boll.png' %}" width="100" height="50" alt="Heinrich Böll Stiftung"></a></li>
+            <li><a href="https://www.mysociety.org"><img src="{% static 'images/logo-mysociety.svg' %}" width="172" height="40" alt="mySociety"></a></li>
+            <li><a href="https://www.ned.org"><img src="{% static 'images/logo-ned.svg' %}" width="64" height="64" alt="The National Endowment for Democracy"></a></li>
         </ul>
     </div>
-  {% endif %}
 
-    <div id="home-social">
-      <div class="home-social__facebook">
-        <h2>Like us on Facebook</h2>
-        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FMzalendoWatch&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21&amp;appId=212162318805899" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-      </div>
-      <div class="home-social__profiles">
-        <h2>Follow us</h2>
-        <ul class="home-social__profiles-list">
-          <li><a href="https://www.instagram.com/mzalendowatch/" class="social-profile-link social-profile-link--instagram">Instagram</a></li>
-          <li><a href="https://www.youtube.com/user/MzalendoKenya" class="social-profile-link social-profile-link--youtube">YouTube</a></li>
-        </ul>
-      </div>
-    </div>
-
-  {% if settings.TWITTER_USERNAME and settings.TWITTER_WIDGET_ID %}
-    <div id="home-twitter">
-        {% include 'twitter_widget.html' %}
-    </div>
-  {% endif %}
-
-</div>
-
-<div id="home-promoted">
-
-</div>
-
-<div id="home-background">
-    <img src="/static/images/indigo.gif" width="300" height="172" alt="Indigo">
-    <p>Mzalendo is a non-partisan entity that keeps an eye on Kenyan Parliament with a mission to facilitate public participation in Parliamentary processes through Information Sharing, Research and Networking. Our vision is to see informed, empowered and engaged citizens transforming society by holding their leaders to account.</p>
 </div>
 
 {% endblock %}

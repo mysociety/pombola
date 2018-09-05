@@ -1,160 +1,181 @@
-// There are two menus - the 'mobile-top-tools' and the 'main-menu'.
-
-$no-frills-menu-breakpoint: 840px;
 $no-menu-breakpoint: 640px;
-$menu-background-color: #f2f0e7;
+$menu-background-color: $colour_dark_grey;
 
-#main-menu {
-  display: none; // Don't show this menu at all by default
-  @media only all and (min-width: $no-menu-breakpoint) {
-    display: block;
-  }
+.site-menu {
+    background: $menu-background-color;
+    border-top: 4px solid $colour_red;
+    padding: 10px 0;
 
-  background: $menu-background-color;
-
-  body.women &,
-  body.shujaaz & {
-    // These pages have pale yellow body backgrounds, so add a border
-    // to give some contrast between the menu and the page content.
-    border-bottom: 1px solid darken($menu-background-color, 5%);
-  }
-
-  nav {
-    width: 100%;
-    max-width: 980px; /* override default 960px, to account for padding on list items */
-    text-align: center;
+    ul {
+        @include unstyled-list();
+    }
 
     a {
-      color: #444;
+        color: #fff;
     }
 
-    a,
-    & > ul > li > a {
-      height: auto;
-      background: transparent;
+    .wrapper {
+        @include clearfix();
+    }
+}
+
+.site-menu__mobile-toggle {
+    display: inline-block;
+    width: 25%;
+    max-width: 6em;
+    padding: 7px 10px; // Tedious vertical padding because Opera Mini won't let us use line-height
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    border: 1px solid mix(#fff, $menu-background-color, 50%);
+    text-align: center;
+    cursor: default;
+
+    @media (min-width: $no-menu-breakpoint) {
+        display: none;
     }
 
-    // styles for top level menu
-    & > ul {
-      display: block; // undo the default pombola inline-block
-      text-align: justify; // space out inline children to fill available width
-      font-size: 0; // effectively hide all inline children (but mainly the fake element)
-      line-height: 0;
-
-      &:after {
-        display: inline-block;
-        content: ""; // create a fake final element in the menu
-        width: 100%; // force element onto a new line, making text justification kick in for the previous line
-        height: 0; // effectively hide this element
-      }
-
-      & > li {
-        float: none;
-        border-right: none;
-        height: auto;
-
-        display: inline-block; // display list items horizontally, and use parent's text alignment (justify)
-        position: relative; // so we can absolutely position the submenus
-        font-size: 14px; // override the parent's 0px font-size
-        line-height: 24px;
-
-        @media (max-width: $no-frills-menu-breakpoint) {
-          font-size: 12px;
-        }
-
-        & > a {
-          display: block;
-          font-size: inherit;
-          padding: 5px 10px;
-
-          @media (max-width: $no-frills-menu-breakpoint) {
-            padding: 5px;
-          }
-        }
-
-        &:hover > a,
-        & > a:hover,
-        & > a:focus {
-          background: darken($menu-background-color, 10%);
-        }
-      }
-    }
-
-    .js-hover-dropdown {
-      z-index: 1; // make sure it appears over later list items, if the menu wraps onto two lines
-      top: 34px; // 24px li line-height + 5px padding-top + 5px padding-bottom
-      width: auto; // override pombola default of 193px
-      border: 1px solid #ccc;
-      border-top: none;
-      background: #fff;
-      text-align: left; // reset the parent menu's "text-align: justify
-      float: left; // allows dropdown menu to exceed parent li's width
-      white-space: nowrap; // stops menu items wrapping onto more than one line
-      min-width: 100%; // makes sure dropdowns are at least as wide as their parent
-      box-sizing: border-box; // count border as part of width, in modern browsers
-
-      a {
-        display: block;
-        padding: 8px 10px;
+    &:hover,
+    &:focus {
         text-decoration: none;
-        background: transparent; // override pombola default of #f6f6f6
+        background-color: $colour_primary_mid;
+        border-color: $colour_primary_mid;
+    }
+
+    svg {
+        margin-right: 5px;
+    }
+}
+
+.site-menu__search {
+    width: 60%;
+    float: right;
+    position: relative;
+
+    @media (min-width: $no-menu-breakpoint) {
+        width: 15em;
+    }
+
+    input {
+        @include box-sizing(border-box);
+        width: 100%;
+        font-size: 1em;
+        height: 30px;
+        padding: 0 40px 0 10px; // Sadly this padding is largely ignored by Opera Mini.
+        border-radius: 4px;
+        border: none;
+    }
+
+    button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        padding: 0 10px;
 
         &:hover,
         &:focus {
-          background: #eee;
+            background-color: $colour_primary_mid;
+
+            svg path {
+                fill: #fff;
+            }
         }
-      }
+
+        svg {
+            vertical-align: middle;
+        }
+    }
+}
+
+// Hide the menu on narrow screens, when javascript is available.
+// And reveal it again when the toggle button has been pressed.
+.js .site-menu__links {
+    display: none;
+
+    @media (min-width: $no-menu-breakpoint) {
+        display: block;
+    }
+}
+
+.site-menu__mobile-toggle[aria-expanded="true"] ~ .site-menu__links {
+    display: block;
+}
+
+.site-menu__links {
+    margin-top: 10px;
+
+    li {
+        margin-bottom: 0;
+    }
+
+    a {
+        display: block;
+        padding: 5px 0;
+    }
+
+    // Top level links.
+    & > li > a {
+        font-weight: bold;
+    }
+
+    // Submenus.
+    ul {
+        margin-left: 1em;
     }
 
     .has-submenu > a {
-      cursor: pointer;
+        cursor: pointer;
 
-      &:after {
-        content: '';
-        display: inline-block;
-        vertical-align: -2px;
-        margin-left: 5px;
-        height: 0;
-        width: 0;
-        border: 4px solid transparent;
-        border-top-color: mix(#000, $menu-background-color, 50%);
-
-        @media only all and (max-width: $no-frills-menu-breakpoint) {
-          display: none;
+        &:after {
+            content: '';
+            display: inline-block;
+            vertical-align: -2px;
+            margin-left: 5px;
+            height: 0;
+            width: 0;
+            border: 4px solid transparent;
+            border-top-color: mix(#fff, $menu-background-color, 50%);
         }
-      }
     }
-  }
+
+    @media (min-width: $no-menu-breakpoint) {
+        float: left;
+        margin-top: 0;
+        max-width: calc(100% - 16em); // sit alongside search on modern browsers at smallish widths
+
+        & > li {
+            float: left;
+            margin-right: 1.5em;
+            position: relative;
+        }
+
+        // Top level links.
+        & > li > a {
+            font-weight: normal;
+            padding: 15px 10px; // on all sides, for larger click target
+            margin: -10px -10px; // compensate for padding
+        }
+
+        // Submenus.
+        ul {
+            margin-left: 0;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: -15px;
+            margin-top: -1px; // make sure menu always overlaps trigger button
+            background-color: $menu-background-color;
+            padding: 5px 0;
+            box-shadow: 0 2px 5px rgba(#000, 0.2);
+
+            a {
+                padding: 5px 15px;
+                white-space: nowrap;
+            }
+        }
+    }
 }
-
-.m-sub-menu {
-  @include list-reset-soft;
-  background: $colour_muted;
-  li {
-    margin: 0 10px;
-    border-top: 1px solid $colour_black;
-    a {
-      display: block;
-      padding: 10px 0;
-      &:hover {
-        text-decoration: none; } } } }
-
-#footer-menu {
-  // by default show the sub entries. Hide if the screen is big in which
-  // case the menu at the top will be shown instead.
-  li > ul {
-    @media only all and (min-width: $no-menu-breakpoint), print {
-      display: none;
-    }
-
-    margin-left: 1em;
-
-    li {
-      display: inline;
-      font-size: 90%;
-      padding-right: 1em;
-    }
-  }
-}
-
-
