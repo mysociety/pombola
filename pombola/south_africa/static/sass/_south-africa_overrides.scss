@@ -3,14 +3,6 @@ $high_dpi_screen: '-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi
 
 @import "base_fonts";
 
-@mixin unstyled-list {
-    padding-left: 0;
-    margin-bottom: 0;
-    li {
-        list-style: none outside none;
-    }
-}
-
 #staging_header {
     background-color: $colour_blackish;
     color: #ccc;

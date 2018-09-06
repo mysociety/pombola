@@ -150,6 +150,15 @@
       margin: 0;
       border: 0; } }
 
+
+@mixin unstyled-list {
+    padding-left: 0;
+    margin-bottom: 0;
+    li {
+        list-style: none outside none;
+    }
+}
+
 // Clearfix
 .clearfix { zoom: 1; }
 .clearfix:before, .clearfix:after {
