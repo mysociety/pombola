@@ -159,15 +159,9 @@
     }
 }
 
-// Clearfix
-.clearfix { zoom: 1; }
-.clearfix:before, .clearfix:after {
-  content: "";
-  display: table;
-}
-.clearfix:after { clear: both; }
-
 @mixin clearfix {
+    *zoom: 1;
+
     &:before,
     &:after {
         content: "";
@@ -177,10 +171,10 @@
     &:after {
         clear: both;
     }
+}
 
-    & {
-        *zoom: 1;
-    }
+.clearfix {
+  @include clearfix();
 }
 
 @mixin display-flex() {
