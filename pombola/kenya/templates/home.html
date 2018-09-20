@@ -19,6 +19,7 @@
 {% block js_end_of_body %}
   {{ block.super }}
   {% javascript 'feeds' %}
+  {% javascript 'sms-carousel' %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -78,12 +79,12 @@
     </div>
 </div>
 
-<div class="homepage-sms">
+<div class="homepage-sms" id="sms">
     <div class="wrapper">
         <h2 class="homepage-sms__title">This week’s SMS question:</h2>
         <div class="mz-grid-row">
             <div class="homepage-sms__question mz-grid-col-8">
-                <h3>Do you think women are fully represented in Kenyan parliament?</h3>
+                <h3>{{ sms_question }}</h3>
             </div>
             <div class="mz-grid-col-4">
                 <a href="sms:21516" class="homepage-sms__cta">
@@ -92,33 +93,32 @@
                 </a>
             </div>
         </div>
-        <div class="homepage-sms__responses mz-grid-row">
+        <div class="homepage-sms__responses mz-grid-row" id="sms-messages">
+          {% for message in sms_current_messages %}
             <div class="mz-grid-col-4">
                 <div class="homepage-sms__response">
-                    <p>“Women will never be equal until we have a woman president!”</p>
+                    <p>“{{ message.content }}”</p>
                     <footer>
-                        <p>1 hour ago</p>
+                        <p>{{ message.date }}</p>
                     </footer>
                 </div>
             </div>
-            <div class="mz-grid-col-4">
-                <div class="homepage-sms__response">
-                    <p>“Women are represented just as well as everyone else.”</p>
-                    <footer>
-                        <p>5 hours ago</p>
-                    </footer>
-                </div>
-            </div>
-            <div class="mz-grid-col-4">
-                <div class="homepage-sms__response">
-                    <p>“Sabina Wanjiru Chege is my hero. She has done a lot for womens causes in Parliament.”</p>
-                    <footer>
-                        <p>1 day ago</p>
-                    </footer>
-                </div>
-            </div>
+          {% endfor %}
         </div>
+      {% if sms_pages|length > 1 %}
+        <form class="homepage-sms__pagination" data-sms-carousel="#sms-messages" action="#sms">
+          {% for page in sms_pages %}
+            <button type="submit" {% if page.current %}disabled{% endif %} name="sms_page" value="{{ page.i }}">{{ page.n }}</button>
+          {% endfor %}
+        </form>
+      {% endif %}
     </div>
+    <script>
+        window.sms_all_messages = [];
+      {% for message in sms_all_messages %}
+        window.sms_all_messages.push({"content": "{{ message.content|escape }}", "date": "{{ message.date|escape }}"})
+      {% endfor %}
+    </script>
 </div>
 
 <div class="homepage-editorial">

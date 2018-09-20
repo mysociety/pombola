@@ -217,6 +217,38 @@ body.home {
     }
 }
 
+.homepage-sms__pagination {
+    margin-top: 1em;
+    text-align: center;
+
+    button {
+        display: inline-block;
+        vertical-align: top;
+        border: none;
+        box-sizing: border-box;
+        background: rgba(#fff, 0.5);
+        overflow: hidden;
+        width: 50px;
+        height: 0;
+        padding: 10px 0 0 0;
+        font-size: inherit;
+        border-radius: 20px;
+        border: 10px solid $colour_deep_green;
+        margin: -10px -5px;
+        cursor: pointer;
+
+        &:focus,
+        &:hover {
+            background-color: #fff;
+        }
+    }
+
+    button[disabled] {
+        background-color: #fff;
+        cursor: default;
+    }
+}
+
 .homepage-editorial {
     background-color: $colour_cream;
 

@@ -4,6 +4,7 @@
 import logging
 import random
 import json
+import math
 import sys
 
 from django.conf import settings
@@ -123,6 +124,57 @@ class KEHomeView(HomeView):
         context = super(KEHomeView, self).get_context_data(**kwargs)
         context['election_blog_posts'] = InfoPage.objects.filter(
             tags__slug='elections-2017').order_by('-publication_date')
+
+        sms_messages_per_page = 3
+
+        # TODO: this should be based on request.GET['sms_page']
+        sms_current_page_index = int( self.request.GET.get('sms_page', 0) )
+
+        # TODO: This data needs to be real!
+        context['sms_question'] = 'Do you think women are fully represented in Kenyan parliament?'
+        context['sms_all_messages'] = [{
+            "content": "Women will never be equal until we have a woman president!",
+            "date": "1 hour ago",
+        }, {
+            "content": "Women are represented just as well as everyone else",
+            "date": "5 hours ago",
+        }, {
+            "content": "Sabina Wanjiru Chege is my hero. She has done a lot for womens causes in Parliament",
+            "date": "1 day ago",
+        }, {
+            "content": "I don't see why it matters. A true representative does their job regardless of gender!",
+            "date": "1 day ago",
+        }, {
+            "content": "Our women reps do fantastic work representing us on issues like abortion and equality",
+            "date": "1 day ago",
+        }, {
+            "content": "No way! Kenya is still a man's world :-(",
+            "date": "2 days ago",
+        }, {
+            "content": "I like chocolate. Send me chocolate. Now.",
+            "date": "2 days ago",
+        }, {
+            "content": "47 women representatives simply isn't enough for a country the size of Kenya",
+            "date": "3 days ago",
+        }, {
+            "content": "I enjoy reading what Joyce Emanikor says in Parliament. Nothing gets past her!",
+            "date": "3 days ago",
+        }]
+        slice_start = sms_current_page_index * sms_messages_per_page
+        context['sms_current_messages'] = context['sms_all_messages'][slice(
+            slice_start,
+            slice_start + sms_messages_per_page
+        )]
+        sms_total_pages = int(math.ceil(1.0 * len(context['sms_all_messages']) / sms_messages_per_page))
+        sms_pages = []
+        for i in range(sms_total_pages):
+            sms_pages.append({
+                "i": i,
+                "n": i + 1,
+                "current": i == sms_current_page_index
+            })
+        context['sms_pages'] = sms_pages
+
         return context
 
 

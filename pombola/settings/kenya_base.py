@@ -75,6 +75,12 @@ COUNTRY_JS = {
         ),
         'output_filename': 'js/collapse-responsibilities.js',
     },
+    'sms-carousel': {
+        'source_filenames': (
+            'js/sms-carousel.js',
+        ),
+        'output_filename': 'js/sms-carousel.js',
+    },
     'lazy-loaded-images': {
         'source_filenames': (
             'js/libs/blazy.js',
