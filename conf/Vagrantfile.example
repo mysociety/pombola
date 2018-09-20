@@ -12,7 +12,7 @@ BOX_URI = ENV['BOX_URI'] || "https://cloud-images.ubuntu.com/vagrant/trusty/curr
 # data) by default, but you can switch to another country by running,
 # say:
 #
-#  bin/switch-country.py south_africa
+#  bin/switch-country.py south-africa
 #
 # FIXME: add some notes (or refer to other notes) about importing some
 # data as well.
