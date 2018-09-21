@@ -51,7 +51,7 @@ FROM_EMAIL: 'you@example.com'
 # A list of hosts which this Django site can serve.
 # You'll need to put your hostname here
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#std:setting-ALLOWED_HOSTS
-ALLOWED_HOSTS: ['pombola.example.com']
+ALLOWED_HOSTS: ['pombola.example.com', 'localhost']
 
 # If the local version of pdftohtml is wrong (ie != 0.12.4) - blank means do it
 # locally
