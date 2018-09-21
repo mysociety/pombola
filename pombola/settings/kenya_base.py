@@ -81,6 +81,12 @@ COUNTRY_JS = {
         ),
         'output_filename': 'js/sms-carousel.js',
     },
+    'featured-person': {
+        'source_filenames': (
+            'js/featured-person.js',
+        ),
+        'output_filename': 'js/featured-person.js',
+    },
     'lazy-loaded-images': {
         'source_filenames': (
             'js/libs/blazy.js',

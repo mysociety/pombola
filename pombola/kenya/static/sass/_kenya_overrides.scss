@@ -505,3 +505,22 @@ $comment-color: #009f57;
     margin-right: 1em;
   }
 }
+
+// Creates coloured bars for "Greeked" text.
+// Useful for realistic-looking loading states.
+.greek {
+  display: block;
+  padding: 0.1em 0 0.2em 0;
+  opacity: 0.5;
+
+  &:before {
+    content: "";
+    display: block;
+    height: 1em;
+    background-color: currentColor;
+  }
+
+  p & {
+    padding: 0.15em 0 0.3em 0;
+  }
+}

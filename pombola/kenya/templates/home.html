@@ -20,6 +20,7 @@
   {{ block.super }}
   {% javascript 'feeds' %}
   {% javascript 'sms-carousel' %}
+  {% javascript 'featured-person' %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -125,32 +126,13 @@
     <div class="wrapper">
         <div class="mz-grid-row">
             <div class="mz-grid-col-4">
-
               {% if featured_person != None %}
-                <!-- {% include 'core/person_feature.html' %} -->
+                <div class="homepage-featured-person js-featured-person">
+                  {% include 'core/person_feature.html' %}
+                </div>
               {% else %}
                 <!-- TODO: fill this space if featured person not set -->
               {% endif %}
-
-                <div class="homepage-featured-person">
-                    <header>
-                        <h2>Featured person</h2>
-                        <a href="#" class="homepage-featured-person__previous">Previous person</a>
-                        <a href="#" class="homepage-featured-person__next">Next person</a>
-                    </header>
-                    <a href="#">
-                        <img src="http://info.mzalendo.com/media_root/cache/68/62/6862426421874a9421acc795b9441ac1.jpg" height="140" width="140" alt="">
-                    </a>
-                    <a href="#" class="homepage-featured-person__name">
-                        <h3>Sabina Wanjiru Chege</h3>
-                    </a>
-                    <p class="homepage-featured-person__role">
-                        Politician
-                    </p>
-                    <p class="homepage-featured-person__description">
-                        Sabina Chege is a woman of many talents and used to be an actor at Kenya National Theatre. She served as a radio presenter for many years where she addressed development and women issues. Transforming…
-                    </p>
-                </div>
             </div>
             <div class="mz-grid-col-8">
 

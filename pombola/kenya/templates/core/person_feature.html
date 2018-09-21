@@ -1,47 +1,32 @@
 {% load thumbnail %}
 
-<div class="featured-person clearfix">
-    <a href="{{ featured_person.get_absolute_url }}">
-        {% thumbnail featured_person.primary_image "200x200" as im %}
-            <img src="{{ im.url }}" alt="{{ featured_person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
-        {% empty %}
-            <img src="{{STATIC_URL}}images/person-200x200.jpg" />
-        {% endthumbnail %}
-    </a>
-    <div class="featured-person-info">
-        <h2><a href="{{ featured_person.get_absolute_url }}">{{ featured_person.title }}{{ featured_person.name }}</a></h2>
-
-        {% if featured_person.is_politician %}
-        <p class="feature-person-role">Politician</p>
-        {% endif %}
-
-        <div class="feature-person-summary">
-            {{ featured_person.summary|truncatewords_html:35 }}
-        </div>
-        {% comment %}
-            Note it is odd for a featured person to not have a scorecard, simply because this is shown
-            on the home page as "MP RATINGS" -- so admin should be careful to only tick "can_be_featured"
-            for Person instances that are both indeed MPs and rated. This case is handled here, but
-            really it's inappropriate to be featuring such a Person.
-        {% endcomment %}
-        {% if featured_person.show_overall_score and featured_person.has_scorecards %}
-            <div class="rating-container">
-                <div class="rating">
-                    <a href="{{ featured_person.get_absolute_url }}">
-                        Mzalendo Rating:
-                        <strong>{{ featured_person.scorecard_overall_as_word|capfirst }}</strong>
-                    </a>
-                </div>
-                {%if featured_person.has_scorecards %}
-                    <a class="rating-img {{ featured_person.scorecard_overall_as_word }}" href="{{ featured_person.get_absolute_url }}"></a>
-                {% endif %}
-            </div>
-        {% endif %}
-
-        <div class="feature-nav">
-            <a class="feature-prev" href="/?before={{ featured_person.slug }}">previous</a>
-            <a class="feature-next" href="/?after={{ featured_person.slug }}">next</a>
-        </div>
-    </div>
+<!--
+<div class="feature-nav">
+    <a class="feature-prev" href="/?before={{ featured_person.slug }}">previous</a>
+    <a class="feature-next" href="/?after={{ featured_person.slug }}">next</a>
 </div>
+-->
 
+<header>
+    <h2>Featured person</h2>
+    <a href="/?before={{ featured_person.slug }}" class="homepage-featured-person__previous">Previous person</a>
+    <a href="/?after={{ featured_person.slug }}" class="homepage-featured-person__next">Next person</a>
+</header>
+<a href="{{ featured_person.get_absolute_url }}">
+  {% thumbnail featured_person.primary_image "140x140" as im %}
+    <img src="{{ im.url }}" alt="{{ featured_person.name }}" width="{{ im.width }}" height="{{ im.height }}" />
+  {% empty %}
+    <img src="{{STATIC_URL}}images/person-200x200.jpg" />
+  {% endthumbnail %}
+</a>
+<a href="{{ featured_person.get_absolute_url }}" class="homepage-featured-person__name">
+    <h3>{{ featured_person.title }}{{ featured_person.name }}</h3>
+</a>
+{% if featured_person.is_politician %}
+    <p class="homepage-featured-person__role">
+      Politician
+    </p>
+{% endif %}
+<div class="homepage-featured-person__description">
+    {{ featured_person.summary|truncatewords_html:35 }}
+</div>

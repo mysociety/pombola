@@ -287,6 +287,16 @@ body.home {
 
     img {
         margin-bottom: 10px;
+        max-width: 140px;
+        height: auto;
+    }
+
+    .greek-img {
+        display: block;
+        width: 140px;
+        height: 140px;
+        background: #eee;
+        margin-bottom: 10px;
     }
 }
 
