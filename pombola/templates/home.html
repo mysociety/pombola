@@ -33,11 +33,18 @@
 
         {% if settings.BLOG_RSS_FEED %}
             <h2>Latest News</h2>
-            <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
+            <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}" data-blog-template="#blog-template">
                 <li>
                     Loading news&hellip;
                 </li>
             </ul>
+            <script type="text/x-template" id="blog-template">
+                <li>
+                    <h3><a data-blog-link data-blog-title></a></h3>
+                    <p data-blog-date></p>
+                    <p data-blog-description></p>
+                </li>
+            </script>
         {% endif %}
     </div>
     <div class="home-right">

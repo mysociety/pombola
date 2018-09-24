@@ -130,51 +130,27 @@
                 <div class="homepage-featured-person js-featured-person">
                   {% include 'core/person_feature.html' %}
                 </div>
-              {% else %}
-                <!-- TODO: fill this space if featured person not set -->
               {% endif %}
             </div>
             <div class="mz-grid-col-8">
-
               {% if settings.BLOG_RSS_FEED %}
-                <!-- <ul id="home-news-list" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}">
-                    <li>Loading news&hellip;</li>
-                </ul> -->
-              {% else %}
-                <!-- TODO: fill this space if blog rss feed not supplied -->
-              {% endif %}
-
                 <div class="homepage-news">
                     <header>
                         <h2>Editorial</h2>
-                        <a href="#">Read more on the Mzalendo blog</a>
+                        <a href="http://www.mzalendo.com/blog">Read more on the Mzalendo blog</a>
                     </header>
-                    <div class="mz-grid-row">
+                    <div class="mz-grid-row" data-blog-rss-feed="{{ settings.BLOG_RSS_FEED }}" data-blog-template="#blog-template"></div>
+                    <script type="text/x-template" id="blog-template">
                         <div class="homepage-news__story mz-grid-col-6">
-                            <a href="#" class="homepage-news__story__title">
-                                <h3>When greed appears to be our national ethos then we the people will always be at the bottom of the food chain</h3>
+                            <a data-blog-link class="homepage-news__story__title">
+                                <h3 data-blog-title></h3>
                             </a>
-                            <p class="homepage-news__story__date">
-                                29 Jul 2018
-                            </p>
-                            <p class="homepage-news__story__content">
-                                This week people have been making jokes about the government stealing from the government then investigating the government as a way of mocking the whole corruption exercise. Others have taken the same approach on the MAU forest issue, saying the government is warning the government against evictions. The whole point being we seem to be […]
-                            </p>
+                            <p data-blog-date class="homepage-news__story__date"></p>
+                            <p data-blog-description class="homepage-news__story__content"></p>
                         </div>
-                        <div class="homepage-news__story mz-grid-col-6">
-                            <a href="#" class="homepage-news__story__title">
-                                <h3>We need to be sober about two-thirds gender debate and the Green Amendment Campaign is on track</h3>
-                            </a>
-                            <p class="homepage-news__story__date">
-                                21 Jul 2018
-                            </p>
-                            <p class="homepage-news__story__content">
-                                In Kenya, the law is always very clear until it is not. A few months ago when opposition was toying with the idea of the People’s Assembly, politicians from both sides kept shouting the law is very clear and then would proceed to make very incoherent statements that left the public more confused. This week, […]
-                            </p>
-                        </div>
-                    </div>
+                    </script>
                 </div>
-
+              {% endif %}
             </div>
         </div>
     </div>
