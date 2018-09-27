@@ -1,19 +1,24 @@
 {% load switch %}
 
-<li class="list-of-things-item {{ object.css_class }}-list-item{% if not object.show_active %} inactive{% endif %}">
-
-    {% switch object.css_class %}
-        {% case 'position' %}
-            {% include "core/position_list_item.html" %}
-        {% case 'positiontitle' %}
-            {% include "core/positiontitle_list_item.html" %}
-        {% case 'person' %}
-            {% include "core/person_list_item.html" %}
-        {% case 'organisation' %}
-            {% include "core/organisation_list_item.html" %}
-        {% case 'place' %}
-            {% include "core/place_list_item.html" %}
-        {% else %}
-            {% include "core/unknown_list_item.html" %}
-    {% endswitch %}
-</li>
+{% if object.kind.slug == 'parliament' %}
+    <li class="parliament-list-item">
+        {% include "core/parliament_list_item.html" %}
+    </li>
+{% else %}
+    <li class="list-of-things-item {{ object.css_class }}-list-item{% if not object.show_active %} inactive{% endif %}">
+        {% switch object.css_class %}
+            {% case 'position' %}
+                {% include "core/position_list_item.html" %}
+            {% case 'positiontitle' %}
+                {% include "core/positiontitle_list_item.html" %}
+            {% case 'person' %}
+                {% include "core/person_list_item.html" %}
+            {% case 'organisation' %}
+                {% include "core/organisation_list_item.html" %}
+            {% case 'place' %}
+                {% include "core/place_list_item.html" %}
+            {% else %}
+                {% include "core/unknown_list_item.html" %}
+        {% endswitch %}
+    </li>
+{% endif %}

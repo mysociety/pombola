@@ -1764,51 +1764,91 @@ a.alphabet-links__link {
     font-family: $font_family_lato;
     font-weight: bold;
     color: $colour_green;
-    margin-top: -0.5em;
 }
 
 .house-splash {
+    display: block;
     width: 100%;
     overflow: hidden;
     position: relative;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 
-    @media only all and (min-width: 640px), print {
-        height: 15.5em;
-        background-color: $colour_primary;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: top left;
-        &.national-assembly {
-            background-image: url('/static/images/national-assembly.jpg');
-        }
-        &.ncop {
-            background-image: url('/static/images/national-council-of-provinces.jpg');
-        }
-        &.person-write {
-            background-image: url('/static/images/splash-mps.jpg');
-        }
-        &.committee-write {
-            background-image: url('/static/images/splash-committee.jpg');
-        }
+    background-color: $colour_primary;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top left;
+
+    &.national-assembly {
+        background-image: url('/static/images/national-assembly.jpg');
     }
 
+    &.ncop {
+        background-image: url('/static/images/national-council-of-provinces.jpg');
+    }
+
+    &.person-write {
+        background-image: url('/static/images/splash-mps.jpg');
+    }
+
+    &.committee-write {
+        background-image: url('/static/images/splash-committee.jpg');
+    }
+
+    @media only all and (min-width: 640px), print {
+        margin-bottom: 2em;
+        height: 15.5em;
+    }
+}
+
+a.house-splash {
+    text-decoration: none;
+
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: $colour_primary;
+        opacity: 0;
+        transition: opacity 100ms linear;
+    }
+
+    &:hover,
+    &:focus {
+        &:before {
+            opacity: 0.5;
+        }
+    }
 }
 
 .house-title {
+    position: relative; // stack above :before
+    padding: 1em;
+
+    h1, p {
+        color: #fff;
+        line-height: 1;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    & > :last-child {
+        margin-bottom: 0;
+    }
+
     @media only all and (min-width: 640px), print {
+        padding: 1.5em;
         position: absolute;
         bottom: 0;
-        left: 2%;
-        h1, p {
-            color: #fff;
-        }
-        h1 {
-            font-size: 36px;
-        }
+        left: 0;
     }
 
 }
