@@ -10,6 +10,7 @@ OPTIONAL_APPS = [
     'pombola.votematch',
     'pombola.bills',
     'pombola.wordcloud',
+    'pombola.sms',
 ]
 
 TWITTER_USERNAME = 'MzalendoWatch'

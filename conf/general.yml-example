@@ -119,3 +119,7 @@ EMAIL_USE_TLS: false
 # addresses to longitude / latitude. You can specify the key to use
 # here:
 GOOGLE_MAPS_GEOCODING_API_KEY: ''
+
+# Config for Kenya SMS API
+KENYA_SMS_API_URL: ''
+KENYA_SMS_API_SHORT_CODE: ''
