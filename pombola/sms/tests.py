@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.test import TestCase
 from .api import APIClient
 import requests_mock
@@ -31,7 +32,7 @@ class APIClientTest(TestCase):
                         },
                         '2': {
                             'MSISDN': '0987654322',
-                            'message': 'Testing',
+                            'message': u'Testing double-encoded UTF-8: beeverage like soda or ju\xc3\xaeces',
                             'time_in': '2018-09-30 18:35:03',
                             'short_code': '123',
                         },
@@ -57,7 +58,7 @@ class APIClientTest(TestCase):
 
             message2 = messages[1]
             self.assertEqual(message2.msisdn(), '0987654322')
-            self.assertEqual(message2.message(), 'Testing')
+            self.assertEqual(message2.message(), u'Testing double-encoded UTF-8: beeverage like soda or ju\xeeces')
             self.assertEqual(
                 message2.time_in(),
                 datetime(2018, 9, 30, 18, 35, 3)

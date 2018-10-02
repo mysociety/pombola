@@ -11,7 +11,7 @@ class APIMessage(object):
         return self.attrs.get('MSISDN', '')
 
     def message(self):
-        return self.attrs.get('message', '')
+        return self.attrs.get('message', '').encode('raw_unicode_escape').decode('utf-8')
 
     def time_in(self):
         time_str = self.attrs.get('time_in', '')
