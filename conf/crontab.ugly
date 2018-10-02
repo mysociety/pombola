@@ -40,6 +40,7 @@ PYTHONIOENCODING=utf-8
 !!(* if ($vhost eq 'mzalendo.mysociety.org') { *)!!
 MAILTO=cron-mzalendo@mysociety.org
 0 7 * * *  !!(*= $user *)!! run_management_command feedback_report_pending
+0 * * * *  !!(*= $user *)!! output-on-error run_management_command kenya_sms_retrieve_messages
 MAILTO=mzalendo-managers@mysociety.org
 6 7 * * *  !!(*= $user *)!! update_hansard.bash
 MAILTO=cron-!!(*= $site *)!!@mysociety.org
