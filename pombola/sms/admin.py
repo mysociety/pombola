@@ -1,11 +1,10 @@
 from django.contrib import admin
-from .models import Message
+from .models import Message, Question
 
 
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('text', 'msisdn', 'datetime', 'status')
     list_filter = ('status',)
-    # list_display_links = None
     actions = ['mark_as_accepted', 'mark_as_rejected']
     date_hierarchy = 'datetime'
     readonly_fields = ('text', 'msisdn', 'datetime')
@@ -27,3 +26,9 @@ class MessageAdmin(admin.ModelAdmin):
 
 admin.site.disable_action('delete_selected')
 admin.site.register(Message, MessageAdmin)
+
+
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('text', 'created')
+
+admin.site.register(Question, QuestionAdmin)
