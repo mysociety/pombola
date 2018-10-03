@@ -61,9 +61,9 @@
 <div class="homepage-tabs wrapper">
     <div class="mz-grid-row">
         <div class="homepage-tabs__sms mz-grid-col-4">
-            <a href="sms:21516">
+            <a href="sms:{{ settings.KENYA_SMS_API_SHORT_CODE }}">
                 <strong>Bonga-na-Mzalendo!</strong>
-                SMS 21516
+                SMS {{ settings.KENYA_SMS_API_SHORT_CODE }}
             </a>
         </div>
         <div class="homepage-tabs__dokeza mz-grid-col-4">
@@ -89,9 +89,9 @@
                 <h3>{{ sms_question }}</h3>
             </div>
             <div class="mz-grid-col-4">
-                <a href="sms:21516" class="homepage-sms__cta">
+                <a href="sms:{{ settings.KENYA_SMS_API_SHORT_CODE }}" class="homepage-sms__cta">
                     Have your say
-                    <strong>SMS 21516</strong>
+                    <strong>SMS {{ settings.KENYA_SMS_API_SHORT_CODE }}</strong>
                 </a>
             </div>
         </div>
