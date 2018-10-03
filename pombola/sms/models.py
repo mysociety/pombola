@@ -22,3 +22,12 @@ class Message(models.Model):
     class Meta:
         unique_together = ('text', 'msisdn', 'datetime')
         ordering = ['-datetime']
+
+
+class Question(models.Model):
+    text = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created']
