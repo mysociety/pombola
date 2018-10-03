@@ -82,6 +82,7 @@
 </div>
 
 <div class="homepage-sms" id="sms">
+    {% if sms_question %}
     <div class="wrapper">
         <h2 class="homepage-sms__title">This week’s SMS question:</h2>
         <div class="mz-grid-row">
@@ -121,6 +122,7 @@
         window.sms_all_messages.push({"content": "{{ message.text|escape }}", "date": "{{ message.datetime|naturaltime|escape }}"})
       {% endfor %}
     </script>
+    {% endif %}
 </div>
 
 <div class="homepage-editorial">

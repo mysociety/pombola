@@ -28,7 +28,7 @@ from pombola.experiments.views import (
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
-from pombola.sms.models import Message
+from pombola.sms.models import Message, Question
 
 from datetime import datetime
 
@@ -128,11 +128,13 @@ class KEHomeView(HomeView):
 
         sms_messages_per_page = 3
 
-        # TODO: this should be based on request.GET['sms_page']
         sms_current_page_index = int( self.request.GET.get('sms_page', 0) )
 
-        # TODO: This data needs to be real!
-        context['sms_question'] = 'Do you think women are fully represented in Kenyan parliament?'
+        try:
+            context['sms_question'] = Question.objects.latest('created').text
+        except Question.DoesNotExist:
+            context['sms_question'] = ''
+
         context['sms_all_messages'] = Message.objects.filter(status=Message.ACCEPTED)
         slice_start = sms_current_page_index * sms_messages_per_page
         context['sms_current_messages'] = context['sms_all_messages'][slice(
