@@ -28,6 +28,7 @@ from pombola.experiments.views import (
 )
 from pombola.hansard.views import HansardPersonMixin
 from pombola.kenya import shujaaz
+from pombola.sms.models import Message
 
 from datetime import datetime
 
@@ -132,34 +133,7 @@ class KEHomeView(HomeView):
 
         # TODO: This data needs to be real!
         context['sms_question'] = 'Do you think women are fully represented in Kenyan parliament?'
-        context['sms_all_messages'] = [{
-            "content": "Women will never be equal until we have a woman president!",
-            "date": "1 hour ago",
-        }, {
-            "content": "Women are represented just as well as everyone else",
-            "date": "5 hours ago",
-        }, {
-            "content": "Sabina Wanjiru Chege is my hero. She has done a lot for womens causes in Parliament",
-            "date": "1 day ago",
-        }, {
-            "content": "I don't see why it matters. A true representative does their job regardless of gender!",
-            "date": "1 day ago",
-        }, {
-            "content": "Our women reps do fantastic work representing us on issues like abortion and equality",
-            "date": "1 day ago",
-        }, {
-            "content": "No way! Kenya is still a man's world :-(",
-            "date": "2 days ago",
-        }, {
-            "content": "I like chocolate. Send me chocolate. Now.",
-            "date": "2 days ago",
-        }, {
-            "content": "47 women representatives simply isn't enough for a country the size of Kenya",
-            "date": "3 days ago",
-        }, {
-            "content": "I enjoy reading what Joyce Emanikor says in Parliament. Nothing gets past her!",
-            "date": "3 days ago",
-        }]
+        context['sms_all_messages'] = Message.objects.filter(status=Message.ACCEPTED)
         slice_start = sms_current_page_index * sms_messages_per_page
         context['sms_current_messages'] = context['sms_all_messages'][slice(
             slice_start,

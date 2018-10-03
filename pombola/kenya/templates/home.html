@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load pipeline %}
 {% load staticfiles %}
+{% load humanize %}
 
 {% block title %}Home{% endblock %}
 
@@ -98,9 +99,9 @@
           {% for message in sms_current_messages %}
             <div class="mz-grid-col-4">
                 <div class="homepage-sms__response">
-                    <p>“{{ message.content }}”</p>
+                    <p>“{{ message.text }}”</p>
                     <footer>
-                        <p>{{ message.date }}</p>
+                        <p>{{ message.datetime|naturaltime }}</p>
                     </footer>
                 </div>
             </div>
@@ -117,7 +118,7 @@
     <script>
         window.sms_all_messages = [];
       {% for message in sms_all_messages %}
-        window.sms_all_messages.push({"content": "{{ message.content|escape }}", "date": "{{ message.date|escape }}"})
+        window.sms_all_messages.push({"content": "{{ message.text|escape }}", "date": "{{ message.datetime|naturaltime|escape }}"})
       {% endfor %}
     </script>
 </div>
