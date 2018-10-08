@@ -135,7 +135,7 @@ class KEHomeView(HomeView):
         except Question.DoesNotExist:
             context['sms_question'] = ''
 
-        context['sms_all_messages'] = Message.objects.filter(status=Message.ACCEPTED)
+        context['sms_all_messages'] = Message.objects.filter(status=Message.ACCEPTED)[:9]
         slice_start = sms_current_page_index * sms_messages_per_page
         context['sms_current_messages'] = context['sms_all_messages'][slice(
             slice_start,
