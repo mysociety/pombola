@@ -89,6 +89,7 @@ a {
 .inline-search-box {
     input {
         border-radius: $border_radius 0 0 $border_radius;
+        border-width: 1px 0 1px 1px;
     }
 
     .button {
