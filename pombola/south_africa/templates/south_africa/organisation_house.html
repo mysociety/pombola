@@ -24,19 +24,14 @@ the organisation detail page.
 
   <h2>People</h2>
 
-  <div>
-    <ul class="house-page-list">
-      <li><a href="{% url 'organisation_people' slug=object.slug %}">All members</a></li>
-      <li>
-        <span class="inline-search">Find a person by name:</span>
-        <form class="inline-search" action="{% url "core_search" %}">
-          <input class="search-autocomplete-name" id="core_search" data-source="/search/autocomplete/?model=person" type="text" name="q" value="" placeholder="e.g. Baleka Mbete"></input>
-          <input type="hidden" name="section" value="persons">
-          <input type="submit">
-        </form>
-      </li>
-    </ul>
-  </div>
+  <form action="{% url "core_search" %}" class="inline-search-box people-list-inline-search" style="margin-top: 0">
+    <label for="core_search">Find a person by name</label>
+    <input class="search-autocomplete-name" id="core_search" data-source="/search/autocomplete/?model=person" type="text" name="q" value="" placeholder="e.g. Baleka Mbete">
+    <input type="hidden" name="section" value="persons">
+    <input type="submit" value="Search" class="button">
+    <a href="{% url 'organisation_people' slug=object.slug %}">Or browse an A-Z list of all members</a>
+  </form>
+
 
   <h2>Parties</h2>
 

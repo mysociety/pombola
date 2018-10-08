@@ -122,10 +122,17 @@
 
 .people-list-inline-search {
   margin: 2em 0 2.5em 0; // search input needs to stand out on crowded person list page
+  line-height: 1.4;
 
   label {
     display: block;
-    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+  }
+
+  a {
+    display: block;
+    clear: both;
+    padding-top: 0.5em;
   }
 }
 
