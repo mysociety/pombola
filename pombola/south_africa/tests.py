@@ -1879,7 +1879,6 @@ class SAPlaceDetailViewTest(WebTest):
         self.assertEqual(1, resp.context['legislature_people_count'])
 
         self.assertEqual(3, len(resp.context['related_people']))
-        self.assertContains(resp, "There are 3 people related to Test Place.")
 
     def test_multiple_positions(self):
 
@@ -1915,7 +1914,6 @@ class SAPlaceDetailViewTest(WebTest):
         self.assertEqual(0, resp.context['legislature_people_count'])
 
         self.assertEqual(1, len(resp.context['related_people']))
-        self.assertContains(resp, "There is 1 person related to Test Place.")
 
     def test_ncop_delegate(self):
 
@@ -1942,7 +1940,6 @@ class SAPlaceDetailViewTest(WebTest):
         self.assertEqual(0, resp.context['legislature_people_count'])
 
         self.assertEqual(1, len(resp.context['related_people']))
-        self.assertContains(resp, "There is 1 person related to Test Place.")
 
     def test_former_positions(self):
 

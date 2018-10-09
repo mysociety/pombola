@@ -26,23 +26,6 @@
         </p>
     {% endif %}
 
-    {# because I can't see how to store the length of an array we'll have to pass the array around instead #}
-    {% with people_related=object.related_people %}
-        {% if people_related|length %}
-          <div class="clearfix">
-            <p style="float: right;">
-              <a class="js-reveal-all-link" href="#">Expand all subsections</a>
-            </p>
-
-            <p>
-            There {{ people_related|length|pluralize:"is,are"}} {{ people_related|length }} {{ people_related|length|pluralize:"person,people"}} related to {{ object.name }}.
-            </p>
-          </div>
-        {% endif %}
-    {% endwith %}
-
-
-
     <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#provinicial-legislature-people">Members of the Provincial Legislature ({{ legislature_people_count }})</a>
 
     <div id="provinicial-legislature-people" class="person-panel js-hide-reveal">
