@@ -1,22 +1,33 @@
 {% load active_class %}
-<div class="tabs">
-<ul class="tab-links">
 
-    <li><a class="{% active_class request.path "place" slug=object.slug %}" href="{% url "place" slug=object.slug %}">People</a></li>
+<div class="ui-tabs ui-widget">
+<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
+
+    <li class="ui-state-default {% active_class request.path "place" slug=object.slug %}">
+        <a class="ui-tabs-anchor" href="{% url "place" slug=object.slug %}">People</a>
+    </li>
 
     {% if object.has_scorecards %}
-    <li><a class="{% active_class request.path "place_scorecard" slug=object.slug %}" href="{% url "place_scorecard" slug=object.slug %}">Scorecard</a></li>
+    <li class="ui-state-default {% active_class request.path "place_scorecard" slug=object.slug %}">
+        <a class="ui-tabs-anchor" href="{% url "place_scorecard" slug=object.slug %}">Scorecard</a>
+    </li>
     {% endif %}
 
     {# <li><a href="{% url "place_people" slug=object.slug %}">People</a></li> #}
-    <li><a class="{% active_class request.path "place_places" slug=object.slug %}" href="{% url "place_places" slug=object.slug %}">Constituency Offices</a></li>
+    <li class="ui-state-default {% active_class request.path "place_places" slug=object.slug %}">
+        <a class="ui-tabs-anchor" href="{% url "place_places" slug=object.slug %}">Constituency Offices</a>
+    </li>
 
     {% if settings.ENABLED_FEATURES.place_data and object.placedata %}
-    <li><a class="{% active_class request.path "place_data" slug=object.slug %}" href="{% url "place_data" slug=object.slug %}">Data</a></li>
+    <li class="ui-state-default {% active_class request.path "place_data" slug=object.slug %}">
+        <a class="ui-tabs-anchor" href="{% url "place_data" slug=object.slug %}">Data</a>
+    </li>
     {% endif %}
 
     {% if settings.ENABLED_FEATURES.projects and object.is_constituency %}
-    <li><a class="{% active_class request.path "place_projects" slug=object.slug %}" href="{% url "place_projects" slug=object.slug %}">CDF Projects ({{ object.project_set.count }})</a></li>
+    <li class="ui-state-default {% active_class request.path "place_projects" slug=object.slug %}">
+        <a class="ui-tabs-anchor" href="{% url "place_projects" slug=object.slug %}">CDF Projects ({{ object.project_set.count }})</a>
+    </li>
     {% endif %}
 
 </ul>

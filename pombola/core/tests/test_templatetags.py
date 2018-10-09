@@ -70,7 +70,7 @@ class ActiveClassTest(TestCase):
 
         for current_url, route_name, kwargs in tests:
             actual = active_class(current_url, route_name, **kwargs)
-            self.assertEqual(' active ', actual)
+            self.assertEqual(' ui-tabs-active ui-state-active ', actual)
 
         self.assertEqual(active_class('/foo', 'home'), '')
 

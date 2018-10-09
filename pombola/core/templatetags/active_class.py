@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.simple_tag
 def active_class(request_path, name, **kwargs):
-    """ Return the string ' active ' current request.path is same as name
+    """ Return jQuery UI active classes if current request.path is same as name
 
     Keyword aruguments:
     request  -- Django request object
@@ -16,6 +16,6 @@ def active_class(request_path, name, **kwargs):
     path = reverse(name, kwargs=kwargs)
 
     if request_path == path:
-        return ' active '
+        return ' ui-tabs-active ui-state-active '
 
     return ''
