@@ -79,6 +79,12 @@ class Command(BaseCommand):
                 'odekro_mp',
                 'odekro_uploadmodel'
             ])
+        if settings.COUNTRY_APP in ('kenya',):
+            # Ignore SMS tables as they contain phone numbers.
+            tables_to_ignore.update([
+                'sms_message',
+                'sms_question',
+            ])
         tables_to_dump = [
             t for t in tables if t not in tables_to_ignore
         ]
