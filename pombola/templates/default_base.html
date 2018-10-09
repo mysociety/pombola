@@ -31,6 +31,10 @@
         <meta name="google-site-verification" content="{{ settings.GOOGLE_SITE_VERIFICATION }}" />
         {% endif %}
 
+        {% if settings.STAGING %}
+        <meta name="robots" content="noindex, nofollow" />
+        {% endif %}
+
         {% block open_graph %}
         <meta property="og:title" content="{{ site.name }}" />
         <meta property="og:type" content="website" />
