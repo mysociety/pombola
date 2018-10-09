@@ -79,6 +79,12 @@ class Command(BaseCommand):
                 'odekro_mp',
                 'odekro_uploadmodel'
             ])
+        if settings.COUNTRY_APP in ('kenya',):
+            # Ignore SMS tables as they contain phone numbers.
+            tables_to_ignore.update([
+                'sms_message',
+                'sms_question',
+            ])
         tables_to_dump = [
             t for t in tables if t not in tables_to_ignore
         ]
@@ -204,10 +210,10 @@ class Command(BaseCommand):
         unexpected = set(tables_to_dump) - set(expected_tables)
         if unexpected:
             print '''The following tables were found which weren't expected
-and which hadn't been explictly excluded.  If these are safe to make
+and which hadn't been explicitly excluded.  If these are safe to make
 available in a public database dump (in particular check that they
 contain no personal information of site users) then add them to
-'expected_table'. Otherwise (i.e. they should *not* be made availble
+'expected_table'. Otherwise (i.e. they should *not* be made available
 publicly) add them to 'tables_to_ignore'.'''
             for t in sorted(unexpected):
                 print " ", t
