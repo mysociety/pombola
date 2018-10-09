@@ -27,6 +27,10 @@
         <meta property="fb:app_id" content="{{ settings.FACEBOOK_APP_ID }}" />
         {% endif %}
 
+        {% if settings.GOOGLE_SITE_VERIFICATION %}
+        <meta name="google-site-verification" content="{{ settings.GOOGLE_SITE_VERIFICATION }}" />
+        {% endif %}
+
         {% block open_graph %}
         <meta property="og:title" content="{{ site.name }}" />
         <meta property="og:type" content="website" />
