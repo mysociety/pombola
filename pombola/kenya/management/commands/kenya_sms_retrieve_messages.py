@@ -13,7 +13,7 @@ class Command(BaseCommand):
             short_code=settings.KENYA_SMS_API_SHORT_CODE
         )
         new_messages = 0
-        for message in api_client.latest_messages(limit=50):
+        for message in api_client.latest_messages(limit=20):
             _, created = Message.objects.get_or_create(
                 text=message.message(),
                 msisdn=message.msisdn(),
