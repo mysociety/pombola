@@ -38,17 +38,11 @@ PYTHONIOENCODING=utf-8
 # or apps. Use the conditionals below to run the correct cron jobs, and make
 # sure that they don't clash timewise.
 !!(* if ($vhost eq 'mzalendo.mysociety.org') { *)!!
-MAILTO=cron-mzalendo@mysociety.org
-0 * * * *  !!(*= $user *)!! output-on-error run_management_command kenya_sms_retrieve_messages
+
+# See https://github.com/mysociety/pombola/issues/1582
 MAILTO=mzalendo-managers@mysociety.org
 6 7 * * *  !!(*= $user *)!! update_hansard.bash
 MAILTO=cron-!!(*= $site *)!!@mysociety.org
-
-# disabling the scorcard updating to remove them from the site temporarily. This
-# is an interim measure, but much simpler than doing it properly by making the
-# scorecard app optional, or adding some feature flip for them. See #629
-
-# 0 1 * * * !!(*= $user *)!! run_management_command scorecard_update_person_contact_scores
 
 # Generate the Popolo JSON files
 33 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
@@ -56,6 +50,9 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 
 # Check for any recurring data problems:
 47 4 * * * !!(*= $user *)!! run_management_command kenya_check_for_recurring_problems
+
+# Import messages from SMS API
+0 * * * *  !!(*= $user *)!! output-on-error run_management_command kenya_sms_retrieve_messages
 
 !!(* } elsif ($vhost eq 'www.shineyoureye.org') { *)!!
 23 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.shineyoureye.org
@@ -71,7 +68,6 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 
 !!(* } elsif ($vhost eq 'www.pa.org.za') { *)!!
 
-# NOTE - until the live site is launched, crons are turned off in vhosts.pl
 13 1 * * * !!(*= $user *)!! output-on-error update_za_hansard.bash
 
 # Generate the Popolo JSON files
@@ -81,5 +77,4 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 # Sync EveryPolitician UUIDs to local DB
 30 10 * * * !!(*= $user *)!! output-on-error run_management_command south_africa_sync_everypolitician_uuid
 
-!!(* } else { *)!!
 !!(* } *)!!
