@@ -144,7 +144,7 @@ $(function () {
             'maps', '3',
             {
                 callback: initialize_map,
-                other_params:'sensor=false&key=AIzaSyCsI0iDUA5waenMFVuinV6dciKwkgaqQt8'
+                other_params:'key=AIzaSyCsI0iDUA5waenMFVuinV6dciKwkgaqQt8'
             }
         );
     }
