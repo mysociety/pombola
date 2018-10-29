@@ -1,10 +1,26 @@
 {% extends "default_base.html" %}
 {% load pipeline %}
+{% load staticfiles %}
 
 {% block title_suffix %} :: Mzalendo{% endblock %}
 
 {% block css_headers %}
     {% stylesheet 'kenya' %}
+{% endblock %}
+
+{% block open_graph %}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ site.name }}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:title" content="TODO" />
+    <meta property="og:description" content="TODO" />
+    <meta property="og:image" content="{% static 'images/mzalendo-avatar.jpg' %}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@MzalendoWatch" />
+    <meta name="twitter:url" content="{{ request.build_absolute_uri }}" />
+    <meta name="twitter:title" content="TODO" />
+    <meta name="twitter:description" content="TODO" />
+    <meta name="twitter:image" content="{% static 'images/mzalendo-avatar.jpg' %}" />
 {% endblock %}
 
 {% block footer %}
