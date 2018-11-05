@@ -482,115 +482,111 @@ def make_enabled_features(installed_apps, all_optional_apps):
 
 # Set up the core CSS and JS files:
 
-PIPELINE_CSS = {
-    'countdown': {
-        'source_filenames': (
-            'css/jquery.countdown-v1.6.0.css',
-            'sass/countdown.scss',
-        ),
-        'output_filename': 'css/countdown.css',
+PIPELINE = {
+    'STYLESHEETS': {
+        'countdown': {
+            'source_filenames': (
+                'css/jquery.countdown-v1.6.0.css',
+                'sass/countdown.scss',
+            ),
+            'output_filename': 'css/countdown.css',
+        },
+        'admin': {
+            'source_filenames': (
+                # .scss files from core:
+                'sass/admin.scss',
+            ),
+            'output_filename': 'css/admin.css',
+        },
     },
-    'admin': {
-        'source_filenames': (
-            # .scss files from core:
-            'sass/admin.scss',
-        ),
-        'output_filename': 'css/admin.css',
-    },
+    'JAVASCRIPT': {
+        'base': {
+            'source_filenames': (
+                'js/libs/jquery-ui.js',
+                'js/libs/jquery.form-v2.94.js',
+                'js/functions.js',
+                'js/hover-dropdown.js',
+                'js/twitter-embed.js',
+                'js/analytics.js',
+            ),
+            'output_filename': 'js/base.js',
+        },
+        'load-appearances': {
+            'source_filenames': (
+                'js/load-appearances.html',
+            ),
+            'output_filename': 'js/load-appearances.js',
+        },
+        'feeds': {
+            'source_filenames': (
+                'js/feeds.js',
+            ),
+            'output_filename': 'js/feeds.js',
+        },
+        'responsive-carousel': {
+            'source_filenames': (
+                'js/libs/responsive-carousel.js',
+            ),
+            'output_filename': 'js/responsive-carousel.js',
+        },
+        'map': {
+            'source_filenames': (
+                'js/map-drilldown.js',
+            ),
+            'output_filename': 'js/base-map-drilldown.js',
+        },
+        'ui-test': {
+            'source_filenames': (
+                'js/ui-test.js',
+            ),
+            'output_filename': 'js/ui-test.js',
+        },
+        'google-map': {
+            'source_filenames': (
+                'js/map.js',
+            ),
+            'output_filename': 'js/google-map.js',
+        },
+        'modernizr': {
+            'source_filenames': (
+                'js/libs/modernizr.js',
+            ),
+            'output_filename': 'js/modernizr.js',
+        },
+        'respond': {
+            'source_filenames': (
+                'js/libs/respond.1.4.2.js',
+            ),
+            'output_filename': 'js/respond.js',
+        },
+        'hide-reveal': {
+            'source_filenames': (
+                'js/hide-reveal.js',
+            ),
+            'output_filename': 'js/hide-reveal.js',
+        },
+        'survey': {
+            'source_filenames': (
+                'js/survey.js',
+            ),
+            'output_filename': 'js/survey.js',
+        },
+    }
 }
 
-PIPELINE_JS = {
-   'base': {
-        'source_filenames': (
-            'js/libs/jquery-ui.js',
-            'js/libs/jquery.form-v2.94.js',
-            'js/functions.js',
-            'js/hover-dropdown.js',
-            'js/twitter-embed.js',
-            'js/analytics.js',
-        ),
-        'output_filename': 'js/base.js',
-    },
-    'load-appearances': {
-        'source_filenames': (
-            'js/load-appearances.html',
-        ),
-        'output_filename': 'js/load-appearances.js',
-    },
-    'feeds': {
-        'source_filenames': (
-            'js/feeds.js',
-        ),
-        'output_filename': 'js/feeds.js',
-    },
-    'responsive-carousel': {
-        'source_filenames': (
-            'js/libs/responsive-carousel.js',
-        ),
-        'output_filename': 'js/responsive-carousel.js',
-    },
-    'map': {
-        'source_filenames': (
-            'js/map-drilldown.js',
-        ),
-        'output_filename': 'js/base-map-drilldown.js',
-    },
-    'ui-test': {
-        'source_filenames': (
-            'js/ui-test.js',
-        ),
-        'output_filename': 'js/ui-test.js',
-    },
-    'google-map': {
-        'source_filenames': (
-            'js/map.js',
-        ),
-        'output_filename': 'js/google-map.js',
-    },
-    'modernizr': {
-        'source_filenames': (
-            'js/libs/modernizr.js',
-        ),
-        'output_filename': 'js/modernizr.js',
-    },
-    'respond': {
-        'source_filenames': (
-            'js/libs/respond.1.4.2.js',
-        ),
-        'output_filename': 'js/respond.js',
-    },
-    'hide-reveal': {
-        'source_filenames': (
-            'js/hide-reveal.js',
-        ),
-        'output_filename': 'js/hide-reveal.js',
-    },
-    'survey': {
-        'source_filenames': (
-            'js/survey.js',
-        ),
-        'output_filename': 'js/survey.js',
-    },
-}
-
-# Only for debugging compression (the default is: 'not DEBUG' which is
-# fine when not experimenting with compression)
-# PIPELINE_ENABLED = True
-
-PIPELINE_COMPILERS = (
-  'pipeline_compass.compass.CompassCompiler',
+PIPELINE['COMPILERS'] = (
+    'pipeline_compass.compass.CompassCompiler',
 )
 if 'ON_HEROKU' not in os.environ:
     PIPELINE_COMPASS_BINARY = os.path.join(root_dir, 'gem-bin', 'compass')
 
+PIPELINE['CSS_COMPRESSOR'] = 'pipeline.compressors.yui.YUICompressor'
+PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.yui.YUICompressor'
 
-PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
 
+PIPELINE['YUI_BINARY'] = '/usr/bin/env yui-compressor'
 
-PIPELINE_YUI_BINARY = '/usr/bin/env yui-compressor'
-
-PIPELINE_DISABLE_WRAPPER = True
+PIPELINE['DISABLE_WRAPPER'] = True
 
 EXCLUDE_FROM_SEARCH = ()
 

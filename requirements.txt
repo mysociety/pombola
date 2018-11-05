@@ -15,7 +15,7 @@ pymongo==3.0.2
 Django==1.8.18
 django-pagination==1.0.7
 django-bcrypt==0.9.2
-django-pipeline==1.5.4
+django-pipeline==1.6.14
 django-pipeline-compass-rubygem==0.1.8
 django-formtools==2.1
 
