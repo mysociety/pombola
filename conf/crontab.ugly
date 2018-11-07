@@ -39,10 +39,11 @@ PYTHONIOENCODING=utf-8
 # sure that they don't clash timewise.
 !!(* if ($vhost eq 'mzalendo.mysociety.org') { *)!!
 
-# See https://github.com/mysociety/pombola/issues/1582
-MAILTO=mzalendo-managers@mysociety.org
+# Update Hansard every morning
 6 7 * * *  !!(*= $user *)!! update_hansard.bash
-MAILTO=cron-!!(*= $site *)!!@mysociety.org
+
+# Send Hansard unmatched speakers email once a week
+0 8 * * 1 !!(*= $user *)!! run_management_command hansard_email_unmatched_speakers
 
 # Generate the Popolo JSON files
 33 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
