@@ -80,12 +80,9 @@ class Command(NoArgsCommand):
         for soup, base_url in self.get_index_pages(url, list_page, verbose):
             # Grab each of the blocks on the current page which are supposed
             # to contain a link to a PDF file.
-            link_sections = soup.findAll('div', 'catItemView groupPrimary')
+            link_sections = soup.findAll('span', 'file--application-pdf')
 
-            links = [
-                section.find('div', 'catItemAttachmentsBlock').a
-                for section in link_sections
-            ]
+            links = [section.a for section in link_sections]
 
             # Check that we found some links. This is to detect when the page
             # changes or our scraper breaks (see issue #905 for example).
@@ -102,7 +99,7 @@ class Command(NoArgsCommand):
                 href = link['href'].strip()
                 # print "href: " + href
 
-                name = ' '.join(link_sections[idx].find("h3", "catItemTitle").contents).strip()
+                name = link.text.strip()
                 # print "name: " + name
 
                 if Source.objects.filter(
@@ -179,7 +176,7 @@ class Command(NoArgsCommand):
             url_parts = urlsplit(next_url)
             base_url = urlunsplit((url_parts.scheme, url_parts.netloc, '', '', ''))
 
-            next_url = self.get_next_url(soup, base_url)
+            next_url = self.get_next_url(soup, url)
 
             yield soup, base_url
 
@@ -191,9 +188,9 @@ class Command(NoArgsCommand):
             return url
 
 
-    def get_next_url(self, soup, base_url):
-        next_page_button = soup.find('li', 'pagination-next')
+    def get_next_url(self, soup, url):
+        next_page_button = soup.find('li', 'pager__item--next')
         if next_page_button.a:
-            return self.format_url(next_page_button.a['href'].strip(), base_url)
+            return ''.join([url, next_page_button.a['href'].strip()])
         else:
             return None
