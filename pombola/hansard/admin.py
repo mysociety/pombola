@@ -13,7 +13,7 @@ import models
 # from django.core.urlresolvers import reverse
 # from django.contrib.contenttypes.admin import GenericTabularInline
 # from django import forms
-# 
+#
 # def create_admin_link_for(obj, link_text):
 #     return u'<a href="%s">%s</a>' % ( obj.get_admin_url(), link_text )
 
@@ -23,7 +23,7 @@ class SourceAdmin(admin.ModelAdmin):
     list_display  = [ 'name', 'date', 'last_processing_success', 'last_processing_attempt' ]
     list_filter = ('date', 'last_processing_success')
     date_hierarchy = 'date'
-    
+
 
 @admin.register(models.Venue)
 class VenueAdmin(admin.ModelAdmin):
@@ -35,26 +35,26 @@ class SittingAdmin(admin.ModelAdmin):
     list_display  = [ 'start_date', 'start_time', 'end_date', 'end_time', 'source' ]
     list_filter = ['start_date']
     date_hierarchy = 'start_date'
-    
+
 
 @admin.register(models.Entry)
 class EntryAdmin(admin.ModelAdmin):
     list_display  = [ 'sitting', 'type', 'speaker_name', 'speaker',  '__unicode__' ]
-    
+
 
 # # When we have Django 1.4
 # from django.contrib.admin import SimpleListFilter
-# 
+#
 # class AliasStatusListFilter(SimpleListFilter):
 #     title = _('alias status')
 #     parameter_name = 'status'
-# 
+#
 #     def lookups(self, request, model_admin):
 #         return (
 #             ('unassigned', 'unassigned'),
 #             # ('90s', _('in the nineties')),
 #         )
-# 
+#
 #     def queryset(self, request, queryset):
 #         if self.value() == 'unassigned':
 #             return queryset.unassigned()
@@ -73,10 +73,10 @@ class AliasAdmin(admin.ModelAdmin):
         {
             'person':       'person_name',
         }
-    )    
+    )
 
     actions = ["ignore_aliases",]
-    
+
     def ignore_aliases(self, request, queryset):
         for alias in queryset:
             alias.ignored = True
@@ -84,7 +84,7 @@ class AliasAdmin(admin.ModelAdmin):
 
         self.message_user(request, "Ignored the aliases")
     ignore_aliases.short_description = "Ignore the selected aliases"
-    
+
 
     def get_urls(self):
         urls = super(AliasAdmin, self).get_urls()
@@ -92,7 +92,7 @@ class AliasAdmin(admin.ModelAdmin):
             ( r'^next_unassigned/$', self.next_unassigned ),
         )
         return my_urls + urls
-        
+
 
     @method_decorator(staff_member_required)
     def next_unassigned(self, request):
@@ -105,7 +105,7 @@ class AliasAdmin(admin.ModelAdmin):
         # onwards another. Not implemented now as it is not certain that this
         # is actually a problem.
         unassigned = models.Alias.objects.all().unassigned().order_by('-created')
-        
+
 
         try:
             alias = unassigned[0]
