@@ -1,6 +1,6 @@
 from ajax_select import make_ajax_form
 
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import redirect, render_to_response
 from django.conf.urls import patterns
@@ -111,8 +111,5 @@ class AliasAdmin(admin.ModelAdmin):
             alias = unassigned[0]
             return redirect( '/admin/hansard/alias/' + str(alias.id) + '/' )
         except IndexError:
-            return render_to_response(
-                'admin/hansard/alias',
-                {},
-                context_instance=RequestContext(request)
-            )
+            messages.add_message(request, messages.INFO, 'There are no more unassigned aliases.')
+            return redirect('/admin/hansard/alias/')
