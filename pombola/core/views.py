@@ -14,7 +14,8 @@ import json
 import string
 import sys
 import subprocess
-from urlparse import urlsplit, urlunsplit
+import unicodecsv as csv
+from urlparse import urlsplit, urlunsplit, urljoin
 from os.path import dirname
 
 import django
@@ -508,11 +509,113 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
         context['alphabetical_link_from_query_parameter'] = True
     context['positions'] = positions
 
-    return render_to_response(
-        template,
-        context,
-        context_instance=RequestContext(request)
-    )
+    if request.GET.get('format') == 'csv':
+
+        response = HttpResponse(content_type='text/csv')
+
+        writer = csv.writer(response)
+
+        writer.writerow([
+            'id',
+            'source',
+            'name',
+            'honorific_prefix',
+            'email',
+            'image',
+            'identifier__wikidata',
+            'party',
+            'party_wikidata_id',
+            'area',
+            'area_wikidata_id',
+            'start_date',
+            'end_date'
+        ])
+
+        for position in positions:
+
+            person = position.person
+
+            person_wikidata_id_query = person.identifiers.filter(scheme='wikidata')
+            if person_wikidata_id_query.exists():
+                person_wikidata_id = person_wikidata_id_query.first().identifier
+            else:
+                person_wikidata_id = None
+
+            email_query = person.contacts.filter(kind__slug='email').order_by('-preferred')
+            if email_query.exists():
+                email = email_query.first().value
+            else:
+                email = None
+
+            if person.parties_and_coalitions():
+                if len(person.parties_and_coalitions()) > 1:
+                    person_party_name = 'MULTIPLE'
+                    person_party_wikidata_id = 'MULTIPLE'
+                else:
+                    party = person.parties_and_coalitions().first()
+                    person_party_name = party.name
+                    person_party_wikidata_id_query = party.identifiers.filter(scheme='wikidata')
+                    if person_party_wikidata_id_query.exists():
+                        person_party_wikidata_id = person_party_wikidata_id_query.first().identifier
+                    else:
+                        person_party_wikidata_id = None
+            else:
+                person_party_name = None
+                person_party_wikidata_id = None
+
+            if person.constituencies():
+                if len(person.constituencies()) > 1:
+                    person_area_name = 'MULTIPLE'
+                    person_area_wikidata_id = 'MULTIPLE'
+                else:
+                    area = person.constituencies().first()
+                    person_area_name = area.name
+                    person_area_wikidata_id_query = area.identifiers.filter(scheme='wikidata')
+                    if person_area_wikidata_id_query.exists():
+                        person_area_wikidata_id = person_area_wikidata_id_query.first().identifier
+                    else:
+                        person_area_wikidata_id = None
+            else:
+                person_area_name = None
+                person_area_wikidata_id = None
+
+            def handle_approx_date(date):
+                return_date = None
+                if date and not date.future:
+                    if date.year:
+                        return_date = str(date.year)
+                    if date.month:
+                        return_date = return_date + '-' + str(date.month).zfill(2)
+                    if date.day:
+                        return_date = return_date + '-' + str(date.day).zfill(2)
+
+                return return_date
+
+            writer.writerow([
+                person.slug,
+                request.build_absolute_uri(person.get_absolute_url()),
+                person.name,
+                person.honorific_prefix,
+                email,
+                request.build_absolute_uri('/' + str(person.primary_image())),
+                person_wikidata_id,
+                person_party_name,
+                person_party_wikidata_id,
+                person_area_name,
+                person_area_wikidata_id,
+                handle_approx_date(position.start_date),
+                handle_approx_date(position.end_date)
+            ])
+
+        return response
+
+    else:
+
+        return render_to_response(
+            template,
+            context,
+            context_instance=RequestContext(request)
+        )
 
 
 class OrganisationDetailView(SlugRedirectMixin, BaseDetailView):
