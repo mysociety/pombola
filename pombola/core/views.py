@@ -593,11 +593,13 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
 
             writer.writerow([
                 person.slug,
-                request.build_absolute_uri(person.get_absolute_url()),
+                request.build_absolute_uri(person.get_absolute_url())
+                            .replace('http://', 'https://'),
                 person.name,
                 person.honorific_prefix,
                 email,
-                request.build_absolute_uri('/' + str(person.primary_image())),
+                request.build_absolute_uri('/' + str(person.primary_image()))
+                            .replace('http://', 'https://'),
                 person_wikidata_id,
                 person_party_name,
                 person_party_wikidata_id,
