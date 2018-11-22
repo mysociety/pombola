@@ -8,7 +8,8 @@ OPTIONAL_APPS = APPS_REQUIRED_BY_SPEECHES + (
     'pombola.interests_register',
     'pombola.spinner',
     'pombola.writeinpublic',
-    'formtools'
+    'formtools',
+    'pombola.surveys',
 )
 
 SPEECH_SUMMARY_LENGTH = 30
