@@ -12,3 +12,6 @@ class Survey(models.Model):
 
   def __str__(self):
     return self.label
+
+  class Meta:
+    get_latest_by = "created"
