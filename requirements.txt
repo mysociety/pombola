@@ -170,7 +170,7 @@ babel
 certifi==2015.04.28
 
 # Packages needed for running on Heroku, but not otherwise:
-dj-database-url==0.4.
+dj-database-url==0.4.2
 gunicorn==19.4.5
 whitenoise==2.0.6
 
