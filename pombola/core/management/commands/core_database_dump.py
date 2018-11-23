@@ -171,6 +171,7 @@ class Command(BaseCommand):
                 'speeches_speech',
                 'speeches_speech_tags',
                 'speeches_tag',
+                'surveys_survey',
                 'za_hansard_answer',
                 'za_hansard_pmgcommitteeappearance',
                 'za_hansard_pmgcommitteereport',
