@@ -594,6 +594,10 @@ class ShujaazFinalists2015View(TemplateView):
         return context
 
 
+class ShujaazFinalists2018View(TemplateView):
+    template_name = 'shujaaz-2018.html'
+
+
 class YoungRepresentativesView(TemplateView):
 
     template_name = 'reps-young.html'
