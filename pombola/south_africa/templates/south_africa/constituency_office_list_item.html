@@ -19,7 +19,7 @@
       </ul>
     </div>
     <div class="column">
-      {% if not skip_positions %}
+      {% if object.related_positions and not skip_positions %}
         <ul class="unstyled-list">
         {% for position in object.related_positions %}
           {% with object=position.person %}
