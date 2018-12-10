@@ -1,4 +1,7 @@
 <div class="person-gallery__item">
+    {% if before %}
+        {{ before }}
+    {% endif %}
     {% if section %}
         <h3>{{ section }}</h3>
     {% endif %}

@@ -94,6 +94,11 @@ body.home {
 
 // Replaces .homepage-intro__popular when Shujaaz is in process.
 .homepage-intro__shujaaz {
+    @include display-flex();
+    @include flex-direction(column);
+    @include align-items(center);
+    @include justify-content(center);
+
     padding: 1em;
     text-align: center;
     border: 1px solid #e4dfc5;

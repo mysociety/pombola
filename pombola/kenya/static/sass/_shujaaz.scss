@@ -194,6 +194,11 @@ body.shujaaz {
     line-height: 1.4em;
     margin-bottom: 0;
 
+    .shujaaz--2018 & {
+      font-size: 1.6em;
+      margin-bottom: 0.5em;
+    }
+
     small {
       font-size: 0.7em;
       line-height: 1;
@@ -231,25 +236,6 @@ body.shujaaz {
     width: 40%;
   }
 }
-
-.shujaaz-vote-box {
-  background-color: #fff4da;
-  border-radius: 0.3em;
-  padding: 1.5em;
-  text-align: center;
-
-  p {
-    font-size: 16px;
-    line-height: 1.4;
-    margin: 0.5em 0;
-  }
-
-  .shujaaz-button {
-    margin: 0 1em; // add some space around the button when it's in a line of text
-    margin-top: 0.5em;
-  }
-}
-
 
 // A version of the person-gallery that uses markup to
 // create the two columns, rather than just floating
