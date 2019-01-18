@@ -24,6 +24,20 @@ class EntryQuerySet(models.query.QuerySet):
 
         return counts
 
+    def yearly_appearance_counts(self):
+        """Return an list of dictionaries for dates and counts for each year"""
+
+        # would prefer to do this as a single query but I can't seem to make the ORM do that.
+
+        dates = self.dates('sitting__start_date', 'year', 'DESC')
+        counts = []
+
+        for d in dates:
+            qs = self.filter(sitting__start_date__year=d.year)
+            counts.append(dict(date=d, count=qs.count()))
+
+        return counts
+
     def unassigned_speeches(self):
         """All speeches that do not have a speaker assigned"""
         return self.filter(
