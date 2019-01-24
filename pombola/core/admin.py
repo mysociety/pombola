@@ -211,6 +211,7 @@ class PlaceAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     search_fields = ('name', 'organisation__name')
     inlines = (
         InformationSourceInlineAdmin,
+        ImageAdminInline,
         ScorecardInlineAdmin,
         IdentifierInlineAdmin,
         )
