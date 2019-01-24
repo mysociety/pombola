@@ -66,7 +66,7 @@ requests-mock==1.4.0
 # For Ghana:
 python-openid
 oauth2==1.5.170
-django-social-auth==0.6.0
+django-social-auth==0.7.28
 pycrypto==2.6.1
 Fabric==1.10.1
 pyasn1==0.1.9
