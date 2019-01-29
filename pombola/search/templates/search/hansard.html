@@ -28,6 +28,11 @@
                 <option value="adate"{% if order == 'adate' %} selected{% endif %}>Oldest first</option>
               </select>
 
+              <div>
+                <label for="speaker-name">Speaker name</label>
+                <input id="speaker-name" type="text" name="speaker" type="text" value="{{ speaker }}">
+              </div>
+
             <input type="submit" value="Search" class="button">
         </div>
 
