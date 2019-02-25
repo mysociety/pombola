@@ -219,7 +219,7 @@ class KEPersonDetailAppearances(HansardPersonMixin, PersonDetailSub, KEPersonDet
         context = super(KEPersonDetailAppearances, self).get_context_data(**kwargs)
         context['hansard_entries_to_show'] = ":5"
         context['lifetime_summary'] = context['hansard_entries'] \
-            .monthly_appearance_counts()
+            .yearly_appearance_counts()
         return context
 
 
@@ -592,6 +592,10 @@ class ShujaazFinalists2015View(TemplateView):
         context['finalists_column_2'] = finalists[half:]
 
         return context
+
+
+class ShujaazFinalists2018View(TemplateView):
+    template_name = 'shujaaz-2018.html'
 
 
 class YoungRepresentativesView(TemplateView):

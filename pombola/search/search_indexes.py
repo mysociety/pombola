@@ -50,6 +50,7 @@ if settings.ENABLED_FEATURES['hansard']:
     class HansardEntryIndex(BaseIndex, indexes.Indexable):
         start_date = indexes.DateTimeField(null=True)
         sitting_start_date = indexes.DateField(model_attr='sitting__start_date')
+        speaker_names = indexes.MultiValueField()
 
         def get_model(self):
             return hansard_models.Entry
@@ -60,6 +61,14 @@ if settings.ENABLED_FEATURES['hansard']:
 
         def prepare_start_date(self, obj):
             return obj.sitting.start_date
+
+        def prepare_speaker_names(self, obj):
+            names = [obj.speaker_name]
+            # If there's a speaker object include the name and any aliases from that.
+            if obj.speaker:
+                names.append(obj.speaker.name)
+                names.extend([a.alias for a in obj.speaker.alias_set.all()])
+            return names
 
 if 'info' in settings.INSTALLED_APPS:
     from info.models import InfoPage

@@ -6,6 +6,7 @@ from info.models import (
 
 from pombola.core.views import HomeView
 from pombola.core.models import Person
+from pombola.surveys.models import Survey
 
 
 class SAHomeView(HomeView):
@@ -38,5 +39,10 @@ class SAHomeView(HomeView):
                 entries.order_by('-created')[0]
         except BlogTag.DoesNotExist:
             context['infographic'] = None
+
+        try:
+            context['survey'] = Survey.objects.latest()
+        except Survey.DoesNotExist:
+            context['survey'] = None
 
         return context

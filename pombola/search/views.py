@@ -275,6 +275,7 @@ if settings.ENABLED_FEATURES['hansard']:
             self.query = self.request.GET.get('q', '')
             self.page = self.request.GET.get('page')
             self.order = self.request.GET.get('order')
+            self.speaker = self.request.GET.get('speaker', '')
 
         def get_data(self):
             from pombola.hansard.models import Entry
@@ -290,6 +291,8 @@ if settings.ENABLED_FEATURES['hansard']:
                 data_query = data_query.order_by('-start_date')
             if self.order == 'adate':
                 data_query = data_query.order_by('start_date')
+            if self.speaker != '':
+                data_query = data_query.filter(speaker_names=self.speaker)
 
             result = defaults.copy()
             result['results'] = data_query.highlight()
@@ -311,6 +314,7 @@ if settings.ENABLED_FEATURES['hansard']:
             context = super(HansardSearchView, self).get_context_data(**kwargs)
             context['query'] = self.query
             context['order'] = self.order
+            context['speaker'] = self.speaker
 
             query_dict = self.request.GET.copy()
             if 'page' in query_dict:

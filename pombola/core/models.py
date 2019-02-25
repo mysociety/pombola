@@ -847,7 +847,7 @@ class PlaceQuerySet(models.query.GeoQuerySet):
         return self.order_by('-kind__name', 'name')
 
 
-class Place(ModelBase, ScorecardMixin, BudgetsMixin, IdentifierMixin):
+class Place(ModelBase, HasImageMixin, ScorecardMixin, BudgetsMixin, IdentifierMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(
         max_length=200,
@@ -868,6 +868,7 @@ class Place(ModelBase, ScorecardMixin, BudgetsMixin, IdentifierMixin):
     fields_to_whitespace_normalize = ['name']
 
     identifiers = GenericRelation(Identifier)
+    images = GenericRelation(Image)
 
     objects = PlaceQuerySet.as_manager()
     is_overall_scorecard_score_applicable = False

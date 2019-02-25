@@ -105,10 +105,12 @@
 <div class="home__section home__news">
     <div class="wrapper">
         <div class="home__news__row">
+          {% if survey %}
             <div class="home__news__survey">
-                <img class="home__news__survey__thumb" src="{% static 'images/medicalnegligence.jpg' %}" />
-                <p><a href="https://www.pa.org.za/blog/have-your-say-about-public-healthcare-medical-negl" class="button button--low-case">Have Your Say!</a></p>
+                <img class="home__news__survey__thumb" src="{{ survey.image.url }}" />
+                <p><a href="{{ survey.url }}" class="button button--low-case">Have Your Say!</a></p>
             </div>
+          {% endif %}
             <div class="home__news__articles">
                 <h3 class="home__section-header">
                     Latest news
@@ -135,13 +137,13 @@
         <div class="home__three-boxes__box">
             <a href="{% url 'mp-attendance' %}">
                 <h3>MP Attendance</h3>
-                <img src="{% static 'images/mp-attendance.jpg' %}" /> 
+                <img src="{% static 'images/mp-attendance.jpg' %}" />
             </a>
         </div>
         <div class="home__three-boxes__box">
             <a href="{% url 'sa-interests-index' %}">
                 <h3>MP Assets</h3>
-                <img src="{% static 'images/mp-assets.jpg' %}" /> 
+                <img src="{% static 'images/mp-assets.jpg' %}" />
             </a>
         </div>
         <div class="home__three-boxes__box">

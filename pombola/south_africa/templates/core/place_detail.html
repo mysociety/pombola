@@ -36,7 +36,7 @@
         {% endif %}
     </div>
 
-    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#national-assembly-people">Members of the National Assembly ({{ national_assembly_people_count }})</a>
+    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#national-assembly-people">National Assembly members from provincial list ({{ national_assembly_people_count }})</a>
 
     <div id="national-assembly-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=national_assembly_people skip_positions=1 %}
@@ -46,7 +46,7 @@
         {% endif %}
     </div>
 
-    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#ncop-people">Members of the National Council of Provinces ({{ ncop_people_count }})</a>
+    <a class="js-hide-reveal-link hide-reveal-link has-dropdown-dark" href="#ncop-people">Permanent Delegates to National Council of Provinces ({{ ncop_people_count }})</a>
 
     <div id="ncop-people" class="person-panel js-hide-reveal">
         {% include "core/_people_listing.html" with people=ncop_people skip_positions=1 %}

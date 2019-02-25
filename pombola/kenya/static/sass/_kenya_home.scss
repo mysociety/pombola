@@ -92,6 +92,39 @@ body.home {
     }
 }
 
+// Replaces .homepage-intro__popular when Shujaaz is in process.
+.homepage-intro__shujaaz {
+    @include display-flex();
+    @include flex-direction(column);
+    @include align-items(center);
+    @include justify-content(center);
+
+    padding: 1em;
+    text-align: center;
+    border: 1px solid #e4dfc5;
+    background: #fcffea url(../images/peoples-shujaaz-background-small.jpg) center bottom no-repeat;
+    background-size: contain;
+    border-radius: $border-radius;
+
+    @media (min-width: $mz-grid-breakpoint) {
+        box-sizing: border-box;
+        height: 100%;
+    }
+
+    h2 {
+        overflow: hidden;
+        height: 0;
+        padding-top: 15%;
+        background: transparent url(../images/peoples-shujaaz-logo.png) center center no-repeat;
+        background-size: 100%;
+        margin: 0;
+    }
+
+    p {
+        margin-top: 0.5em;
+    }
+}
+
 .homepage-tabs {
     a {
         @include box-sizing(border-box);

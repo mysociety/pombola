@@ -23,11 +23,11 @@
 
               <h3>Lifetime summary</h3>
 
-              <p>{{ person.name }} has month by month spoken in parliament this many times (if a month is missing there were no speeches found for that month):</p>
+              <p>{{ person.name }} has year by year spoken in parliament this many times (if a year is missing there were no speeches found for that year):</p>
 
               <ul>
                 {% for summary in lifetime_summary %}
-                  <li>{{ summary.date|date:"M Y" }}: {{ summary.count }} speeches</li>
+                  <li>{{ summary.date|date:"Y" }}: {{ summary.count }} speeches</li>
                 {% endfor %}
               </ul>
 

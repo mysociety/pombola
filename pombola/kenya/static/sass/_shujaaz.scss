@@ -69,6 +69,10 @@ body.shujaaz {
   @media (min-width: 640px) and (min-height: 1000px) {
     padding: 4em 0 16em 0;
   }
+
+  .shujaaz-button {
+    margin: 0.5em 0.5em 0 0.5em;
+  }
 }
 
 .shujaaz__main,
@@ -139,33 +143,37 @@ body.shujaaz {
   font-weight: bold;
   font-family: 'Skolar', Georgia, serif;
 
-  background: $colour_red;
-  background: -moz-linear-gradient(top, lighten($colour_red, 20%) 0%,  $colour_red 100%);
-  background: -webkit-linear-gradient(top, lighten($colour_red, 20%) 0%, $colour_red 100%);
-  background: linear-gradient(to bottom, lighten($colour_red, 20%) 0%, $colour_red 100%);
-
   &:hover, &:focus {
     text-decoration: none;
     color: #fff;
-    background: darken($colour_red, 10%);
-    background: -moz-linear-gradient(top, darken(lighten($colour_red, 20%), 10%) 0%,  darken($colour_red, 10%) 100%);
-    background: -webkit-linear-gradient(top, darken(lighten($colour_red, 20%), 10%) 0%, darken($colour_red, 10%) 100%);
-    background: linear-gradient(to bottom, darken(lighten($colour_red, 20%), 10%) 0%, darken($colour_red, 10%) 100%);
   }
+}
 
-  .shujaaz__intro & {
-    margin-top: 0.5em;
-    background: $colour_primary_mid;
-    background: -moz-linear-gradient(top, #b1d580 0%,  $colour_primary_mid 100%);
-    background: -webkit-linear-gradient(top, #b1d580 0%, $colour_primary_mid 100%);
-    background: linear-gradient(to bottom, #b1d580 0%, $colour_primary_mid 100%);
+.shujaaz-button--primary {
+  background: #d44b00;
+  background: -moz-linear-gradient(top, #fea100 0%,  #d44b00 100%);
+  background: -webkit-linear-gradient(top, #fea100 0%, #d44b00 100%);
+  background: linear-gradient(to bottom, #fea100 0%, #d44b00 100%);
 
-    &:hover, &:focus {
-      background: darken($colour_primary_mid, 5%);
-      background: -moz-linear-gradient(top, darken(#b1d580, 5%) 0%,  darken($colour_primary_mid, 5%) 100%);
-      background: -webkit-linear-gradient(top, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
-      background: linear-gradient(to bottom, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
-    }
+  &:hover, &:focus {
+    background: darken(#d44b00, 10%);
+    background: -moz-linear-gradient(top, darken(#fea100, 10%) 0%,  darken(#d44b00, 10%) 100%);
+    background: -webkit-linear-gradient(top, darken(#fea100, 10%) 0%, darken(#d44b00, 10%) 100%);
+    background: linear-gradient(to bottom, darken(#fea100, 10%) 0%, darken(#d44b00, 10%) 100%);
+  }
+}
+
+.shujaaz-button--secondary {
+  background: $colour_primary_mid;
+  background: -moz-linear-gradient(top, #b1d580 0%,  $colour_primary_mid 100%);
+  background: -webkit-linear-gradient(top, #b1d580 0%, $colour_primary_mid 100%);
+  background: linear-gradient(to bottom, #b1d580 0%, $colour_primary_mid 100%);
+
+  &:hover, &:focus {
+    background: darken($colour_primary_mid, 5%);
+    background: -moz-linear-gradient(top, darken(#b1d580, 5%) 0%,  darken($colour_primary_mid, 5%) 100%);
+    background: -webkit-linear-gradient(top, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
+    background: linear-gradient(to bottom, darken(#b1d580, 5%) 0%, darken($colour_primary_mid, 5%) 100%);
   }
 }
 
@@ -185,6 +193,17 @@ body.shujaaz {
     font-size: 2em;
     line-height: 1.4em;
     margin-bottom: 0;
+
+    .shujaaz--2018 & {
+      font-size: 1.6em;
+      margin-bottom: 0.5em;
+    }
+
+    small {
+      font-size: 0.7em;
+      line-height: 1;
+      display: block;
+    }
   }
 }
 
@@ -217,18 +236,6 @@ body.shujaaz {
     width: 40%;
   }
 }
-
-.shujaaz-vote-box {
-  background-color: mix(#fff, $colour_red, 90%);
-  border-radius: 0.3em;
-  padding: 1.5em;
-  text-align: center;
-
-  .shujaaz-button {
-    margin: 0 1em; // add some space around the button when it's in a line of text
-  }
-}
-
 
 // A version of the person-gallery that uses markup to
 // create the two columns, rather than just floating
@@ -295,6 +302,10 @@ body.shujaaz {
       }
     }
 
+    img {
+      margin-bottom: 0.5em;
+    }
+
     ol {
       margin-top: 0.5em;
       margin-bottom: 0;
@@ -321,6 +332,11 @@ body.shujaaz {
 
   .person-card__name {
     margin-top: 0;
+  }
+
+  .shujaaz--2018 & {
+    overflow: auto;
+    margin-bottom: 2em;
   }
 }
 

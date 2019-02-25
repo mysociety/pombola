@@ -2,7 +2,7 @@ import re
 
 from django.db import models
 
-from pombola.core.models import Person
+from pombola.core.models import Person, Place, ParliamentarySession
 from pombola.hansard.models import Sitting, Alias
 from pombola.hansard.models.base import HansardModelBase
 
@@ -20,6 +20,20 @@ class EntryQuerySet(models.query.QuerySet):
 
         for d in dates:
             qs = self.filter(sitting__start_date__month=d.month, sitting__start_date__year=d.year)
+            counts.append(dict(date=d, count=qs.count()))
+
+        return counts
+
+    def yearly_appearance_counts(self):
+        """Return an list of dictionaries for dates and counts for each year"""
+
+        # would prefer to do this as a single query but I can't seem to make the ORM do that.
+
+        dates = self.dates('sitting__start_date', 'year', 'DESC')
+        counts = []
+
+        for d in dates:
+            qs = self.filter(sitting__start_date__year=d.year)
             counts.append(dict(date=d, count=qs.count()))
 
         return counts
@@ -192,6 +206,11 @@ class Entry(HansardModelBase):
                 reverse=True,
                 )
 
+        if len(results) == 0:
+            matches = self.find_person_from_constituency_and_party_reference(name)
+            if matches:
+                results = matches
+
         found_one_result = len(results) == 1
 
         # If there is a single matching speaker and an unassigned alias delete it
@@ -207,3 +226,33 @@ class Entry(HansardModelBase):
             )
 
         return results
+
+    def find_person_from_constituency_and_party_reference(self, name):
+        parts = re.split(r'[,\s]+', name)
+        party_initials_re = re.compile(r'^[A-Z-]+$')
+        party_initials = [p for p in parts if party_initials_re.match(p) or p == 'Independent']
+        place_name = ' '.join([p.strip() for p in parts if p not in party_initials])
+        if len(party_initials) == 0:
+            return
+        sessions = ParliamentarySession.objects.filter(start_date__lte=self.sitting.start_date, end_date__gte=self.sitting.end_date, name__contains=self.sitting.venue.name)
+        if len(sessions) != 1:
+            return
+        session = sessions[0]
+        places = Place.objects.filter(name=place_name, parliamentary_session=session)
+        if 'CWR' in party_initials:
+            # County Women's Representative, ensure place is a county
+            places = places.filter(kind__slug='county')
+        if len(places) != 1:
+            return
+        place = places[0]
+        positions = place.position_with_organisation_set.currently_active(when=self.sitting.start_date)
+        if len(positions) != 1:
+            return
+        position = positions[0]
+        # Now check that the matched person holds a position at the relevant party.
+        if not position.person.position_set.current_politician_positions(when=self.sitting.start_date).filter(
+            organisation__identifiers__identifier__in=party_initials,
+            organisation__identifiers__scheme='hansard-initials'
+        ).exists():
+            return
+        return [position.person]

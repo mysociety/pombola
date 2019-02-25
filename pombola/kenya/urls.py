@@ -16,7 +16,7 @@ from .views import (KEHomeView,
     YouthEmploymentView, YouthEmploymentSupportSubmission,
     YouthEmploymentCommentSubmission, ExperimentThanks,
     YouthEmploymentInputSubmission, YouthEmploymentBillView,
-    ShujaazFinalists2014View, ShujaazFinalists2015View,
+    ShujaazFinalists2014View, ShujaazFinalists2015View, ShujaazFinalists2018View,
     YoungRepresentativesView, FemaleRepresentativesView
 )
 from .views_iebc_office_locator import (
@@ -33,11 +33,12 @@ urlpatterns = [
     url(r'^$', KEHomeView.as_view(), name='home'),
     url(r'^shujaaz$',
         RedirectView.as_view(
-            pattern_name='shujaaz-finalists-2015',
+            pattern_name='shujaaz-finalists-2018',
             permanent=False
         ),
         name='shujaaz-redirect'
     ),
+    url(r'^shujaaz/2018$', ShujaazFinalists2018View.as_view(), name='shujaaz-finalists-2018'),
     url(r'^shujaaz/2015$', ShujaazFinalists2015View.as_view(), name='shujaaz-finalists-2015'),
     url(r'^shujaaz/2014$', ShujaazFinalists2014View.as_view(), name='shujaaz-finalists-2014'),
     url(r'^shujaaz-voting$', TemplateView.as_view(template_name='shujaaz-voting.html'), name='shujaaz-voting'),

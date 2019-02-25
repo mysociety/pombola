@@ -66,7 +66,7 @@ requests-mock==1.4.0
 # For Ghana:
 python-openid
 oauth2==1.5.170
-django-social-auth==0.6.0
+django-social-auth==0.7.28
 pycrypto==2.6.1
 Fabric==1.10.1
 pyasn1==0.1.9
@@ -170,8 +170,8 @@ babel
 certifi==2015.04.28
 
 # Packages needed for running on Heroku, but not otherwise:
-dj-database-url==0.4.
-gunicorn==19.4.5
+dj-database-url==0.4.2
+gunicorn==19.9.0
 whitenoise==2.0.6
 
 cffi
