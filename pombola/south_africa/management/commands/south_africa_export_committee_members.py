@@ -38,11 +38,11 @@ class Command(BaseCommand):
         destination = args[0]
 
         organisationKinds = [
-            OrganisationKind.objects.filter(slug='committee').get(),
+            # OrganisationKind.objects.filter(slug='committee').get(),
             OrganisationKind.objects.filter(slug='national-assembly-committees').get(),
-            OrganisationKind.objects.filter(slug='ad-hoc-committees').get(),
-            OrganisationKind.objects.filter(slug='joint-committees').get(),
-            OrganisationKind.objects.filter(slug='ncop-committees').get(),
+            # OrganisationKind.objects.filter(slug='ad-hoc-committees').get(),
+            # OrganisationKind.objects.filter(slug='joint-committees').get(),
+            # OrganisationKind.objects.filter(slug='ncop-committees').get(),
         ]
         organisations = Organisation.objects.filter(kind__in=organisationKinds)
 
