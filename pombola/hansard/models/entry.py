@@ -238,12 +238,20 @@ class Entry(HansardModelBase):
         if len(sessions) != 1:
             return
         session = sessions[0]
-        places = Place.objects.filter(name=place_name, parliamentary_session=session)
+        place_name_variations = set()
+        place_name_variations.add(place_name)
+        if ' ' in place_name:
+            place_name_variations.add(re.sub(r'\s+', '-', place_name))
+        if '-' in place_name:
+            place_name_variations.add(re.sub(r'\s?-\s?', ' ', place_name))
+        # Hansard uses unicode but Mzalendo uses ASCII for place names like Murang'a
+        if u'\u2019' in place_name:
+            place_name_variations.add(place_name.replace(u'\u2019', "'"))
+        places = Place.objects.filter(name__in=place_name_variations, parliamentary_session=session)
         if 'CWR' in party_initials:
-            # County Women's Representative, ensure place is a county
-            place_name_variations = set(place_name)
             if 'county' in place_name.lower():
                 place_name_variations.add(re.sub(r'(?i)\s+county$', '', place_name))
+            # County Women's Representative, ensure place is a county
             places = Place.objects.filter(
                 name__in=place_name_variations,
                 kind__slug='county',
