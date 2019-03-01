@@ -241,11 +241,19 @@ class Entry(HansardModelBase):
         places = Place.objects.filter(name=place_name, parliamentary_session=session)
         if 'CWR' in party_initials:
             # County Women's Representative, ensure place is a county
-            places = places.filter(kind__slug='county')
+            places = Place.objects.filter(
+                name=place_name,
+                kind__slug='county',
+                parliamentary_session__start_date__lte=self.sitting.start_date,
+                parliamentary_session__end_date__gte=self.sitting.end_date
+            )
         if len(places) != 1:
             return
         place = places[0]
         positions = place.position_with_organisation_set.currently_active(when=self.sitting.start_date)
+        if 'CWR' in party_initials:
+            # County Women's Representative, ensure position in in National Assembly
+            positions = positions.filter(title__slug='member-national-assembly')
         if len(positions) != 1:
             return
         position = positions[0]
