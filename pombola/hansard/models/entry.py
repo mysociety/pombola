@@ -241,8 +241,11 @@ class Entry(HansardModelBase):
         places = Place.objects.filter(name=place_name, parliamentary_session=session)
         if 'CWR' in party_initials:
             # County Women's Representative, ensure place is a county
+            place_name_variations = set(place_name)
+            if 'county' in place_name.lower():
+                place_name_variations.add(re.sub(r'(?i)\s+county$', '', place_name))
             places = Place.objects.filter(
-                name=place_name,
+                name__in=place_name_variations,
                 kind__slug='county',
                 parliamentary_session__start_date__lte=self.sitting.start_date,
                 parliamentary_session__end_date__gte=self.sitting.end_date
