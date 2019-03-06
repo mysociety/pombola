@@ -141,6 +141,11 @@ class Entry(HansardModelBase):
         """
 
         name = self.speaker_name
+
+        # Nominated reps don't have a unique speaker name, so fall back to the speaker title
+        if re.split(r'[,\s]+', self.speaker_name)[0] == 'Nominated':
+            name = self.speaker_title
+
         name = Alias.clean_up_name( name )
 
         # First check for a matching alias that is not ignored
