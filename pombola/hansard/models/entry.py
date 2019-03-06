@@ -233,6 +233,8 @@ class Entry(HansardModelBase):
         return results
 
     def find_person_from_constituency_and_party_reference(self, name):
+        # Remove spaces from around dashes (both ASCII and Unicode) and normalise to ASCII
+        name = re.sub(ur'(?:\s+)?[\u2013\-](?:\s+)?', '-', name)
         parts = re.split(r'[,\s]+', name)
         party_initials_re = re.compile(r'^[A-Z-]+$')
         party_initials = [p for p in parts if party_initials_re.match(p) or p == 'Independent']
