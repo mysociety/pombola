@@ -236,9 +236,9 @@ class Entry(HansardModelBase):
         parts = re.split(r'[,\s]+', name)
         party_initials_re = re.compile(r'^[A-Z-]+$')
         party_initials = [p for p in parts if party_initials_re.match(p) or p == 'Independent']
-        place_name = ' '.join([p.strip() for p in parts if p not in party_initials])
         if len(party_initials) == 0:
             return
+        place_name = ' '.join([p.strip() for p in parts[:parts.index(party_initials[0])] if p not in party_initials])
         sessions = ParliamentarySession.objects.filter(start_date__lte=self.sitting.start_date, end_date__gte=self.sitting.end_date, name__contains=self.sitting.venue.name)
         if len(sessions) != 1:
             return
