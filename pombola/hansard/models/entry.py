@@ -252,6 +252,9 @@ class Entry(HansardModelBase):
         # Hansard uses unicode but Mzalendo uses ASCII for place names like Murang'a
         if u'\u2019' in place_name:
             place_name_variations.add(place_name.replace(u'\u2019', "'"))
+        # Special case
+        if place_name == 'Muranga':
+            place_name_variations.add("Murang'a")
         places = Place.objects.filter(name__in=place_name_variations, parliamentary_session=session)
         if 'CWR' in party_initials:
             if 'county' in place_name.lower():
