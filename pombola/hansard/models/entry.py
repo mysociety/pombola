@@ -243,6 +243,9 @@ class Entry(HansardModelBase):
         if len(party_initials) == 0:
             return None, None
         place_name = ' '.join([p.strip() for p in parts[:parts.index(party_initials[0])] if p not in party_initials])
+        # Party name should appear at the end of the name.
+        if party_initials[-1] != parts[-1]:
+            return None, None
         return place_name, party_initials
 
     def find_person_from_constituency_and_party_reference(self, place_name, party_initials):
