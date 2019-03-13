@@ -236,7 +236,7 @@ class Entry(HansardModelBase):
         # Remove spaces from around dashes (both ASCII and Unicode) and normalise to ASCII
         name = re.sub(ur'(?:\s+)?[\u2013\-](?:\s+)?', '-', name)
         parts = re.split(r'[,\s]+', name)
-        party_initials_re = re.compile(r'^[A-Z-]+$')
+        party_initials_re = re.compile(r'^[A-Z-]{2,}$')
         party_initials = [p for p in parts if party_initials_re.match(p) or p == 'Independent']
         if len(party_initials) == 0:
             return
