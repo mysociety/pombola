@@ -218,6 +218,10 @@ class Entry(HansardModelBase):
                 matches = self.find_person_from_constituency_and_party_reference(place_name, party_initials)
                 if matches:
                     results = matches
+                else:
+                    # Create alias so admins can manually match
+                    Alias.objects.get_or_create(alias=name)
+                    return []
 
         found_one_result = len(results) == 1
 
