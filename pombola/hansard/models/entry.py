@@ -1,4 +1,5 @@
 import re
+import calendar
 
 from django.db import models
 
@@ -235,6 +236,8 @@ class Entry(HansardModelBase):
         return results
 
     def place_name_and_party_initials_from_hansard_name(self, name):
+        if self.name_should_be_ignored(name):
+            return None, None
         # Remove spaces from around dashes (both ASCII and Unicode) and normalise to ASCII
         name = re.sub(ur'(?:\s+)?[\u2013\-](?:\s+)?', '-', name)
         parts = re.split(r'[,\s]+', name)
@@ -247,6 +250,14 @@ class Entry(HansardModelBase):
         if party_initials[-1] != parts[-1]:
             return None, None
         return place_name, party_initials
+
+    def name_should_be_ignored(self, place_name):
+        # Ignore names that contain months
+        months = [calendar.month_name[month] for month in range(1, 13)]
+        for month in months:
+            if month in place_name:
+                return True
+        return False
 
     def find_person_from_constituency_and_party_reference(self, place_name, party_initials):
         sessions = ParliamentarySession.objects.filter(start_date__lte=self.sitting.start_date, end_date__gte=self.sitting.end_date, name__contains=self.sitting.venue.name)
