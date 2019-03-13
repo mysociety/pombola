@@ -212,9 +212,11 @@ class Entry(HansardModelBase):
                 )
 
         if len(results) == 0:
-            matches = self.find_person_from_constituency_and_party_reference(name)
-            if matches:
-                results = matches
+            place_name, party_initials = self.place_name_and_party_initials_from_hansard_name(name)
+            if place_name and party_initials:
+                matches = self.find_person_from_constituency_and_party_reference(place_name, party_initials)
+                if matches:
+                    results = matches
 
         found_one_result = len(results) == 1
 
@@ -232,15 +234,18 @@ class Entry(HansardModelBase):
 
         return results
 
-    def find_person_from_constituency_and_party_reference(self, name):
+    def place_name_and_party_initials_from_hansard_name(self, name):
         # Remove spaces from around dashes (both ASCII and Unicode) and normalise to ASCII
         name = re.sub(ur'(?:\s+)?[\u2013\-](?:\s+)?', '-', name)
         parts = re.split(r'[,\s]+', name)
         party_initials_re = re.compile(r'^[A-Z-]{2,}$')
         party_initials = [p for p in parts if party_initials_re.match(p) or p == 'Independent']
         if len(party_initials) == 0:
-            return
+            return None, None
         place_name = ' '.join([p.strip() for p in parts[:parts.index(party_initials[0])] if p not in party_initials])
+        return place_name, party_initials
+
+    def find_person_from_constituency_and_party_reference(self, place_name, party_initials):
         sessions = ParliamentarySession.objects.filter(start_date__lte=self.sitting.start_date, end_date__gte=self.sitting.end_date, name__contains=self.sitting.venue.name)
         if len(sessions) != 1:
             return
