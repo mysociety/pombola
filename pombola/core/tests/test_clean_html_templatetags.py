@@ -36,3 +36,10 @@ class CleanHTMLTest(TestCase):
         self.assertEqual(
             template.render(Context({'answer_text': '  '})),
             '<p></p>')
+
+    def test_string_with_all_closing_tags_should_not_error(self):
+        template = Template(
+            '{% load clean_html %}{{ answer_text|as_clean_html|safe }}')
+        self.assertEqual(
+            template.render(Context({'answer_text': '</strong></a></p>'})),
+            '<p></p>')
