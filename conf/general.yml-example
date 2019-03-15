@@ -121,7 +121,7 @@ EMAIL_USE_TLS: false
 GOOGLE_MAPS_GEOCODING_API_KEY: ''
 
 # Config for Kenya SMS API
-KENYA_SMS_API_URL: ''
+KENYA_SMS_API_URL: 'https://app.bongasms.co.ke/api/fetch-messages'
 KENYA_SMS_API_SHORT_CODE: ''
 KENYA_SMS_API_KEY: ''
 
