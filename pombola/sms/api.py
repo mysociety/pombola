@@ -1,42 +1,46 @@
 import requests
 from urllib import urlencode
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class APIMessage(object):
     def __init__(self, attrs):
         self.attrs = attrs
 
+    @property
     def msisdn(self):
-        return self.attrs.get('MSISDN', '')
+        return self.attrs.get('msisdn', '')
 
+    @property
     def message(self):
-        return self.attrs.get('message', '').encode('raw_unicode_escape').decode('utf-8')
+        return self.attrs.get('message', '')
 
-    def time_in(self):
-        time_str = self.attrs.get('time_in', '')
+    @property
+    def datetime(self):
+        time_str = self.attrs.get('date', '')
         return datetime.strptime(time_str, '%Y-%m-%d %H:%M:%S')
 
 
 class APIClient(object):
-    def __init__(self, base_url, short_code):
+    def __init__(self, base_url, api_key):
         self.base_url = base_url
-        self.short_code = short_code
+        self.api_key = api_key
 
     # Get a list of the latest messages from the API.
-    def latest_messages(self, limit=10):
+    def get_messages(self, **kwargs):
         response = requests.get(
-            self.api_url(limit=limit)
+            self.api_url(**kwargs)
         )
-        messages = response.json()['latest_messages']
-        return [
-            APIMessage(m[1])
-            # Need to sort messages using dict key
-            for m in sorted(messages.items(), key=lambda m: int(m[0]))
-        ]
+        messages = response.json()['fetched_messages']
+        return [APIMessage(m) for m in messages]
 
     def api_url(self, **kwargs):
-        kwargs['short_code'] = self.short_code
+        kwargs['api_key'] = self.api_key
+        # Default start date to one week ago
+        kwargs['start_date'] = kwargs.get('start_date') or (datetime.now() - timedelta(weeks=1)).date()
+        # Default end date to tomorrow
+        kwargs['end_date'] = kwargs.get('end_date') or (datetime.now() + timedelta(days=1)).date()
+
         params = urlencode(kwargs)
         return "{base_url}?{params}".format(
             base_url=self.base_url,
