@@ -10,14 +10,15 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         api_client = APIClient(
             base_url=settings.KENYA_SMS_API_URL,
-            short_code=settings.KENYA_SMS_API_SHORT_CODE
+            api_key=settings.KENYA_SMS_API_KEY
         )
         new_messages = 0
-        for message in api_client.latest_messages(limit=20):
+        messages = api_client.get_messages()
+        for message in messages:
             _, created = Message.objects.get_or_create(
-                text=message.message(),
-                msisdn=message.msisdn(),
-                datetime=message.time_in()
+                text=message.message,
+                msisdn=message.msisdn,
+                datetime=message.datetime
             )
             if created:
                 new_messages += 1
