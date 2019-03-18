@@ -8,6 +8,8 @@ MEMBER_ORGS = ('parliament', 'national-assembly', )
 
 @register.assignment_tag()
 def should_display_place(organisation):
+    if not organisation:
+        return True
     return organisation.slug not in NO_PLACE_ORGS
 
 
