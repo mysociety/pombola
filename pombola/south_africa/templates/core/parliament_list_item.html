@@ -1,8 +1,8 @@
 <a class="house-splash {{ object.slug }}" href="{{ object.get_absolute_url }}">
     <div class="house-title">
         <h1>{{ object.name }}</h1>
-      {% if object.num_positions %}
-        <p class="kind-of-subtitle">{{ object.num_positions }} members</p>
+      {% if object.seats %}
+        <p class="kind-of-subtitle">{{ object.seats }} seats</p>
       {% endif %}
     </div>
 </a>

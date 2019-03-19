@@ -10,6 +10,7 @@ from collections import defaultdict
 
 from django.core import exceptions
 from django.core.urlresolvers import reverse
+from django.core.validators import MinValueValidator
 
 from django.db.models import Q
 from django.db import transaction
@@ -745,6 +746,13 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
     kind = models.ForeignKey('OrganisationKind')
     started = ApproximateDateField(blank=True, help_text=date_help_text)
     ended = ApproximateDateField(blank=True, help_text=date_help_text)
+
+    seats = models.IntegerField(
+        null=True,
+        blank=True,
+        validators=[MinValueValidator(1)],
+        help_text="The number of seats this organisation nominally has."
+    )
 
     fields_to_whitespace_normalize = ['name']
 
