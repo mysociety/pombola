@@ -676,8 +676,8 @@ class OrganisationKindList(SlugRedirectMixin, SingleObjectMixin, ListView):
             self.object
                 .organisation_set
                 .all()
-                .annotate(num_positions = Count('position'))
-                .order_by('-num_positions', 'name')
+                .annotate(num_position_holders=Count('position'))
+                .order_by('-num_position_holders', 'name')
         )
         return orgs
 
