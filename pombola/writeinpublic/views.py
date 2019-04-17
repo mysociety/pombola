@@ -240,7 +240,10 @@ class WriteInPublicMessage(WriteInPublicMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(WriteInPublicMessage, self).get_context_data(**kwargs)
-        context['message'] = self.client.get_message(self.kwargs['message_id'])
+        try:
+            context['message'] = self.client.get_message(self.kwargs['message_id'])
+        except self.client.WriteInPublicException:
+            raise Http404("Couldn't find message with that ID")
         context['app_name'] = self.app_name
         return context
 

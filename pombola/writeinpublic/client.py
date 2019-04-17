@@ -77,9 +77,12 @@ class WriteInPublic(object):
             'username': self.username,
             'api_key': self.api_key,
         }
-        response = requests.get(url, params=params)
-        response.raise_for_status()
-        return Message(response.json(), adapter=self.adapter)
+        try:
+            response = requests.get(url, params=params)
+            response.raise_for_status()
+            return Message(response.json(), adapter=self.adapter)
+        except requests.exceptions.RequestException as err:
+            raise self.WriteInPublicException(unicode(err))
 
     def get_messages(self, person_popolo_uri):
         url = '{url}/api/v1/instance/{instance_id}/messages/'.format(url=self.url, instance_id=self.instance_id)
