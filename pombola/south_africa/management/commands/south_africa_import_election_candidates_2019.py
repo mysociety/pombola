@@ -29,6 +29,7 @@ list_to_object = {}
 position_to_object = {}
 YEAR = "2019"
 COMMIT = False
+candidates_csv = "pombola/south_africa/data/candidates-2019-elections.csv"
 
 
 def check_or_create_positions():
@@ -402,7 +403,6 @@ class Command(NoArgsCommand):
     )
 
     option_list = NoArgsCommand.option_list + (
-        make_option("--candidates", "-c", help="The candidates csv file"),
         make_option(
             "--commit",
             action="store_true",
@@ -414,13 +414,9 @@ class Command(NoArgsCommand):
         global COMMIT
         COMMIT = options["commit"]
 
-        if not options["candidates"] or not os.path.exists(options["candidates"]):
-            print >> sys.stderr, "The candidates file doesn't exist"
-            sys.exit(1)
-
         # check all the parties exist
-        with open(options["candidates"], "rb") as csvfile:
             candidiates = unicodecsv.reader(csvfile)
+        with open(candidates_csv, "rb") as csvfile:
             missingparties = False
             lastmissingparty = ""
             for row in candidiates:
@@ -435,7 +431,7 @@ class Command(NoArgsCommand):
         # check whether the positions exist, otherwise create them
         check_or_create_positions()
 
-        with open(options["candidates"], "rb") as csvfile:
+        with open(candidates_csv, "rb") as csvfile:
             candidiates = unicodecsv.reader(csvfile)
             for row in candidiates:
                 if not search(row[3], row[4], row[0], row[2], row[1]):
