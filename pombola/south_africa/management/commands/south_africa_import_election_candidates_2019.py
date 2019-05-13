@@ -1,5 +1,5 @@
 """
-Imports ZA provincial and national election candidates using the 2014
+Imports ZA provincial and national election candidates using the 2019
 IEC spreadsheet format.
 """
 
@@ -27,7 +27,7 @@ from haystack.query import SearchQuerySet
 party_to_object = {}
 list_to_object = {}
 position_to_object = {}
-YEAR = ""
+YEAR = "2019"
 COMMIT = False
 
 
@@ -403,7 +403,6 @@ class Command(NoArgsCommand):
 
     option_list = NoArgsCommand.option_list + (
         make_option("--candidates", "-c", help="The candidates csv file"),
-        make_option("--year", "-y", help="The year of the election"),
         make_option(
             "--commit",
             action="store_true",
@@ -412,15 +411,11 @@ class Command(NoArgsCommand):
     )
 
     def handle_noargs(self, **options):
-        global YEAR, COMMIT
-        YEAR = options["year"]
+        global COMMIT
         COMMIT = options["commit"]
 
         if not options["candidates"] or not os.path.exists(options["candidates"]):
             print >> sys.stderr, "The candidates file doesn't exist"
-            sys.exit(1)
-        if not YEAR:
-            print >> sys.stderr, "You must specify a year"
             sys.exit(1)
 
         # check all the parties exist
