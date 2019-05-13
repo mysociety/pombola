@@ -415,15 +415,16 @@ class Command(NoArgsCommand):
         COMMIT = options["commit"]
 
         # check all the parties exist
-            candidiates = unicodecsv.reader(csvfile)
         with open(candidates_csv, "rb") as csvfile:
+            candidiates = unicodecsv.DictReader(csvfile)
             missingparties = False
             lastmissingparty = ""
             for row in candidiates:
-                if not get_party(row[0]):
-                    if row[0] != lastmissingparty:
-                        print "Missing party:", row[0]
-                        lastmissingparty = row[0]
+                party_name = row["Party name"]
+                if not get_party(party_name):
+                    if party_name != lastmissingparty:
+                        print "Missing party:", party_name
+                        lastmissingparty = party_name
                     missingparties = True
             if missingparties:
                 sys.exit(1)
@@ -434,5 +435,13 @@ class Command(NoArgsCommand):
         with open(candidates_csv, "rb") as csvfile:
             candidiates = unicodecsv.reader(csvfile)
             for row in candidiates:
-                if not search(row[3], row[4], row[0], row[2], row[1]):
-                    add_new_person(row[0], row[2], row[1], row[3], row[4])
+                party_name = row["Party name"]
+                list_type = row["List type"]
+                order_number = row["Order number"]
+                full_names = row["Full names"]
+                surname = row["Surname"]
+
+                if not search(full_names, surname, party_name, order_number, list_type):
+                    add_new_person(
+                        party_name, order_number, list_type, full_names, surname
+                    )
