@@ -417,16 +417,14 @@ class Command(NoArgsCommand):
         # check all the parties exist
         with open(candidates_csv, "rb") as csvfile:
             candidiates = unicodecsv.DictReader(csvfile)
-            missingparties = False
-            lastmissingparty = ""
+            missingparties = set()
             for row in candidiates:
                 party_name = row["Party name"]
                 if not get_party(party_name):
-                    if party_name != lastmissingparty:
-                        print "Missing party:", party_name
-                        lastmissingparty = party_name
-                    missingparties = True
+                    missingparties.add(party_name)
             if missingparties:
+                for party in sorted(missingparties):
+                    print "Missing party:", party
                 sys.exit(1)
 
         # check whether the positions exist, otherwise create them
