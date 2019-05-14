@@ -3,6 +3,7 @@ Imports ZA provincial and national election candidates using the 2019
 IEC spreadsheet format.
 """
 
+import re
 import os
 import sys
 import unicodecsv
@@ -74,6 +75,7 @@ def get_list(listname, listslug):
 
 def get_party(partyname):
     """Returns the organisation object for a party"""
+    partyname = re.sub(r"\s+", " ", partyname)
     # if the party has already been worked with, return that
     if partyname in party_to_object:
         return party_to_object[partyname]
