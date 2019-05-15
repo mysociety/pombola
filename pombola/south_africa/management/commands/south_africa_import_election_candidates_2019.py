@@ -64,7 +64,7 @@ def check_or_create_positions():
         position_name = str(p) + num_append[str(p)[-1]] + " Candidate"
         position_slug = str(p) + num_append[str(p)[-1]] + "_candidate"
         position_object, _ = PositionTitle.objects.get_or_create(
-            slug=position_slug, name=position_name
+            slug=position_slug, defaults={"name": position_name}
         )
         position_to_object[unicode(p)] = position_object
 
