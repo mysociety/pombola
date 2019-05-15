@@ -36,6 +36,13 @@ with open(candidates_csv, "rb") as csvfile:
     csv = unicodecsv.DictReader(csvfile)
     [candidates.append(row) for row in csv]
 
+party_mapping_csv = "pombola/south_africa/data/elections/2019/party-mappings.csv"
+party_mapping = {}
+with open(party_mapping_csv, "rb") as csvfile:
+    csv = unicodecsv.DictReader(csvfile)
+    for row in csv:
+        party_mapping[row["name_in_candidates_file"]] = row["pombola_slug"]
+
 
 def check_or_create_positions():
     """Checks whether positions exist, otherwise create them"""
@@ -84,10 +91,13 @@ def get_party(partyname):
     if partyname in party_to_object:
         return party_to_object[partyname]
 
-    # check if the party exists in the database
-    parties = Organisation.objects.filter(name__icontains=partyname, kind__slug="party")
-    if len(parties) == 1:
-        party_to_object[partyname] = parties[0]
+    party_slug = party_mapping[partyname]
+    if not party_slug:
+        return False
+
+    party = Organisation.objects.get(slug=party_slug)
+    if party:
+        party_to_object[partyname] = party
         return party_to_object[partyname]
     else:
         return False
