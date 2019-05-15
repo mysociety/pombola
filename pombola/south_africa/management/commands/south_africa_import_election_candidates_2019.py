@@ -31,6 +31,10 @@ position_to_object = {}
 YEAR = "2019"
 COMMIT = False
 candidates_csv = "pombola/south_africa/data/candidates-2019-elections.csv"
+candidates = []
+with open(candidates_csv, "rb") as csvfile:
+    csv = unicodecsv.DictReader(csvfile)
+    [candidates.append(row) for row in csv]
 
 
 def check_or_create_positions():
@@ -417,31 +421,25 @@ class Command(NoArgsCommand):
         COMMIT = options["commit"]
 
         # check all the parties exist
-        with open(candidates_csv, "rb") as csvfile:
-            candidiates = unicodecsv.DictReader(csvfile)
-            missingparties = set()
-            for row in candidiates:
-                party_name = row["Party name"]
-                if not get_party(party_name):
-                    missingparties.add(party_name)
-            if missingparties:
-                for party in sorted(missingparties):
-                    print "Missing party:", party
-                sys.exit(1)
+        missingparties = set()
+        for row in candidates:
+            party_name = row["Party name"]
+            if not get_party(party_name):
+                missingparties.add(party_name)
+        if missingparties:
+            for party in sorted(missingparties):
+                print "Missing party:", party
+            sys.exit(1)
 
         # check whether the positions exist, otherwise create them
         check_or_create_positions()
 
-        with open(candidates_csv, "rb") as csvfile:
-            candidiates = unicodecsv.reader(csvfile)
-            for row in candidiates:
-                party_name = row["Party name"]
-                list_type = row["List type"]
-                order_number = row["Order number"]
-                full_names = row["Full names"]
-                surname = row["Surname"]
+        for row in candidates:
+            party_name = row["Party name"]
+            list_type = row["List type"]
+            order_number = row["Order number"]
+            full_names = row["Full names"]
+            surname = row["Surname"]
 
-                if not search(full_names, surname, party_name, order_number, list_type):
-                    add_new_person(
-                        party_name, order_number, list_type, full_names, surname
-                    )
+            if not search(full_names, surname, party_name, order_number, list_type):
+                add_new_person(party_name, order_number, list_type, full_names, surname)
