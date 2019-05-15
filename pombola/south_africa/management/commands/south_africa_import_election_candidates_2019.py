@@ -25,6 +25,11 @@ from django_date_extensions.fields import ApproximateDate
 
 from haystack.query import SearchQuerySet
 
+# TODO: Check these are the correct dates
+final_candidate_list_date = ApproximateDate(year=2019, month=4, day=23)
+month_before_final_list_date = ApproximateDate(year=2019, month=3)
+
+
 party_to_object = {}
 list_to_object = {}
 position_to_object = {}
@@ -150,8 +155,6 @@ def save_match(
     # get the person's current party to compare whether these have changed
     # we assume that a person on an election list should not be a member
     # more than one party - so we end memberships that do not match the list
-    # start/end dates are assumed as March 2014 (TODO: this will need to
-    # change if the script is used for later elections)
     foundcorrectparty = False
     for p in person.parties():
         if p == party:
@@ -169,7 +172,7 @@ def save_match(
                 Q(start_date__lte=now_approx),
                 (Q(sorting_end_date_high__gte=now_approx) | Q(end_date="")),
             )
-            position.end_date = ApproximateDate(year=2014, month=3)
+            position.end_date = month_before_final_list_date
             if COMMIT:
                 print "- ending %s party position" % position.organisation
                 position.save()
@@ -184,9 +187,7 @@ def save_match(
         position = Position.objects.get_or_create(
             person=person,
             organisation=party,
-            start_date=ApproximateDate(
-                year=2014, month=3
-            ),  # TODO - correct for later use
+            start_date=month_before_final_list_date,
             title=member,
             category="political",
         )
@@ -220,9 +221,7 @@ def save_match(
         position = Position.objects.get_or_create(
             person=person,
             organisation=list_object,
-            start_date=ApproximateDate(
-                year=2014, month=4, day=22
-            ),  # set to the date of release of the final candidate lists. TODO - update for subsequent years
+            start_date=final_candidate_list_date,
             title=positiontitle,
             category="political",
         )
@@ -284,9 +283,7 @@ def add_new_person(
     position, _ = Position.objects.get_or_create(
         person=person,
         organisation=list_object,
-        start_date=ApproximateDate(
-            year=2014, month=4, day=22
-        ),  # set to the date of release of the official candidate lists. TODO - update for subsequent years
+        start_date=final_candidate_list_date,
         title=positiontitle,
         category="political",
     )
