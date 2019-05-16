@@ -19,7 +19,7 @@ class Command(BaseCommand):
                 party_name = row["name"]
                 party_kind = OrganisationKind.objects.get(slug="party")
                 party, created = Organisation.objects.get_or_create(
-                    slug=party_slug, name=party_name, kind=party_kind
+                    slug=party_slug, kind=party_kind, defaults={"name": party_name}
                 )
                 if created:
                     print("Created new party: {}".format(party))
