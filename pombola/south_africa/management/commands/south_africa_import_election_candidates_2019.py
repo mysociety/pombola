@@ -384,7 +384,7 @@ def search(firstnames, surname, party, list_position, list_name):
     print "Looking at %s %s:" % (firstnames, surname),
 
     existing = Person.objects.filter(
-        given_name=firstnames.title(), family_name=surname.title()
+        given_name__iexact=firstnames, family_name__iexact=surname
     )
     if len(existing) == 1:
         print "match existing", existing[0].name
