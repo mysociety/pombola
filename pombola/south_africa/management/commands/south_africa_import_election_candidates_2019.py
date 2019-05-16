@@ -442,11 +442,11 @@ class Command(NoArgsCommand):
         check_or_create_positions()
 
         for row in candidates:
-            party_name = row["Party name"]
-            list_type = row["List type"]
-            order_number = row["Order number"]
-            full_names = row["Full names"]
-            surname = row["Surname"]
+            party_name = row["Party name"].strip()
+            list_type = row["List type"].strip()
+            order_number = row["Order number"].strip()
+            full_names = row["Full names"].strip()
+            surname = row["Surname"].strip()
 
             if not search(full_names, surname, party_name, order_number, list_type):
                 add_new_person(party_name, order_number, list_type, full_names, surname)
