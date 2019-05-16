@@ -13,12 +13,16 @@
 
 {% block content %}
 <div class="election-page-header" id="top">
-        <h2>South African General Election 2014</h2>
+        <h2>South African General Election {{ election_year }}</h2>
+        {% if election_year == 2014 %}
         <p class="election-page-subtitle">7 May 2014</p>
+        {% endif %}
     </div>
+{% if election_year == 2014 %}
 <div class="general-election-information">
   <p>The 2014 South African general election was held on 7 May 2014, to elect a new National Assembly as well as new provincial legislatures in each province</p>
 </div>
+{% endif %}
 <div class="election-candidates">
     <h2>National Election</h2>
     {% include "south_africa/election/_national.html" %}

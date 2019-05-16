@@ -7,20 +7,20 @@
 {% block intro_content %}
     <div class="election-header">
         <div class="wrapper">
-            <h1>Elections 2014</h1>
+            <h1>Elections {{ election_year }}</h1>
             <div class="navigation-tabs">
                 <nav role="navigation">
                     <ul>
-                        <li><a href="{% url "sa-election-overview-year" election_year=2014 %}"
+                        <li><a href="{% url "sa-election-overview-year" election_year=election_year %}"
                         {% if view.election_type == '' %}class="current"{% endif %}
                         >Home</a></li>
-                        <li><a href="{% url "sa-election-overview-national" election_year=2014 %}"
+                        <li><a href="{% url "sa-election-overview-national" election_year=election_year %}"
                         {% if view.election_type == 'national' %}class="current"{% endif %}
                         >National election</a></li>
-                        <li><a href="{% url "sa-election-overview-provincial" election_year=2014 %}"
+                        <li><a href="{% url "sa-election-overview-provincial" election_year=election_year %}"
                         {% if view.election_type == 'provincial' %}class="current"{% endif %}
                         >Provincial election</a></li>
-                        <li><a href="{% url "sa-election-statistics-year" election_year=2014 %}"
+                        <li><a href="{% url "sa-election-statistics-year" election_year=election_year %}"
                         {% if view.election_type == 'statistics' %}class="current"{% endif %}
                         >Statistics</a></li>
                     </ul>

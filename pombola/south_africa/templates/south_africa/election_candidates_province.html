@@ -17,9 +17,9 @@
                 </ul>
                 {% if election_list.candidates|length > 10 %}
                     {% if election_type == 'provincial' %}
-                        <a href="{% url "sa-election-candidates-provincial-party" election_year=2014 province_name=province.slug party_name=election_list.party.slug %}">View all</a>
+                        <a href="{% url "sa-election-candidates-provincial-party" election_year=election_year province_name=province.slug party_name=election_list.party.slug %}">View all</a>
                     {% elif election_type == 'national' %}
-                        <a href="{% url "sa-election-candidates-national-province-party" election_year=2014 province_name=province.slug party_name=election_list.party.slug %}">View all</a>
+                        <a href="{% url "sa-election-candidates-national-province-party" election_year=election_year province_name=province.slug party_name=election_list.party.slug %}">View all</a>
                     {% endif %}
               {% endif %}
             </div>
