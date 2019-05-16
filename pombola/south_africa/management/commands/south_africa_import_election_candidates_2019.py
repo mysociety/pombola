@@ -35,7 +35,7 @@ list_to_object = {}
 position_to_object = {}
 YEAR = "2019"
 COMMIT = False
-candidates_csv = "pombola/south_africa/data/candidates-2019-elections.csv"
+candidates_csv = "pombola/south_africa/data/elections/2019/all-candidates.csv"
 candidates = []
 with open(candidates_csv, "rb") as csvfile:
     csv = unicodecsv.DictReader(csvfile)
