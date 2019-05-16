@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand, CommandError
 from pombola.core.models import Organisation, OrganisationKind
 
 
-parties_csv = "pombola/south_africa/data/elections/2019/candidates-parties.csv"
+parties_csv = "pombola/south_africa/data/elections/2019/parties.csv"
 
 
 class Command(BaseCommand):
@@ -13,10 +13,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         with open(parties_csv, "rb") as csvfile:
-            csv = unicodecsv.reader(csvfile)
+            csv = unicodecsv.DictReader(csvfile)
             for row in csv:
-                party_slug = row[0]
-                party_name = row[1]
+                party_slug = row["slug"]
+                party_name = row["name"]
                 party_kind = OrganisationKind.objects.get(slug="party")
                 party, created = Organisation.objects.get_or_create(
                     slug=party_slug, name=party_name, kind=party_kind

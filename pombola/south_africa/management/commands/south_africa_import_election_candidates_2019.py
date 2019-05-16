@@ -41,12 +41,12 @@ with open(candidates_csv, "rb") as csvfile:
     csv = unicodecsv.DictReader(csvfile)
     [candidates.append(row) for row in csv]
 
-party_mapping_csv = "pombola/south_africa/data/elections/2019/party-mappings.csv"
+parties_csv = "pombola/south_africa/data/elections/2019/parties.csv"
 party_mapping = {}
-with open(party_mapping_csv, "rb") as csvfile:
+with open(parties_csv, "rb") as csvfile:
     csv = unicodecsv.DictReader(csvfile)
     for row in csv:
-        party_mapping[row["name_in_candidates_file"]] = row["pombola_slug"]
+        party_mapping[row["name_in_candidates_file"]] = row["slug"]
 
 
 def check_or_create_positions():
