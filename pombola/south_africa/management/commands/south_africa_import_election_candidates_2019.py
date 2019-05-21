@@ -4,7 +4,6 @@ IEC spreadsheet format.
 """
 
 import re
-import os
 import sys
 import unicodecsv
 import string
