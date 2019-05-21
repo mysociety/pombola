@@ -144,9 +144,10 @@ def save_match(
             person.save()
         else:
             print "* would update blank given_name/family_name"
-    elif (
-        string.replace(person_list_firstnames.lower(), '-', ' ') != string.replace(person.given_name.lower(), '-', ' ')
-        or string.replace(person_list_surname.lower(), '-', ' ') != string.replace(person.family_name.lower(), '-', ' ')
+    elif string.replace(person_list_firstnames.lower(), "-", " ") != string.replace(
+        person.given_name.lower(), "-", " "
+    ) or string.replace(person_list_surname.lower(), "-", " ") != string.replace(
+        person.family_name.lower(), "-", " "
     ):
         print "- but names do not match existing given_name/family_name, ignoring"
         return False
