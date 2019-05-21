@@ -19,6 +19,7 @@ from pombola.core.models import (
 )
 from django.core.management.base import NoArgsCommand
 from django.db.models import Q
+from django.db.utils import IntegrityError
 
 from django_date_extensions.fields import ApproximateDate
 
@@ -46,6 +47,8 @@ with open(parties_csv, "rb") as csvfile:
     csv = unicodecsv.DictReader(csvfile)
     for row in csv:
         party_mapping[row["name_in_candidates_file"]] = row["slug"]
+
+errors = []
 
 
 def check_or_create_positions():
@@ -260,15 +263,19 @@ def add_new_person(
     # get the position title
     positiontitle = position_to_object[list_position]
 
-    # create the person
-    person, _ = Person.objects.get_or_create(
-        legal_name=(person_list_firstnames + " " + person_list_surname).title(),
-        given_name=person_list_firstnames.title(),
-        family_name=person_list_surname.title(),
-        slug=string.replace(
-            (person_list_firstnames + " " + person_list_surname).lower(), " ", "-"
-        ),
-    )
+    try:
+        # create the person
+        person, _ = Person.objects.get_or_create(
+            legal_name=(person_list_firstnames + " " + person_list_surname).title(),
+            given_name=person_list_firstnames.title(),
+            family_name=person_list_surname.title(),
+            slug=string.replace(
+                (person_list_firstnames + " " + person_list_surname).lower(), " ", "-"
+            ),
+        )
+    except IntegrityError as e:
+        errors.append(e)
+        return
 
     # add to the party
     member = PositionTitle.objects.get(name="Member")
@@ -450,3 +457,8 @@ class Command(NoArgsCommand):
 
             if not search(full_names, surname, party_name, order_number, list_type):
                 add_new_person(party_name, order_number, list_type, full_names, surname)
+
+        if errors:
+            print("ERRORS:")
+            for error in errors:
+                print(error)
