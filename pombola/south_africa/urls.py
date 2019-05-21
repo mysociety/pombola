@@ -175,7 +175,7 @@ urlpatterns += (
             pattern_name='sa-election-overview-year',
             permanent=False
         ),
-        { 'election_year': 2019 }, name='sa-election-overview'
+        { 'election_year': 2014 }, name='sa-election-overview'
     ),
     url(
         r'^election/(?P<election_year>[0-9]{4})/$',
