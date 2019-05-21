@@ -263,19 +263,20 @@ def add_new_person(
     # get the position title
     positiontitle = position_to_object[list_position]
 
+    slug = string.replace(
+        (person_list_firstnames + " " + person_list_surname).lower(), " ", "-"
+    )
     try:
         # create the person
         person, _ = Person.objects.get_or_create(
             legal_name=(person_list_firstnames + " " + person_list_surname).title(),
             given_name=person_list_firstnames.title(),
             family_name=person_list_surname.title(),
-            slug=string.replace(
-                (person_list_firstnames + " " + person_list_surname).lower(), " ", "-"
-            ),
+            slug=slug,
         )
     except IntegrityError as e:
         errors.append(e)
-        return
+        person = Person.objects.get(slug=slug)
 
     # add to the party
     member = PositionTitle.objects.get(name="Member")
