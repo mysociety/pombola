@@ -20,6 +20,7 @@ from pombola.core.models import (
 from django.core.management.base import NoArgsCommand
 from django.db.models import Q
 from django.db.utils import IntegrityError
+from django.utils.text import slugify
 
 from django_date_extensions.fields import ApproximateDate
 
@@ -263,9 +264,8 @@ def add_new_person(
     # get the position title
     positiontitle = position_to_object[list_position]
 
-    slug = string.replace(
-        (person_list_firstnames + " " + person_list_surname).lower(), " ", "-"
-    )
+    slug = slugify(person_list_firstnames + " " + person_list_surname)
+
     try:
         # create the person
         person, _ = Person.objects.get_or_create(
