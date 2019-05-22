@@ -99,7 +99,7 @@ def get_party(partyname):
     if partyname in party_to_object:
         return party_to_object[partyname]
 
-    party_slug = party_mapping[partyname]
+    party_slug = party_mapping.get(partyname)
     if not party_slug:
         return False
 
