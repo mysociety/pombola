@@ -36,11 +36,26 @@ list_to_object = {}
 position_to_object = {}
 YEAR = "2019"
 COMMIT = False
-candidates_csv = "pombola/south_africa/data/elections/2019/all-candidates.csv"
+
+csv_files = [
+    'all-candidates.csv',
+    'Provincial-EC.csv',
+    'Provincial-FS.csv',
+    'Provincial-GP.csv',
+    'Provincial-KZN.csv',
+    'Provincial-LIM.csv',
+    'Provincial-MP.csv',
+    'Provincial-NC.csv',
+    'Provincial-NW.csv',
+    'Provincial-WC.csv',
+]
+
 candidates = []
-with open(candidates_csv, "rb") as csvfile:
-    csv = unicodecsv.DictReader(csvfile)
-    [candidates.append(row) for row in csv]
+
+for candidates_csv in csv_files:
+    with open("pombola/south_africa/data/elections/2019/" + candidates_csv, "rb") as csvfile:
+        csv = unicodecsv.DictReader(csvfile)
+        [candidates.append(row) for row in csv]
 
 parties_csv = "pombola/south_africa/data/elections/2019/parties.csv"
 party_mapping = {}
