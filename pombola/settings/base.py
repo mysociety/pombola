@@ -13,7 +13,14 @@ IN_TEST_MODE = False
 
 # Work out where we are to set up the paths correctly and load config
 base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..', '..' ) )
-root_dir = os.path.abspath( os.path.join( base_dir, '..' ) )
+
+# data_dir. If it's specified absolutely, respect it.
+# Otherwise assume it's relative to base_dir
+conf_data_dir = config.get( 'DATA_DIR', 'data' )
+if os.path.isabs(conf_data_dir):
+    data_dir = conf_data_dir
+else:
+    data_dir = os.path.abspath( os.path.join( base_dir, conf_data_dir ) )
 
 if int(config.get('STAGING')):
     STAGING = True
@@ -130,7 +137,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.normpath( os.path.join( root_dir, "media_root/") )
+MEDIA_ROOT = os.path.normpath( os.path.join( data_dir, "media_root/") )
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -150,7 +157,7 @@ else:
 if 'ON_HEROKU' in os.environ:
     STATIC_ROOT = os.path.normpath( os.path.join( base_dir, "staticfiles") )
 else:
-    STATIC_ROOT = os.path.normpath( os.path.join( root_dir, "collected_static/") )
+    STATIC_ROOT = os.path.normpath( os.path.join( data_dir, "collected_static/") )
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -306,7 +313,7 @@ PAGINATION_INVALID_PAGE_RAISES_404 = True
 HAYSTACK_CONNECTIONS = {
     #'default': {
     #    'ENGINE': 'xapian_backend.XapianEngine',
-    #    'PATH': os.path.join( root_dir, "pombola_xapian" ),
+    #    'PATH': os.path.join( data_dir, "pombola_xapian" ),
         #'PATH': os.path.join(os.path.dirname(__file__), 'xapian_index'),
     #},
     'default': {
@@ -328,7 +335,7 @@ AJAX_LOOKUP_CHANNELS = {
 }
 
 # misc settings
-HTTPLIB2_CACHE_DIR = os.path.join( root_dir, 'httplib2_cache' )
+HTTPLIB2_CACHE_DIR = os.path.join( data_dir, 'httplib2_cache' )
 GOOGLE_ANALYTICS_ACCOUNT = config.get('GOOGLE_ANALYTICS_ACCOUNT')
 COUNTY_PERFORMANCE_EXPERIMENT_KEY = config.get('COUNTY_PERFORMANCE_EXPERIMENT_KEY')
 YOUTH_EMPLOYMENT_BILL_EXPERIMENT_KEY = config.get('YOUTH_EMPLOYMENT_BILL_EXPERIMENT_KEY')
@@ -368,7 +375,7 @@ BLOG_RSS_FEED = config.get( 'BLOG_RSS_FEED', None )
 THUMBNAIL_DEBUG = True
 
 # ZA Hansard settings
-HANSARD_CACHE   = os.path.join( root_dir, 'hansard_cache' )
+HANSARD_CACHE   = os.path.join( data_dir, 'hansard_cache' )
 COMMITTEE_CACHE = os.path.join( HANSARD_CACHE, 'committee' )
 ANSWER_CACHE    = os.path.join( HANSARD_CACHE, 'answers' )
 QUESTION_CACHE  = os.path.join( HANSARD_CACHE, 'questions' )
@@ -581,7 +588,7 @@ PIPELINE_COMPILERS = (
   'pipeline_compass.compass.CompassCompiler',
 )
 if 'ON_HEROKU' not in os.environ:
-    PIPELINE_COMPASS_BINARY = os.path.join(root_dir, 'gem-bin', 'compass')
+    PIPELINE_COMPASS_BINARY = os.path.join(data_dir, 'gem-bin', 'compass')
 
 
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'

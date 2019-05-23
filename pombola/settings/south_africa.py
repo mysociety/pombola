@@ -28,7 +28,7 @@ PIPELINE_JS.update(COUNTRY_JS)
 
 EXCLUDE_FROM_SEARCH = ('places', 'info_pages');
 
-PMG_API_CACHE_PATH = os.path.join(root_dir, 'pmg_api_cache')
+PMG_API_CACHE_PATH = os.path.join(data_dir, 'pmg_api_cache')
 
 if 'ON_HEROKU' in os.environ:
     CACHES['pmg_api'] = {

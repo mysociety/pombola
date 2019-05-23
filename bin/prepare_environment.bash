@@ -6,12 +6,18 @@ set -e
 # check that we are in the expected directory
 cd "$(dirname $BASH_SOURCE)"/..
 
+# Get application config
+source commonlib/shlib/deployfns
+read_conf conf/general.yml
+
+# Set DATADIR
+DATADIR=${OPTION_DATA_DIR:-data}
 
 # Some env variables used during development seem to make things break - set
 # them back to the defaults which is what they would have on the servers.
 PYTHONDONTWRITEBYTECODE=""
 
-virtualenv_dir='../pombola-virtualenv'
+virtualenv_dir="${DATADIR}/pombola-virtualenv"
 virtualenv_activate="$virtualenv_dir/bin/activate"
 
 # create the virtual environment, install/update required packages
@@ -48,7 +54,7 @@ find . -name '*.pyc' -delete
 ./manage.py migrate
 
 # Install gems in order to compile the CSS
-bundle install --deployment --path ../gems --binstubs ../gem-bin
+bundle install --deployment --path ${DATADIR}/gems --binstubs ${DATADIR}/gem-bin
 
 # Try to make sure that the MapIt CSS has been generated.
 # The '|| echo' means that the script carries on even if this fails,

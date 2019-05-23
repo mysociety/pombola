@@ -28,3 +28,5 @@ tmp/
 local_fabfile.py
 mzalendo/fabfile.py
 /.env
+/data/*
+!/data/.gitkeep

@@ -18,6 +18,9 @@ STAGING: '1'
 TIME_ZONE: 'Europe/London'
 DJANGO_SECRET_KEY: 'abcabc'
 
+# Location of application data, caches, virtualenv, etc
+DATA_DIR: 'data'
+
 # create an account and then put the 'UA-123456-1' bit here
 GOOGLE_ANALYTICS_ACCOUNT: ''
 
