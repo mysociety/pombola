@@ -17,9 +17,8 @@ There is also a sample Apache2 config in 'conf/httpd.conf-example' which might
 be helpful.
 
 When installing the system note that many additional files and directories will
-be created alongside the top level git repo checkout. These include the
-'media_root' for uploaded images, and the 'pombola_xapian' for the search
-index.
+be created in the `data/` directory in the top level git repo checkout. These 
+include the 'media_root' for uploaded images, the virtualenv and various others.
 
 All data is stored in the database, but some is copied into the search engine
 implemented using Haystack for full text searching.

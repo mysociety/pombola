@@ -7,16 +7,9 @@ Where to put the code
 ---------------------
 In addition to the downloaded code several other directories are needed for
 dynamic data such as the search indexes, uploaded images, various caches etc.
- 
-These extra directories are by default put alongside the folder containing the
-code. To keep these from getting mixed up with other directories on your
-computer we suggest you create a folder called pombola_root for them all to
-reside in.
 
-```
-mkdir pombola_root
-cd pombola_root
-```
+These extra directories are by default put inside the `data/` directory, although
+this can be modified using the `DATA_DIR` configuration variable.
 
 Getting the code
 ----------------
@@ -38,10 +31,11 @@ Databases
 ---------
 A Postgis enabled Postgres database is required
 
-Create the database - assuming here that you're calling it 'pombola'
+Create the database and enable the Postgis extensions - assuming here that you're calling it 'pombola'
 
 ```
-createdb -T template_postgis pombola
+createdb pombola
+echo 'CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology' | psql pombola
 ```
 
 Configuration files
@@ -72,7 +66,7 @@ Virtualenv
 ----------
 Now that the environment has been created you need to enable it:
 ```
-source ../pombola-virtualenv/bin/activate
+source data/pombola-virtualenv/bin/activate
 ```
 
 Start the dev server
@@ -81,6 +75,12 @@ The dev server will allow you to check that everything is working as expected.
 ```
 ./manage.py runserver
 ```
+If you are running this inside a Vagrant box, you'll need to bind to all
+interfaces:
+````
+./manage.py runserver 0.0.0.0:8000
+```
+
 Don't forget to log in to the admin and change the entry in 'sites' to your
 machine's hostname and port
 

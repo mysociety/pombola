@@ -59,31 +59,37 @@ Africa).
 
 ## Switching between countries
 
-There's a helper script, bin/switch-country.py which, if you've
-set up symlinks and directories correctly (see the top of that
-script) which will let you switch between working on Kenya or
-South Africa with:
-
-```
-bin/switch-country.py kenya
-bin/switch-country.py south-africa
-```
-
-The Vagrant box should set up an environment in which this
-works.
+We used to support switching between countries in the development
+environment, but as we're now moving towards country-specific forks
+this is no longer supported. See the next section for details on how
+to construct a development environment for a given country.
 
 ## Vagrant
 
-There is a Vagrantfile at conf/Vagrantfile.example, which works
-in a slightly unusual way - you're expected to copy it into a
-newly created empty directory and run `vagrant up`.
+The `Vagrantfile` will set up the Kenyan site by default. You can
+override this by setting `COUNTRY_APP` in the environment, e.g.:
+```
+COUNTRY_APP=south_africa vagrant up
+```
+Or by creating/updating to relevant variable in `conf/general.yml`
+manually (otherwise this will be created the first time you run 
+`vagrant up`).
 
-The provisioning script should download the public database
-dumps which are published, for example,
-[here](https://www.pa.org.za/help/api) for each country and set
-up a database for each. It doesn't attempt to get all uploaded
-media, like images of politicians, however, so if you want them,
-you should rsync them yourself.
+The provisioning script will download the public database dumps from
+the live site for the appropriate country and import this into the
+local database.
+
+It doesn't attempt to get all uploaded media, like images of
+politicians, however, so if you want them you should rsync them yourself.
+
+It is also possible to control the version of Elasticsearch installed
+in the Vagrant box using the `ES_VERSION` environment variable. The
+project uses the `django-haystack` package and this currently supports
+ES versions up to 5, so you can install 0.90, 1, 2 or 5.
+```
+ES_VERSION=5 vagrant up
+```
+
 
 ## Architectural direction
 
@@ -118,7 +124,7 @@ could only be merged back at huge effort on our part. And if we
 did that, the fork would immediately start drifting again.
 
 This can happen because the maintainer of the fork wasn't
-conscious of the importance of making regular pull reqests back
+conscious of the importance of making regular pull requests back
 to upstream, or it's just too hard for them to do: you need to
 understand quite a bit about git and the code of the project to
 do this well.
