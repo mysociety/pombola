@@ -26,7 +26,6 @@ from django_date_extensions.fields import ApproximateDate
 
 from haystack.query import SearchQuerySet
 
-# TODO: Check these are the correct dates
 final_candidate_list_date = ApproximateDate(year=2019, month=4, day=23)
 month_before_final_list_date = ApproximateDate(year=2019, month=3)
 
