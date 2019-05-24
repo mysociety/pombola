@@ -30,3 +30,4 @@ mzalendo/fabfile.py
 /.env
 /data/*
 !/data/.gitkeep
+.vagrant/
