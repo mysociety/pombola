@@ -24,10 +24,10 @@
 
 ;(function(window, document, undefined){
   var classes = [];
-  
+
 
   var tests = [];
-  
+
 
   /**
    *
@@ -76,7 +76,7 @@
     }
   };
 
-  
+
 
   // Fake some of Object.create so we can force non test results to be non "own" properties.
   var Modernizr = function() {};
@@ -86,7 +86,7 @@
   // Overwrite name so constructor name is nicer :D
   Modernizr = new Modernizr();
 
-  
+
 /*!
 {
   "name": "SVG",
@@ -101,8 +101,7 @@
     "canvg",
     "svg-boilerplate",
     "sie",
-    "dojogfx",
-    "fabricjs"
+    "dojogfx"
   ]
 }
 !*/
@@ -207,7 +206,7 @@ Detects support for SVG in `<embed>` or `<object>` elements.
    */
 
   var docElement = document.documentElement;
-  
+
 
   /**
    * A convenience helper to check if the document we are running in is an SVG document
@@ -217,7 +216,7 @@ Detects support for SVG in `<embed>` or `<object>` elements.
    */
 
   var isSVG = docElement.nodeName.toLowerCase() === 'svg';
-  
+
 
   /**
    * setClasses takes an array of class names and adds them to the root element
@@ -825,11 +824,11 @@ Detects support for SVG in `<embed>` or `<object>` elements.
    */
 
   var omPrefixes = 'Moz O ms Webkit';
-  
+
 
   var cssomPrefixes = (ModernizrProto._config.usePrefixes ? omPrefixes.split(' ') : []);
   ModernizrProto._cssomPrefixes = cssomPrefixes;
-  
+
 
   /**
    * atRule returns a given CSS property at-rule (eg @keyframes), possibly in
@@ -896,7 +895,7 @@ Detects support for SVG in `<embed>` or `<object>` elements.
 
   ModernizrProto.atRule = atRule;
 
-  
+
 
   /**
    * List of JavaScript DOM values used for tests
@@ -918,7 +917,7 @@ Detects support for SVG in `<embed>` or `<object>` elements.
 
   var domPrefixes = (ModernizrProto._config.usePrefixes ? omPrefixes.toLowerCase().split(' ') : []);
   ModernizrProto._domPrefixes = domPrefixes;
-  
+
 
 
   /**
@@ -1033,7 +1032,7 @@ Detects support for SVG in `<embed>` or `<object>` elements.
     delete modElem.elem;
   });
 
-  
+
 
   var mStyle = {
     style: modElem.elem.style
@@ -1045,7 +1044,7 @@ Detects support for SVG in `<embed>` or `<object>` elements.
     delete mStyle.style;
   });
 
-  
+
 
   /**
    * domToCSS takes a camelCase string and converts it to kebab-case
@@ -1335,7 +1334,7 @@ Detects support for SVG in `<embed>` or `<object>` elements.
   // Modernizr.testAllProps('boxSizing')
   ModernizrProto.testAllProps = testPropsAll;
 
-  
+
 
   /**
    * prefixed returns the prefixed or nonprefixed property name variant of your input
@@ -1419,7 +1418,7 @@ Detects support for SVG in `<embed>` or `<object>` elements.
     }
   };
 
-  
+
 /*!
 {
   "name": "matchMedia",
