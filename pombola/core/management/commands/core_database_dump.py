@@ -68,17 +68,6 @@ class Command(BaseCommand):
                 'place_data_entry',
                 'projects_project',
             ])
-        if settings.COUNTRY_APP in ('ghana',):
-            # These tables are no longer used, I believe, and migrated
-            # to core / hansard:
-            tables_to_ignore.update([
-                'ghana_hansardentry',
-                'ghana_mp',
-                'ghana_uploadmodel',
-                'odekro_hansardentry',
-                'odekro_mp',
-                'odekro_uploadmodel'
-            ])
         if settings.COUNTRY_APP in ('kenya',):
             # Ignore SMS tables as they contain phone numbers.
             tables_to_ignore.update([
@@ -186,7 +175,7 @@ class Command(BaseCommand):
                 'spinner_quotecontent',
                 'spinner_slide',
             ]
-        if settings.COUNTRY_APP in ('ghana', 'kenya',):
+        if settings.COUNTRY_APP in ('kenya',):
             # hansard, place_data, projects, votematch, wordcloud
             expected_tables += [
                 'hansard_alias',

@@ -108,9 +108,6 @@ DEBUG_TOOLBAR: True
 # option to indicate the GEM_HOME that it's installed in:
 GEMS_DIRECTORY: ''
 
-# This configuration options are only used by Ghana currently:
-EXT_CONTEXT_PROCESSORS: []
-
 EMAIL_SETTINGS: false
 EMAIL_HOST: ''
 EMAIL_HOST_USER: ''

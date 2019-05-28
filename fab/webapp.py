@@ -158,14 +158,6 @@ def configure(db=None, dbuser=None, dbpasswd=None, email_passwd='',
         ('STAGING', '1' if env.is_staging else '0')
     )
 
-    configs2 = (
-        ('COUNTRY_APP', 'ghana'),
-        ('EMAIL_SETTINGS', 'true'),
-        ('EMAIL_PORT', '587'),
-        ('EMAIL_USE_TLS', 'true'),
-        ('EXT_CONTEXT_PROCESSORS', '["pombola.ghana.context_processors.process"]')
-    )
-
     path = '%(basedir)s/releases/%(version)s/conf/general.yml' % env
 
     try:
