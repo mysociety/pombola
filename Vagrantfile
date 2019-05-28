@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
     path: "bin/vagrant-base.bash"
   config.vm.provision "shell",
     env: {
-      "DATADIR"     => ENV['DATADIR']     || "data",
+      "DATADIR"     => ENV['DATADIR']     || "/home/vagrant",
       "COUNTRY_APP" => ENV['COUNTRY_APP'] || "kenya"
     },
     path: "bin/vagrant-install.bash",
