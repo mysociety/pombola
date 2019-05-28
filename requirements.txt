@@ -160,11 +160,7 @@ babel==2.6.0
 # https://github.com/certifi/python-certifi/issues/26
 certifi==2015.04.28
 
-# Packages needed for running on Heroku, but not otherwise:
-dj-database-url==0.4.2
-gunicorn==19.9.0
 whitenoise==2.0.6
-
 cffi
 
 # everypolitician packages

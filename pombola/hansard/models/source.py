@@ -11,11 +11,7 @@ from pombola.hansard.models.base import HansardModelBase
 try:
     HANSARD_CACHE = settings.HANSARD_CACHE
     if not os.path.exists( HANSARD_CACHE ):
-        # Heroku installs the app onto a read-only filesystem, so
-        # trying to create this directory will cause the deployment to
-        # fail on Heroku.
-        if 'ON_HEROKU' not in os.environ:
-            os.makedirs( HANSARD_CACHE )
+        os.makedirs( HANSARD_CACHE )
 except AttributeError:
     raise ImproperlyConfigured("Could not find HANSARD_CACHE setting - please set it")
 
@@ -39,7 +35,7 @@ class SourceQuerySet(models.query.QuerySet):
 class Source(HansardModelBase):
     """
     Sources of the hansard transcripts
-    
+
     For example a PDF transcript.
     """
 
@@ -80,18 +76,18 @@ class Source(HansardModelBase):
         """After deleting from db, delete the cached file too"""
         cache_file_path = self.cache_file_path()
         super( Source, self ).delete()
-        
+
         if os.path.exists( cache_file_path ):
             os.remove( cache_file_path )
-        
-        
+
+
     def file(self, http_object=None):
         """
         Return as a file object the resource that the url is pointing to.
-        
+
         Should check the local cache first, and fetch and store if it is not
         found there.
-        
+
         Raises a SourceUrlCouldNotBeRetrieved exception if URL could not be
         retrieved.
 
@@ -100,13 +96,13 @@ class Source(HansardModelBase):
         fetching data from URL.
         """
         cache_file_path = self.cache_file_path()
-        
+
         # If the file exists open it, read it and return it
         try:
             return open(cache_file_path, 'r')
         except IOError:
             pass # ignore
-        
+
         # If not fetch the file, save to cache and then return fh
         h = httplib2.Http() if (http_object is None) else http_object
         response, content = h.request(self.url)
@@ -116,10 +112,10 @@ class Source(HansardModelBase):
             raise SourceUrlCouldNotBeRetrieved("status code: %s, url: %s" % (response.status, self.url) )
 
         with open(cache_file_path, "w") as new_cache_file:
-            new_cache_file.write(content)        
-        
+            new_cache_file.write(content)
+
         return open(cache_file_path, 'r')
-            
+
 
     def cache_file_path(self):
         """Absolute path to the cache file for this source"""
@@ -135,7 +131,7 @@ class Source(HansardModelBase):
         # check that the dir exists
         if not os.path.exists( cache_dir ):
             os.makedirs( cache_dir )
-        
+
         # create the path to the file
         cache_file_path = os.path.join(cache_dir, id_str)
         return cache_file_path

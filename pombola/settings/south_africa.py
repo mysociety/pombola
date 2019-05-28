@@ -30,22 +30,16 @@ EXCLUDE_FROM_SEARCH = ('places', 'info_pages');
 
 PMG_API_CACHE_PATH = os.path.join(data_dir, 'pmg_api_cache')
 
-if 'ON_HEROKU' in os.environ:
-    CACHES['pmg_api'] = {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'pmg-api-in-memory-cache',
-    }
-else:
-    try:
-        os.makedirs(PMG_API_CACHE_PATH)
-    except OSError as exception:
-        if exception.errno != errno.EEXIST:
-            raise
-    CACHES['pmg_api'] = {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': PMG_API_CACHE_PATH,
-        'OPTIONS': {
-            'MAX_ENTRIES': 10000,
-            },
-        'TIMEOUT': 60*60*24,
-    }
+try:
+    os.makedirs(PMG_API_CACHE_PATH)
+except OSError as exception:
+    if exception.errno != errno.EEXIST:
+        raise
+CACHES['pmg_api'] = {
+    'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+    'LOCATION': PMG_API_CACHE_PATH,
+    'OPTIONS': {
+        'MAX_ENTRIES': 10000,
+        },
+    'TIMEOUT': 60*60*24,
+}
