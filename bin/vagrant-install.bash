@@ -83,3 +83,8 @@ if ! grep -q 'Set up virtualenv activation for Pombola' $HOME/.bashrc; then
 source "${DATADIR}/pombola-virtualenv/bin/activate"
 EOBRC
 fi
+
+echo "==> Installation done!"
+echo "==> To view, first log in and run /vagrant/manage.py runserver 0.0.0.0:8000"
+echo "==> Then visit http://localhost:8000 in your browser."
+echo
