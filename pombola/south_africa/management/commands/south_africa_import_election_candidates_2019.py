@@ -139,7 +139,7 @@ def save_match(
     party = get_party(party_name)
     party_parts = string.split(party.name, " (")
     listname = party_parts[0] + " " + import_list_name + " Election List " + YEAR
-    listslug = (
+    listslug = slugify(
         party.slug
         + "-"
         + string.replace(import_list_name.lower(), " ", "-")
@@ -266,7 +266,7 @@ def add_new_person(
     party = get_party(party_name)
     party_parts = string.split(party.name, " (")
     listname = party_parts[0] + " " + import_list_name + " Election List " + YEAR
-    listslug = (
+    listslug = slugify(
         party.slug
         + "-"
         + string.replace(import_list_name.lower(), " ", "-")
