@@ -22,7 +22,7 @@ install:
   - elasticsearch-${ES_VERSION}/bin/elasticsearch &
   - pip install -U pip
   - bundle update json
-  - bundle install --deployment --path ../gems --binstubs ../gem-bin
+  - bundle install --deployment --path data/gems --binstubs data/gem-bin
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt
   - pip install python-coveralls
