@@ -6,19 +6,22 @@ libapache2-mod-xsendfile
 # On non-debian systems you'll need to build these using the appropriate tools
 # (eg on Mac consider using Homebrew: http://mxcl.github.com/homebrew/).
 
-
-# Database - we use postgres with the postgis addons
-postgresql
-postgis
-postgresql-9.1-postgis | postgresql-8.4-postgis
+# Database client packages
 libpq-dev
+postgresql-client
+
+# Database server packages - if you're running Postgres locally, these
+# are what you'll need. If you're not, you can skip them.
+#postgresql
+#postgis
+#postgresql-9.1-postgis | postgresql-9.6-postgis
 
 # For mapit
-libgdal1-1.6.0 | libgdal1-1.5.0 | libgdal1
+libgdal1-1.6.0 | libgdal1-1.5.0 | libgdal1 | libgdal20
 python-gdal
 
 # Search (elasticsearch is not in stock debian, note)
-openjdk-7-jre-headless | openjdk-6-jre-headless
+openjdk-7-jre-headless | openjdk-8-jre-headless
 elasticsearch
 
 # Python - the language that the site is written in, and additional tools needed
