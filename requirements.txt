@@ -163,7 +163,7 @@ python-mimeparse==0.1.4
 unicodecsv==0.9.4
 
 # Used to format budgetary things into local currency strings
-babel
+babel==2.6.0
 
 # Pin certifi to a version that works with OpenSSL 1.0.1 - see
 # https://github.com/certifi/python-certifi/issues/26
