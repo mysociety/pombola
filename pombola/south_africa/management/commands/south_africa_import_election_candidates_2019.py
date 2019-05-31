@@ -132,6 +132,7 @@ def save_match(
     import_list_name,
     person_list_firstnames,
     person_list_surname,
+    id_number,
 ):
     """Save imported details about a person who already exists"""
     # get the list to add the person to
@@ -230,6 +231,9 @@ def save_match(
                 new_name,
             )
 
+    if COMMIT:
+        person.identifiers.get_or_create(scheme='elections_2019', identifier=id_number)
+
     # add the actual membership of the list organisation. Note no end date
     # is set at this point. This should probably be the date of the election
     # but it is unclear whether setting this immediately would cause issues
@@ -253,6 +257,7 @@ def add_new_person(
     import_list_name,
     person_list_firstnames,
     person_list_surname,
+    id_number,
 ):
     """Create a new person with appropriate positions"""
 
@@ -298,6 +303,8 @@ def add_new_person(
         person=person, organisation=party, title=member, category="political"
     )
 
+    person.identifiers.get_or_create(scheme='elections_2019', identifier=id_number)
+
     # add the actual membership of the list organisation. Note no end date
     # is set at this point. This should probably be the date of the election
     # but it is unclear whether setting this immediately would cause issues
@@ -311,7 +318,7 @@ def add_new_person(
     )
 
 
-def process_search(firstnames, surname, party, list_position, list_name, url):
+def process_search(firstnames, surname, party, list_position, list_name, url, id_number):
     """Process a search based on the search string passed via url"""
     search = SearchQuerySet().models(Person).filter(text=url)
     if len(search) > 1:
@@ -320,30 +327,30 @@ def process_search(firstnames, surname, party, list_position, list_name, url):
     if len(search) == 1 and search[0].object:
         print "match", search[0].object.name
         return save_match(
-            search[0].object, party, list_position, list_name, firstnames, surname
+            search[0].object, party, list_position, list_name, firstnames, surname, id_number
         )
     else:
         return False
 
 
 # Search 1
-def search_full_name(firstnames, surname, party, list_position, list_name):
+def search_full_name(firstnames, surname, party, list_position, list_name, id_number):
     searchurl = '"' + (firstnames + " " + surname) + '"'
     return process_search(
-        firstnames, surname, party, list_position, list_name, searchurl
+        firstnames, surname, party, list_position, list_name, searchurl, id_number
     )
 
 
 # Search 2
-def search_reordered(firstnames, surname, party, list_position, list_name):
+def search_reordered(firstnames, surname, party, list_position, list_name, id_number):
     searchurl = '"' + (firstnames + " " + surname) + '"~4'
     return process_search(
-        firstnames, surname, party, list_position, list_name, searchurl
+        firstnames, surname, party, list_position, list_name, searchurl, id_number
     )
 
 
 # Search 3
-def search_first_names(firstnames, surname, party, list_position, list_name):
+def search_first_names(firstnames, surname, party, list_position, list_name, id_number):
     names = firstnames.split(" ")
     if len(names) == 1:
         # Already covered by search 1
@@ -351,14 +358,14 @@ def search_first_names(firstnames, surname, party, list_position, list_name):
     for name in names:
         searchurl = '"' + (name + " " + surname) + '"'
         if process_search(
-            firstnames, surname, party, list_position, list_name, searchurl
+            firstnames, surname, party, list_position, list_name, searchurl, id_number
         ):
             return True
     return False
 
 
 # Search 4
-def search_initials(firstnames, surname, party, list_position, list_name):
+def search_initials(firstnames, surname, party, list_position, list_name, id_number):
     names = firstnames.split(" ")
     initials = ""
     for name in names:
@@ -369,12 +376,12 @@ def search_initials(firstnames, surname, party, list_position, list_name):
         return False
     searchurl = '"' + (initials + surname) + '"'
     return process_search(
-        firstnames, surname, party, list_position, list_name, searchurl
+        firstnames, surname, party, list_position, list_name, searchurl, id_number
     )
 
 
 # Search 5
-def search_initials_alt(firstnames, surname, party, list_position, list_name):
+def search_initials_alt(firstnames, surname, party, list_position, list_name, id_number):
     names = firstnames.split(" ")
     initials = ""
     for name in names:
@@ -385,23 +392,23 @@ def search_initials_alt(firstnames, surname, party, list_position, list_name):
         return False
     searchurl = '"' + (initials + " " + surname) + '"'
     return process_search(
-        firstnames, surname, party, list_position, list_name, searchurl
+        firstnames, surname, party, list_position, list_name, searchurl, id_number
     )
 
 
 # Search 6
-def search_misspellings(firstnames, surname, party, list_position, list_name):
+def search_misspellings(firstnames, surname, party, list_position, list_name, id_number):
     names = firstnames.split(" ")
     first = ""
     for name in names:
         first += name + "~ AND "
     searchurl = first + surname
     return process_search(
-        firstnames, surname, party, list_position, list_name, searchurl
+        firstnames, surname, party, list_position, list_name, searchurl, id_number
     )
 
 
-def search(firstnames, surname, party, list_position, list_name):
+def search(firstnames, surname, party, list_position, list_name, id_number):
     """Attempt varius approaches to matching names"""
     print "Looking at %s %s:" % (firstnames, surname),
 
@@ -411,21 +418,21 @@ def search(firstnames, surname, party, list_position, list_name):
     if len(existing) == 1:
         print "match existing", existing[0].name
         if save_match(
-            existing[0], party, list_position, list_name, firstnames, surname
+            existing[0], party, list_position, list_name, firstnames, surname, id_number
         ):
             return True
 
-    if search_full_name(firstnames, surname, party, list_position, list_name):
+    if search_full_name(firstnames, surname, party, list_position, list_name, id_number):
         return True
-    if search_reordered(firstnames, surname, party, list_position, list_name):
+    if search_reordered(firstnames, surname, party, list_position, list_name, id_number):
         return True
-    if search_first_names(firstnames, surname, party, list_position, list_name):
+    if search_first_names(firstnames, surname, party, list_position, list_name, id_number):
         return True
-    if search_initials(firstnames, surname, party, list_position, list_name):
+    if search_initials(firstnames, surname, party, list_position, list_name, id_number):
         return True
-    if search_initials_alt(firstnames, surname, party, list_position, list_name):
+    if search_initials_alt(firstnames, surname, party, list_position, list_name, id_number):
         return True
-    if search_misspellings(firstnames, surname, party, list_position, list_name):
+    if search_misspellings(firstnames, surname, party, list_position, list_name, id_number):
         return True
     return False
 
@@ -469,9 +476,10 @@ class Command(NoArgsCommand):
             order_number = row["Order number"].strip()
             full_names = row["Full names"].strip()
             surname = row["Surname"].strip()
+            id_number = row['IDNumber'].strip()
 
-            if not search(full_names, surname, party_name, order_number, list_type):
-                add_new_person(party_name, order_number, list_type, full_names, surname)
+            if not search(full_names, surname, party_name, order_number, list_type, id_number):
+                add_new_person(party_name, order_number, list_type, full_names, surname, id_number)
 
         if errors:
             print("ERRORS:")
