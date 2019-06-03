@@ -11,7 +11,7 @@ base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..', '..'
 data_dir = os.path.abspath( os.path.join( base_dir, 'data', 'testing' ) )
 if os.path.exists( data_dir ):
     shutil.rmtree( data_dir )
-print "Running in test mode! (testing data_dir is '%s')" % data_dir
+print("Running in test mode! (testing data_dir is '%s')" % data_dir)
 
 # For tests we've change the value of data_dir, so have to reset
 # these settings variables:
