@@ -26,7 +26,6 @@ install:
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt
   - pip install python-coveralls
-  - pip install scrutinizer-ocular
   - pip check
   # Create a basic general.yml file:
   - sed -r
@@ -53,7 +52,6 @@ after_script:
 
 after_success:
   - coveralls
-  - ocular --data-file ".coverage"
 
 env:
   - ES_VERSION=0.90.13 ES_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz CC_TEST_REPORTER_ID=44bde58b55e4b1b6e54683a0a66a21c693118fde0a2111d51037b11be91f5673
