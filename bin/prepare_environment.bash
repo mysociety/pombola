@@ -6,12 +6,9 @@ set -e
 # check that we are in the expected directory
 cd "$(dirname $BASH_SOURCE)"/..
 
-# Get application config
-source commonlib/shlib/deployfns
-read_conf conf/general.yml
-
-# Set DATADIR
-DATADIR=${OPTION_DATA_DIR:-data}
+# Set DATADIR.
+DATADIR=$(grep ^DATA_DIR conf/general.yml | awk '{ print $NF}' | tr -d "'\"")
+DATADIR=${DATADIR:-data}
 
 # Some env variables used during development seem to make things break - set
 # them back to the defaults which is what they would have on the servers.

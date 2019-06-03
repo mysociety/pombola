@@ -9,12 +9,12 @@ set -e
 # check that we are in the expected directory
 cd `dirname $0`/..
 
-# Get application config
-source commonlib/shlib/deployfns
-read_conf conf/general.yml
+# Set DATADIR.
+DATADIR=$(grep ^DATA_DIR conf/general.yml | awk '{ print $NF}' | tr -d "'\"")
+DATADIR=${DATADIR:-data}
 
 # Activate virtualenv
-virtualenv_dir="${OPTION_DATA_DIR}/pombola-virtualenv"
+virtualenv_dir="${DATADIR}/pombola-virtualenv"
 source ${virtualenv_dir}/bin/activate
 
 ./manage.py "$@"
