@@ -1,5 +1,6 @@
 import os
 import shutil
+from pombola.config import config
 
 IN_TEST_MODE = True
 
@@ -8,9 +9,15 @@ base_dir = os.path.abspath( os.path.join( os.path.split(__file__)[0], '..', '..'
 # slate. Also print out a little warning - adds clutter to the test output but
 # better than letting a site go live and not notice that the test mode has been
 # detected by mistake
-data_dir = os.path.abspath( os.path.join( base_dir, 'data', 'testing' ) )
+conf_data_dir = config.get( 'DATA_DIR', 'data' )
+if os.path.isabs(conf_data_dir):
+    data_dir = os.path.join( conf_data_dir, 'testing' )
+else:
+    data_dir = os.path.abspath( os.path.join( base_dir, conf_data_dir, 'testing' ) )
+
 if os.path.exists( data_dir ):
     shutil.rmtree( data_dir )
+
 print("Running in test mode! (testing data_dir is '%s')" % data_dir)
 
 # For tests we've change the value of data_dir, so have to reset
