@@ -55,4 +55,4 @@ after_success:
   - coveralls
 
 env:
-  - ES_VERSION=0.90.13 ES_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz CC_TEST_REPORTER_ID=44bde58b55e4b1b6e54683a0a66a21c693118fde0a2111d51037b11be91f5673
+  - ES_VERSION=0.90.13 ES_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz CC_TEST_REPORTER_ID=cd1a0499050b1eba77e364d2795fae1a2e899607ee6ce307e7351f5b42a34d2d
