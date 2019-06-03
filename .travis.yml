@@ -40,14 +40,20 @@ before_script:
   - psql -c 'CREATE EXTENSION postgis;' -U postgres -d pombola
   - ./manage.py migrate --noinput
   - ./manage.py collectstatic --noinput
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - wget -q --waitretry=1 --retry-connrefused -T 10 -O - http://127.0.0.1:9200
   - ./run-tests --coverage
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 after_success:
   - coveralls
   - ocular --data-file ".coverage"
 
 env:
-  - ES_VERSION=0.90.13 ES_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz
+  - ES_VERSION=0.90.13 ES_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz CC_TEST_REPORTER_ID=44bde58b55e4b1b6e54683a0a66a21c693118fde0a2111d51037b11be91f5673
