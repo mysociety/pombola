@@ -14,6 +14,8 @@ from slug_helpers.admin import StricterSlugFieldMixin
 from pombola.core import models
 from pombola.scorecards import models as scorecard_models
 
+admin.site.register(models.ParliamentarySession)
+
 
 def create_admin_link_for(obj, link_text):
     return u'<a href="{url}">{link_text}</a>'.format(
