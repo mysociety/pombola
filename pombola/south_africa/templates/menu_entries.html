@@ -14,7 +14,7 @@
 <li><a href="{% url "core_geocoder_search" %}" role="menuitem">Rep Locator</a></li>
 
 <li>
-  <a href="{% url "person_list" %}" class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>People</a>
+  <a class="has-dropdown" role="menuitem" {% if include_sub_menu_entries %}aria-haspopup="true"{% endif %}>People</a>
   {% if include_sub_menu_entries %}
     <ul id="parliament-overview" class="js-hover-dropdown" role="menu">
       <li><a href="{% url "core_search" %}?section=persons" role="menuitem">Find by name</a></li>
