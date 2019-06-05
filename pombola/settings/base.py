@@ -87,22 +87,16 @@ MANAGERS = (
     (config.get('MANAGERS_NAME'), config.get('MANAGERS_EMAIL')),
 )
 
-if 'ON_HEROKU' in os.environ:
-    import dj_database_url
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES = {'default': db_from_env}
-    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE':   'django.contrib.gis.db.backends.postgis',
-            'NAME':     config.get('POMBOLA_DB_NAME'),
-            'USER':     config.get('POMBOLA_DB_USER'),
-            'PASSWORD': config.get('POMBOLA_DB_PASS'),
-            'HOST':     config.get('POMBOLA_DB_HOST'),
-            'PORT':     config.get('POMBOLA_DB_PORT'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE':   'django.contrib.gis.db.backends.postgis',
+        'NAME':     config.get('POMBOLA_DB_NAME'),
+        'USER':     config.get('POMBOLA_DB_USER'),
+        'PASSWORD': config.get('POMBOLA_DB_PASS'),
+        'HOST':     config.get('POMBOLA_DB_HOST'),
+        'PORT':     config.get('POMBOLA_DB_PORT'),
     }
+}
 
 # Numberof seconds to keep a database connection open for
 # in case it can be reused
@@ -145,19 +139,13 @@ MEDIA_ROOT = os.path.normpath( os.path.join( data_dir, "media_root/") )
 MEDIA_URL = '/media_root/'
 
 # Use django-pipeline for handling static files
-if 'ON_HEROKU' in os.environ:
-    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-else:
-    STATICFILES_STORAGE = 'pombola.whitenoise_pipeline.GzipManifestPipelineStorage'
+STATICFILES_STORAGE = 'pombola.whitenoise_pipeline.GzipManifestPipelineStorage'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-if 'ON_HEROKU' in os.environ:
-    STATIC_ROOT = os.path.normpath( os.path.join( base_dir, "staticfiles") )
-else:
-    STATIC_ROOT = os.path.normpath( os.path.join( data_dir, "collected_static/") )
+STATIC_ROOT = os.path.normpath( os.path.join( data_dir, "collected_static/") )
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -587,8 +575,7 @@ PIPELINE_JS = {
 PIPELINE_COMPILERS = (
   'pipeline_compass.compass.CompassCompiler',
 )
-if 'ON_HEROKU' not in os.environ:
-    PIPELINE_COMPASS_BINARY = os.path.join(data_dir, 'gem-bin', 'compass')
+PIPELINE_COMPASS_BINARY = os.path.join(data_dir, 'gem-bin', 'compass')
 
 
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yui.YUICompressor'
