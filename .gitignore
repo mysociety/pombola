@@ -29,3 +29,4 @@ tmp/
 /data/*
 !/data/.gitkeep
 .vagrant/
+.ruby-version
