@@ -15,7 +15,6 @@ update_exit_code() {
 TEST_SETTINGS_MODULES=(
     'pombola.settings.tests'
     'pombola.settings.tests_kenya'
-    'pombola.settings.tests_nigeria'
     'pombola.settings.tests_south_africa'
 )
 
