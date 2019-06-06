@@ -340,7 +340,6 @@ class GeocoderView(TemplateView):
         # http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
         "south_africa": "za",
         "kenya":        "ke",
-        "nigeria":      "ng",
     }
 
     def get_context_data(self, **kwargs):

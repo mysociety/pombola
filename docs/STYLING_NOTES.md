@@ -11,9 +11,9 @@ You can compile the SASS using `make css` in the project root. This uses [compas
 The main entry point for the SASS is the `<country_name>.scss` file. These are largely similar and let you include or not styles specific to the various apps. Note that often these will contain entries like:
 
 ``` scss
-@import "colours_nigeria";
+@import "colours_kenya";
 /// ... snip ...
-@import "nigeria_overrides";
+@import "kenya_overrides";
 ```
 
 All the `.scss` files should be considered generic for all countries apart from ones like those above, that contain specific tweaks for the specific country.
