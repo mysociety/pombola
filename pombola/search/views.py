@@ -338,7 +338,6 @@ class GeocoderView(TemplateView):
     # See https://github.com/mysociety/pombola/issues/829
     country_app_to_alpha2_mapping = {
         # http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-        "south_africa": "za",
         "kenya":        "ke",
     }
 

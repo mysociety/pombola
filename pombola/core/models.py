@@ -573,15 +573,6 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
         """Return list of constituencies that this person is currently an politician for"""
         return Place.objects.filter(position__in=self.politician_positions()).distinct()
 
-    def constituency_offices(self):
-        """
-        Return list of constituency offices that this person is currently associated with.
-
-        This is specific to the South African site (ZA).
-        """
-        contacts = self.position_set.filter(title__slug="constituency-contact").currently_active()
-        return Organisation.objects.filter(position__in=contacts)
-
     def aspirant_constituencies(self):
         """Return list of constituencies that this person is currently an aspirant for"""
         return Place.objects.filter(position__in=self.aspirant_positions())

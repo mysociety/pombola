@@ -14,9 +14,6 @@
 {% block js_end_of_body %}
   {{ block.super }}
   {% javascript 'hide-reveal' %}
-  {% if settings.COUNTRY_APP == 'south_africa' %}
-    {% javascript 'advanced-search' %}
-  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -26,21 +23,6 @@
 
     <form method="get" action="." class="global-search-form">
 
-      {% block alternative_search_section %}
-        {% if settings.COUNTRY_APP == 'south_africa' %}
-          <p>
-            Alternatively search
-
-            {% if settings.COUNTRY_APP == 'south_africa' %}
-              {% block alternative_search %}
-                <a href="{% url "core_geocoder_search" %}">for a location</a>
-              {% endblock %}
-            {% endif %}
-
-            instead.
-          </p>
-        {% endif %}
-      {% endblock %}
 
         <div class="search-section-box">
 
@@ -51,13 +33,9 @@
                 <input type="submit" value="Search" class="button">
             </div>
 
-          {% if settings.COUNTRY_APP == 'south_africa' %}
-            <h4>Advanced search</h4>
-          {% else %}
             <a href="#advanced-search-options" class="js-hide-reveal-link open-advanced-search">Advanced search</a>
-          {% endif %}
 
-            <div class="advanced-search-options js-update-results-trigger {% if settings.COUNTRY_APP != 'south_africa' %} js-hide-reveal{% endif %}" id="advanced-search-options">
+            <div class="advanced-search-options js-update-results-trigger" id="advanced-search-options">
 
                 <div class="search-category-controls">
                   {% for search_section, title, selected in form_options %}
@@ -77,16 +55,6 @@
                         <option value="date"{% if order == 'date' %} selected{% endif %}>Date</option>
                     </select>
                 </div>
-
-              {% if settings.COUNTRY_APP == 'south_africa' %}
-                <div class="search-range-controls">
-                    <h4>Limit to date range</h4>
-                    <label for="search-range-start">Start date</label>
-                    <input type="text" name="start" id="search-range-start" value="{{ search_start_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
-                    <label for="search-range-end">End date</label>
-                    <input type="text" name="end" id="search-range-end" value="{{ search_end_date_range }}" placeholder="YYYY-MM-DD" class="datepicker">
-                </div>
-              {% endif %}
 
               <button type="submit" class="button js-update-results-button">Update results</button>
 

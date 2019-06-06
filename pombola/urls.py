@@ -148,10 +148,3 @@ if settings.ENABLED_FEATURES['bills']:
 urlpatterns += (
     url(r'^', include('pombola.core.urls')),
 )
-
-# For South Africa, we need SayIt to catch any otherwise unmatched
-# URLs, so this has to come last:
-if settings.COUNTRY_APP and settings.COUNTRY_APP == 'south_africa':
-    urlpatterns += (
-        url(r'^', include('pombola.south_africa.fallback_urls')),
-    )

@@ -56,9 +56,6 @@ case "$COUNTRY_APP" in
   kenya )
     LIVE_URL='http://info.mzalendo.com'
   ;;
-  south_africa )
-    LIVE_URL='https://www.pa.org.za'
-  ;;
   * )
     echo "Unknown country, ${COUNTRY_APP}"
     LIVE_URL=

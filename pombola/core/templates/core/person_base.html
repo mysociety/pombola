@@ -75,18 +75,6 @@
       {% endfor %}
 
 
-
-      {% if settings.COUNTRY_APP == 'south_africa' %}
-      <h3>Constituency Offices</h3>
-      <ul class="constituency-offices">
-          {% for office in object.constituency_offices %}
-              <li><a href="{{ office.get_absolute_url }}">{{ office.name }}</a></li>
-          {% empty %}
-              <li>Not associated with any constituency offices</li>
-          {% endfor %}
-      </ul>
-      {% endif %}
-
       <h3>{% if settings.COUNTRY_APP == 'kenya' %}
         Party &amp; Coalition
       {% else %}
