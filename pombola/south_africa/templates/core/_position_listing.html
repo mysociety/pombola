@@ -1,9 +1,0 @@
-{% load thumbnail %}
-
-<ul class="unstyled-list">
-{% for position in positions %}
-    {% include "core/generic_list_item.html" with object=position.person organisation_kind=position.organisation.kind %}
-{% empty %}
-    <li>No records found.</li>
-{% endfor %}
-</ul>
