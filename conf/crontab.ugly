@@ -15,7 +15,7 @@ VIRTUAL_ENV="/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv"
 # Commonlib now included from the system-wide installation (`/data/mysociety/bin`).
 # If you want to use any of our generic scripts (e.g. `output-on-error`) you'll 
 # need to clone this repository somewhere and add it to the `PATH`.
-PATH=/data/vhost/!!(*= $vhost *)!!/pombola/bin:/data/mysociety/bin:/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv/bin:/usr/local/bin:/usr/bin:/bin
+PATH=/data/vhost/!!(*= $vhost *)!!/pombola/bin:/data/mysociety/bin:/data/mysociety/commonlib/bin:/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv/bin:/usr/local/bin:/usr/bin:/bin
 
 # Set this PYTHONPATH so that the scripts can just 'import pombola.setup_env'
 # and have everything work.
