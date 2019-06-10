@@ -323,7 +323,7 @@ class SAElectionProvinceCandidatesView(TemplateView):
 
         # Get the province object, so we can use its details
         province_kind = models.PlaceKind.objects.get(slug='province')
-        context['province'] = models.Place.objects.get(
+        context['province'] = get_object_or_404(models.Place,
             kind=province_kind,
             slug=province_name)
 
