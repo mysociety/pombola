@@ -255,6 +255,17 @@ class MergeObjectsCommandTest(TestCase):
             with no_stdout_or_stderr():
                 call_command('core_merge_people', **options)
 
+    def test_merge_people_differing_hidden_states(self):
+        self.person_a.hidden = False
+        self.person_a.save()
+
+        self.person_b.hidden = True
+        self.person_b.save()
+
+        with self.assertRaises(CommandError):
+            with no_stdout_or_stderr():
+                call_command('core_merge_people', **self.options)
+
     def test_merge_orgs(self):
         # This one should succeed:
         with no_stdout_or_stderr():
