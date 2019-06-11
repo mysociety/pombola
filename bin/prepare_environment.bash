@@ -40,8 +40,7 @@ CFLAGS="-O0" pip install -r requirements.txt
 # make sure that there is no old code (the .py files may have been git deleted)
 find . -name '*.pyc' -delete
 
-# get the database up to speed
-./manage.py syncdb --noinput
+# run any pending database migrations
 ./manage.py migrate
 
 # Install gems in order to compile the CSS
