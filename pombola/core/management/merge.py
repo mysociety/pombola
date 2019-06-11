@@ -34,7 +34,7 @@ def check_basic_fields(basic_fields, to_keep, to_delete):
             delete_value = getattr(to_delete, basic_field)
             keep_value = getattr(to_keep, basic_field)
 
-        if delete_value and (keep_value != delete_value):
+        if keep_value != delete_value:
             # i.e. there's some data that might be lost:
             safe_to_delete = False
             message = "Mismatch in '%s': '%s' ({%d}) and '%s' (%d)"

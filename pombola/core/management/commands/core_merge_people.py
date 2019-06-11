@@ -17,6 +17,7 @@ class Command(PersonSpeakerMappingsMixin, MergeCommandBase):
         'gender',
         'summary',
         'title',
+        'hidden',
     )
     model_class = core_models.Person
 
