@@ -25,7 +25,7 @@ config_path = None
 if os.environ.get('CONFIG_FROM_ENV'):
     general_yml_example_fname = join(base_dir, 'conf', 'general.yml-example')
     with open(general_yml_example_fname) as f:
-        example_config = yaml.load(f)
+        example_config = yaml.safe_load(f)
     config = {
         k: env_value_to_python(os.environ[k])
         for k in example_config.keys()
@@ -34,4 +34,4 @@ if os.environ.get('CONFIG_FROM_ENV'):
 else:
     config_path =  join(base_dir, 'conf', 'general.yml')
     with open(config_path) as f:
-        config = yaml.load(f)
+        config = yaml.safe_load(f)
