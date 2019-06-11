@@ -5,7 +5,7 @@
 ### General useful bits
 py-bcrypt==0.4
 PyYAML==5.1
-Pillow==3.2.0
+Pillow==6.0.0
 
 ### Database drivers
 psycopg2==2.5.4
