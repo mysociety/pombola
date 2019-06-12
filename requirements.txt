@@ -8,7 +8,7 @@ PyYAML==5.1
 Pillow==6.0.0
 
 ### Database drivers
-psycopg2==2.5.4
+psycopg2==2.8.2
 
 ### Django related
 Django==1.8.18
@@ -50,7 +50,7 @@ django-markitup==2.3.0
 
 requests==2.6.0
 elasticsearch==0.4.5
-django-haystack==2.4.1
+django-haystack==2.6.1
 # Required (but not a declared requirement) of elasticsearch
 urllib3==1.24.2
 
@@ -77,7 +77,8 @@ python-memcached==1.53
 
 # SayIt and ZA hansard scrapers - need to be made available to be added as an optional app
 # Note, if the subsequent -e are ever removed, please remove manually from virtualenv/src !
-django-sayit==1.4.1
+-e git+git://github.com/mysociety/sayit.git@89952e69826ce4ad5717fa445339ca68727e7fd0#egg=django-sayit
+
 mysociety-django-sluggable==0.2.7
 -e git+git://github.com/mysociety/za-hansard.git@6bde60421e44a45a8d2d5921ddc510b23c63a954#egg=za-hansard
 -e git+git://github.com/mysociety/popolo-name-resolver@a6fca27e080acdb475e6fd2e1382592b0c0a0fc5#egg=popolo-name-resolver
@@ -114,7 +115,7 @@ cssselect==0.9.1
 django-bleach==0.3
 django-celery==3.1.16
 django-qmethod==0.0.3
-django-subdomain-instances==1.0
+django-subdomain-instances==2.0
 django-tastypie==0.12.1
 html5lib==0.999
 kombu==3.0.24
