@@ -26,7 +26,7 @@ install:
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt
   - pip install python-coveralls
-  - pip check
+  # - pip check
   # Create a basic general.yml file:
   - sed -r
     -e "s,(POMBOLA_DB_USER:) 'sayit',\\1 'postgres',"
