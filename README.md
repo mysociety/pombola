@@ -4,22 +4,21 @@ This web app allows you to store and share information on public figures,
 especially politicians.
 
 For an overview of the system please see the files in docs/ - especially
-[OVERVIEW.md](https://github.com/mysociety/pombola/blob/master/docs/OVERVIEW.md)
+[OVERVIEW.md](docs/OVERVIEW.md)
 
 
 ## Installing
 
-Please see [docs/INSTALL.md](https://github.com/mysociety/pombola/blob/master/docs/INSTALL.md)
+Please see [docs/INSTALL.md](docs/INSTALL.md)
 
-To change your site's look and feel please see the [styling notes](https://github.com/mysociety/pombola/blob/master/docs/STYLING_NOTES.md).
+To change your site's look and feel please see the [styling notes](docs/STYLING_NOTES.md).
 
 For software developers, you can see information about running
-the tests in
-[docs/TESTING.md](https://github.com/mysociety/pombola/blob/master/docs/INSTALL.md).
+the tests in [docs/TESTING.md](docs/TESTING.md).
 
 ## Troubleshooting
 
-Please see [docs/TROUBLESHOOTING.md](https://github.com/mysociety/pombola/blob/master/docs/TROUBLESHOOTING.md) file
+Please see [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) file
 
 ## Future
 
