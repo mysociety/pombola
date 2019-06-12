@@ -17,7 +17,7 @@ There is also a sample Apache2 config in 'conf/httpd.conf-example' which might
 be helpful.
 
 When installing the system note that many additional files and directories will
-be created in the `data/` directory in the top level git repo checkout. These 
+be created in the `data/` directory in the top level git repo checkout. These
 include the 'media_root' for uploaded images, the virtualenv and various others.
 
 All data is stored in the database, but some is copied into the search engine
@@ -29,20 +29,3 @@ being made to their API. These are cached after the first request.
 Boundary data is taken from a MaPit service (an embedded app), this is used
 to find the constituency for a point and also to serve the KML boundaries used
 on the Google maps.
-
-# GIT BRANCHES
-
-We use a modified version of the model outlined here: http://nvie.com/posts/a-successful-git-branching-model/
-
-Instead of using 'master' as the branch that holds the latest stable release we
-have a specific branch called 'production'. We then use our master branch as the
-'develop' branch.
-
-# DEPENDENCIES
-
-## External requests that may block:
-
-  * Google location API
-
-Other dependencies are listed in 'conf/packages' (debian packages) and in
-'requirements.txt'.
