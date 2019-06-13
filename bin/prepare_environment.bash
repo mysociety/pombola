@@ -26,7 +26,6 @@ fi
 source $virtualenv_activate
 
 # Remove old pip packages installed with the -e switch
-rm -rf $virtualenv_dir/src/django-sayit
 rm -rf $virtualenv_dir/src/popit-resolver
 rm -rf $virtualenv_dir/src/popit-django
 rm -rf $virtualenv_dir/src/pygeocoder
