@@ -7,9 +7,11 @@ To run these commands make sure you're in the root of this repository and then p
     ./manage.py core_merge_people`
 
 # budgets
-    budgets_import_place_budgets
+
+See [the README for the budgets app](../pombola/budgets/README.md) for further details.
 
 # core
+
     core_add_ward_places_2013
     core_check_mp_aspirants
     core_cleanup_disqus_urls
