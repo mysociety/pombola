@@ -3,8 +3,9 @@
 This web app allows you to store and share information on public figures,
 especially politicians.
 
-For an overview of the system please see the files in docs/ - especially
-[OVERVIEW.md](docs/OVERVIEW.md)
+For detailed background about the project as of 2018 please see
+[docs/BACKGROUND.md](docs/BACKGROUND.md). For an overview of the system see
+[docs/OVERVIEW.md](docs/OVERVIEW.md).
 
 
 ## Installing
