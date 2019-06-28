@@ -67,10 +67,14 @@ esac
 
 if [ -n "$LIVE_URL" ]; then
   echo "Downloading and loading database dump for ${COUNTRY_APP}..."
+  TMP_SCHEMA=$(mktemp /var/tmp/schema.XXXXX)
   TMP_DATA=$(mktemp /var/tmp/data.XXXXX)
-  curl -o ${TMP_DATA} ${LIVE_URL}/media_root/dumps/pg-dump_data.sql.gz
+  curl -s -S -o ${TMP_SCHEMA} ${LIVE_URL}/media_root/dumps/pg-dump_schema.sql.gz
+  curl -s -S -o ${TMP_DATA} ${LIVE_URL}/media_root/dumps/pg-dump_data.sql.gz
+  gunzip -c ${TMP_SCHEMA} | psql ${DB_NAME}
   gunzip -c ${TMP_DATA} | psql ${DB_NAME}
   rm $TMP_DATA
+  rm $TMP_SCHEMA
 else
   echo "Skipping live database import."
 fi
