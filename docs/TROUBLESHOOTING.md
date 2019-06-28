@@ -82,4 +82,5 @@ by the checkbox "can be featured" for each one.
 ## You need to merge two people together
 
 There is a management command `core_merge_people` that can do this for you.
-
+See the section about merging people in [ADMIN_TASKS.md](ADMIN_TASKS.md)
+for further documentation.
