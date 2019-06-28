@@ -229,6 +229,7 @@ publicly) add them to 'tables_to_ignore'.'''
                 'pg_dump',
                 '--no-owner',
                 '--no-acl',
+                '--schema=public',
             ]
 
             command.append({
