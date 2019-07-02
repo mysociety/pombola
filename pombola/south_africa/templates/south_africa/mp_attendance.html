@@ -103,6 +103,7 @@
       <th>Name</th>
       <th>Party</th>
       {% if position == 'ministers' %}
+      <th>Position</th>
       <th>Present</th>
       {% else %}
       <th>Meetings</th>
@@ -118,6 +119,10 @@
       <td><a href="{{ member.pa_url }}">{{ member.name }}</td>
       <td>{{ member.party_name }}</td>
       {% if position == 'ministers' %}
+      <td>
+        {% if member.position == 'minister' %}Minister{% endif %}
+        {% if member.position == 'deputy-minister' %}Deputy minister{% endif %}
+      </td>
       <td>{{ member.present }}</td>
       {% else %}
       <td>{{ member.total }}</td>

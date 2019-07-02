@@ -52,20 +52,28 @@ class SAMpAttendanceView(TemplateView):
             ma, member=dict(
                 ma['member'], pa_url=urlsplit(ma['member']['pa_url']).path))
 
-    def build_minister_zero_attendance(self, minister):
+    def minister_or_deputy_for_position_slug(self, position_slug):
+        if position_slug.startswith('minister'):
+            return 'minister'
+        if position_slug.startswith('deputy-minister'):
+            return 'deputy-minister'
+        return ''
+
+    def build_minister_zero_attendance(self, minister, position):
         """
         Return a record in the same format as the PMG API data for ministers with
         no attendance records. These records should be populated with zero.
         """
         initials = "".join(name[0].upper() for name in minister.given_name.split())
-        minister_name = "{}, {} {}".format(
-            minister.family_name, minister.title, initials)
+        minister_name = " ".join("{}, {} {}".format(
+            minister.family_name, minister.title, initials).split())
 
         parties = minister.parties()
         party_name = parties[0].slug.upper() if parties else ""
 
         return {'member': {
                     'name': minister_name,
+                    'position': self.minister_or_deputy_for_position_slug(position),
                     'pa_url': minister.get_absolute_url(),
                     'party_name': party_name},
                 'meetings': None}
@@ -86,10 +94,13 @@ class SAMpAttendanceView(TemplateView):
 
         year = datetime.datetime.strptime(annual_attendance['end_date'], "%Y-%m-%d").year
 
+        # Sorted by person, then start date so the latest position is last for a person
+        # when iterating over the list.
         active_minister_positions = Position.objects \
             .title_slug_prefixes(['minister', 'deputy-minister']) \
             .active_during_year(year) \
-            .select_related('person')
+            .select_related('person') \
+            .order_by('person', 'start_date')
 
         ministers = defaultdict(list)
         for position in active_minister_positions:
@@ -108,6 +119,7 @@ class SAMpAttendanceView(TemplateView):
             if record['member']['pa_url']:
                 # We cannot determine a position if no `pa_url` was returned. Ignore these records.
                 slug = record['member']['pa_url'].split('/')[-2]
+
                 if slug in minister_slugs:
                     # This member was a minister during the year
                     positions = ministers[slug]
@@ -118,6 +130,7 @@ class SAMpAttendanceView(TemplateView):
                         # A member can have more than one active ministerial position in a year
                             if position.is_active_at_date(meeting['date']):
                                 minister_at_date = True
+                                record['member']['position'] = self.minister_or_deputy_for_position_slug(position.title.slug)
 
                         if minister_at_date:
                             attendance_as_minister.append(meeting)
@@ -143,11 +156,12 @@ class SAMpAttendanceView(TemplateView):
             # Create a record for each.
             for slug in minister_slugs:
                 minister = ministers[slug][0].person
+                position = ministers[slug][-1].title.slug
                 if ctx_party and minister.parties()[0].slug.upper() != ctx_party:
                     # Only include ministers belonging to the party selected.
                     continue
                 else:
-                    minister_attendance.append(self.build_minister_zero_attendance(minister))
+                    minister_attendance.append(self.build_minister_zero_attendance(minister, position))
 
             return minister_attendance
 
@@ -264,6 +278,7 @@ class SAMpAttendanceView(TemplateView):
                             if k in present_codes)
                         context['attendance_data'].append({
                                 "name": summary['member']['name'],
+                                "position": summary['member'].get('position', ''),
                                 "pa_url": urlsplit(summary['member']['pa_url']).path,
                                 "party_name": summary['member']['party_name'],
                                 "present": present,

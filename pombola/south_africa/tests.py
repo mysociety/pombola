@@ -822,14 +822,22 @@ class SAMpAttendancePageTest(TestCase):
         # Needs to be a member of a party.
         models.Position.objects.create(person=self.person2, organisation=party1, title=positiontitle1)
 
+        self.person3 = models.Person.objects.create(legal_name='Person3', slug='person3', family_name='3', given_name='Person')
+        positiontitle3 = models.PositionTitle.objects.create(name='Deputy Minister of Something', slug='deputy-minister-of-something')
+        models.Position.objects.create(person=self.person3, organisation=party1, title=positiontitle2, start_date='2000-01-01', end_date='2000-03-30')
+        models.Position.objects.create(person=self.person3, organisation=party1, title=positiontitle3, start_date='2000-04-01', end_date='future')
+        # Needs to be a member of a party.
+        models.Position.objects.create(person=self.person3, organisation=party1, title=positiontitle1)
+
     def test_mp_attendance_context(self):
         raw_data = [{
+            u'start_date': u'2000-01-01',
             u'end_date': u'2000-12-31',
             u'meetings_by_member': [
                 {u'member': {
                     u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person1/',
                     u'party_name': u'Party1', u'name': u'Person 1', u'id': 1},
-                u'meetings': [
+                 u'meetings': [
                     {u'date': u'2000-03-01', u'attendance': u'A'},
                     {u'date': u'2000-03-02', u'attendance': u'P'},
                     {u'date': u'2000-03-03', u'attendance': u'P'},
@@ -837,13 +845,22 @@ class SAMpAttendancePageTest(TestCase):
                 {u'member': {
                     u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person2/',
                     u'party_name': u'Party1', u'name': u'Person 2', u'id': 2},
-                u'meetings': [
+                 u'meetings': [
                     {u'date': u'2000-03-01', u'attendance': u'A'},
                     {u'date': u'2000-03-01', u'attendance': u'P'},
                     {u'date': u'2000-04-01', u'attendance': u'P'},
                     {u'date': u'2000-04-01', u'attendance': u'P'},
-                    {u'date': u'2000-04-01', u'attendance': u'A'}]}],
-            u'start_date': u'2000-01-01'}]
+                    {u'date': u'2000-04-01', u'attendance': u'A'}]},
+                {u'member': {
+                    u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person3/',
+                    u'party_name': u'Party1', u'name': u'Person 3', u'id': 3},
+                 u'meetings': [
+                    {u'date': u'2000-03-01', u'attendance': u'P'},
+                    {u'date': u'2000-04-01', u'attendance': u'P'},
+                    {u'date': u'2000-04-01', u'attendance': u'P'},
+                    {u'date': u'2000-04-01', u'attendance': u'A'}]}
+            ],
+        }]
 
         pmg_api_cache = caches['pmg_api']
         pmg_api_cache.set(
@@ -855,7 +872,9 @@ class SAMpAttendancePageTest(TestCase):
         url = "%s?year=2000" % reverse('mp-attendance')
         context = self.client.get(url).context
 
-        expected = [{'name': u'Person 2', 'pa_url': u'/person/person2/', 'party_name': u'Party1', 'present': 2}]
+        expected = [
+            {'name': u'Person 2', 'pa_url': u'/person/person2/', 'party_name': u'Party1', 'present': 2, 'position': u'minister'},
+            {'name': u'Person 3', 'pa_url': u'/person/person3/', 'party_name': u'Party1', 'present': 3, 'position': u'deputy-minister'}]
         self.assertEqual(context['attendance_data'], expected)
 
         # MP attendance selected
@@ -894,7 +913,9 @@ class SAMpAttendancePageTest(TestCase):
         context = self.client.get(url).context
 
         # Zero attendance as a Minister
-        expected = [{'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'PARTY1', 'present': 0}]
+        expected = [
+            {'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'PARTY1', 'position': u'minister', 'present': 0},
+            {'name': u'3, P', 'pa_url': u'/person/person3/', 'party_name': u'PARTY1', 'position': u'deputy-minister', 'present': 0}]
         self.assertEqual(context['attendance_data'], expected)
 
         # Some attendance as an MP
@@ -933,7 +954,9 @@ class SAMpAttendancePageTest(TestCase):
         context = self.client.get(url).context
 
         # Zero attendance as a Minister
-        expected = [{'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'', 'present': 0}]
+        expected = [
+            {'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'', 'position': u'minister', 'present': 0},
+            {'name': u'3, P', 'pa_url': u'/person/person3/', 'party_name': u'PARTY1', 'position': u'deputy-minister', 'present': 0}]
         self.assertEqual(context['attendance_data'], expected)
 
 
