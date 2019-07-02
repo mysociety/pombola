@@ -1,9 +1,0 @@
-{% with k=object.kind.slug %}
-  {% if k == 'ward' or k == 'constituency' or k == 'county' %}
-    <p>
-        The aspirant data on this page is from the
-        <a href="http://api.iebc.or.ke/">IEBC API</a>,
-        with many thanks.
-    </p>
-  {% endif %}
-{% endwith %}
