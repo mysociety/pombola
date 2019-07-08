@@ -836,7 +836,7 @@ class SAMpAttendancePageTest(TestCase):
             u'meetings_by_member': [
                 {u'member': {
                     u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person1/',
-                    u'party_name': u'Party1', u'name': u'Person 1', u'id': 1},
+                    u'party_name': u'PARTY1', u'name': u'1, P', u'id': 1},
                  u'meetings': [
                     {u'date': u'2000-03-01', u'attendance': u'A'},
                     {u'date': u'2000-03-02', u'attendance': u'P'},
@@ -844,7 +844,7 @@ class SAMpAttendancePageTest(TestCase):
                     {u'date': u'2000-03-04', u'attendance': u'L'}]},
                 {u'member': {
                     u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person2/',
-                    u'party_name': u'Party1', u'name': u'Person 2', u'id': 2},
+                    u'party_name': u'PARTY1', u'name': u'2, Dr P', u'id': 2},
                  u'meetings': [
                     {u'date': u'2000-03-01', u'attendance': u'A'},
                     {u'date': u'2000-03-01', u'attendance': u'P'},
@@ -853,7 +853,7 @@ class SAMpAttendancePageTest(TestCase):
                     {u'date': u'2000-04-01', u'attendance': u'A'}]},
                 {u'member': {
                     u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person3/',
-                    u'party_name': u'Party1', u'name': u'Person 3', u'id': 3},
+                    u'party_name': u'PARTY1', u'name': u'3, P', u'id': 3},
                  u'meetings': [
                     {u'date': u'2000-03-01', u'attendance': u'P'},
                     {u'date': u'2000-04-01', u'attendance': u'P'},
@@ -873,8 +873,8 @@ class SAMpAttendancePageTest(TestCase):
         context = self.client.get(url).context
 
         expected = [
-            {'name': u'Person 2', 'pa_url': u'/person/person2/', 'party_name': u'Party1', 'present': 2, 'position': u'minister'},
-            {'name': u'Person 3', 'pa_url': u'/person/person3/', 'party_name': u'Party1', 'present': 3, 'position': u'deputy-minister'}]
+            {'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'PARTY1', 'present': 2, 'position': u'minister'},
+            {'name': u'3, P', 'pa_url': u'/person/person3/', 'party_name': u'PARTY1', 'present': 3, 'position': u'deputy-minister'}]
         self.assertEqual(context['attendance_data'], expected)
 
         # MP attendance selected
@@ -884,9 +884,9 @@ class SAMpAttendancePageTest(TestCase):
         # total: number of meetings
         # absent, arrived_late, depart_early, present: percentages
         expected = [
-            {'name': u'Person 1', 'party_name': u'Party1', 'pa_url': u'/person/person1/',
+            {'name': u'1, P', 'party_name': u'PARTY1', 'pa_url': u'/person/person1/',
             'absent': 25, 'arrive_late': 25, 'depart_early': 0, 'total': 4, 'present': 75},
-            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'/person/person2/',
+            {'name': u'2, Dr P', 'party_name': u'PARTY1', 'pa_url': u'/person/person2/',
             'absent': 50, 'arrive_late': 0, 'depart_early': 0, 'total': 2, 'present': 50}
         ]
         self.assertEqual(context['attendance_data'], expected)
@@ -897,7 +897,7 @@ class SAMpAttendancePageTest(TestCase):
             u'meetings_by_member': [
                 {u'member': {
                     u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person2/',
-                    u'party_name': u'Party1', u'name': u'Person 2', u'id': 2},
+                    u'party_name': u'PARTY1', u'name': u'2, Dr P', u'id': 2},
                 u'meetings': [
                     {u'date': u'2000-03-01', u'attendance': u'A'},
                     {u'date': u'2000-03-01', u'attendance': u'P'},]}],
@@ -925,7 +925,7 @@ class SAMpAttendancePageTest(TestCase):
         # total: number of meetings
         # absent, arrived_late, depart_early, present: percentages
         expected = [
-            {'name': u'Person 2', 'party_name': u'Party1', 'pa_url': u'/person/person2/',
+            {'name': u'2, Dr P', 'party_name': u'PARTY1', 'pa_url': u'/person/person2/',
             'absent': 50, 'arrive_late': 0, 'depart_early': 0, 'total': 2, 'present': 50}
         ]
         self.assertEqual(context['attendance_data'], expected)
@@ -938,7 +938,7 @@ class SAMpAttendancePageTest(TestCase):
             u'meetings_by_member': [
                 {u'member': {
                     u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person2/',
-                    u'party_name': u'Party1', u'name': u'Person 2', u'id': 2},
+                    u'party_name': u'PARTY1', u'name': u'2, Dr P', u'id': 2},
                 u'meetings': [
                     {u'date': u'2000-03-01', u'attendance': u'A'},
                     {u'date': u'2000-03-01', u'attendance': u'P'},]}],
