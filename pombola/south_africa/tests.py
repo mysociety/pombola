@@ -960,6 +960,54 @@ class SAMpAttendancePageTest(TestCase):
         self.assertEqual(context['attendance_data'], expected)
 
 
+    def test_divide_2019_attendance_records_pre_and_post_elections(self):
+        # Pre election: 01/01/2019 - 30/06/2019
+        # Post election: 01/07/2019 - 31/12/2019
+
+        raw_data = [{
+            u'start_date': u'2019-01-01',
+            u'end_date': u'2019-12-31',
+            u'meetings_by_member': [
+                {u'member': {
+                    u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person2/',
+                    u'party_name': u'PARTY1', u'name': u'2, Dr P', u'id': 2},
+                u'meetings': [
+                    {u'date': u'2019-01-01', u'attendance': u'A'},
+                    {u'date': u'2019-06-30', u'attendance': u'P'},
+                    {u'date': u'2019-07-01', u'attendance': u'P'},
+                    {u'date': u'2019-12-31', u'attendance': u'P'},]},
+                {u'member': {
+                    u'party_id': 1, u'pa_url': u'http://www.pa.org.za/person/person3/',
+                    u'party_name': u'PARTY1', u'name': u'3, P', u'id': 3},
+                u'meetings': [
+                    {u'date': u'2019-07-01', u'attendance': u'P'}]}]
+            }]
+
+        pmg_api_cache = caches['pmg_api']
+        pmg_api_cache.set(
+            "https://api.pmg.org.za/committee-meeting-attendance/meetings-by-member/",
+            raw_data,
+        )
+
+        url = "%s?year=2019" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        expected = [
+            {'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'PARTY1', 'position': u'minister', 'present': 1},
+            {'name': u'3, P', 'pa_url': u'/person/person3/', 'party_name': u'PARTY1', 'position': u'deputy-minister', 'present': 0}]
+
+        self.assertEqual(context['attendance_data'], expected)
+
+        url = "%s?year=2019+-+post+elections" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        expected = [
+            {'name': u'2, Dr P', 'pa_url': u'/person/person2/', 'party_name': u'PARTY1', 'position': u'minister', 'present': 2},
+            {'name': u'3, P', 'pa_url': u'/person/person3/', 'party_name': u'PARTY1', 'position': u'deputy-minister', 'present': 1}]
+
+        self.assertEqual(context['attendance_data'], expected)
+
+
 @attr(country='south_africa')
 class SAPersonProfileSubPageTest(WebTest):
     def setUp(self):

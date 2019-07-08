@@ -78,6 +78,30 @@ class SAMpAttendanceView(TemplateView):
                     'party_name': party_name},
                 'meetings': None}
 
+    def divide_pre_and_post_election_records(self, meetings_by_member):
+        # Pre-election: 01/01/2019 - 30/06/2019
+        # Post-election: 01/07/2019 - 31/12/2019
+
+        pre_election_meetings_by_member, post_election_meetings_by_member = [[], []]
+
+        for record in meetings_by_member:
+            member_pre_election_meetings, member_post_election_meetings = [[], []]
+            for meeting in record['meetings']:
+                if datetime.datetime.strptime(meeting['date'], "%Y-%m-%d").month > 6:
+                    member_post_election_meetings.append(meeting)
+                else:
+                    member_pre_election_meetings.append(meeting)
+            if member_pre_election_meetings:
+                pre_election_meetings_by_member.append({
+                    'member': record['member'],
+                    'meetings': member_pre_election_meetings})
+            if member_post_election_meetings:
+                post_election_meetings_by_member.append({
+                    'member': record['member'],
+                    'meetings': member_post_election_meetings})
+
+        return pre_election_meetings_by_member, post_election_meetings_by_member
+
     def filter_attendance(self, annual_attendance, ctx_party, ctx_pos):
         """
         Filter meeting attendance to only include items which match
@@ -94,13 +118,25 @@ class SAMpAttendanceView(TemplateView):
 
         year = datetime.datetime.strptime(annual_attendance['end_date'], "%Y-%m-%d").year
 
-        # Sorted by person, then start date so the latest position is last for a person
-        # when iterating over the list.
-        active_minister_positions = Position.objects \
+        if year == 2019:
+            # 2019 is divided into pre- and post-election records
+            start_date = datetime.datetime.strptime(annual_attendance['start_date'], "%Y-%m-%d")
+            end_date = datetime.datetime.strptime(annual_attendance['end_date'], "%Y-%m-%d")
+
+            active_minister_positions = Position.objects \
             .title_slug_prefixes(['minister', 'deputy-minister']) \
-            .active_during_year(year) \
+            .overlapping_dates(start_date, end_date) \
             .select_related('person') \
             .order_by('person', 'start_date')
+
+        else:
+            # Sorted by person, then start date so the latest position is last for a person
+            # when iterating over the list.
+            active_minister_positions = Position.objects \
+                .title_slug_prefixes(['minister', 'deputy-minister']) \
+                .active_during_year(year) \
+                .select_related('person') \
+                .order_by('person', 'start_date')
 
         ministers = defaultdict(list)
         for position in active_minister_positions:
@@ -202,6 +238,13 @@ class SAMpAttendanceView(TemplateView):
         context = {}
         context['year'] = str(
             dateutil.parser.parse(data[0]['end_date']).year)
+
+        # Default to post election records while 2019 is the latest records returned
+        # Once we get records for 2020 onward, this block can be removed as it
+        # will have no effect
+        if dateutil.parser.parse(data[0]['end_date']).year == 2019:
+            context['year'] = '2019 - post elections'
+
         context['party'] = ''
         context['position'] = 'ministers'
 
@@ -215,7 +258,30 @@ class SAMpAttendanceView(TemplateView):
 
         for annual_attendance in data:
             year = str(dateutil.parser.parse(annual_attendance['end_date']).year)
-            context['years'].append(year)
+
+            # 2019 should be divided into pre- and post-election records
+            if year == '2019':
+                context['years'].extend(['2019 - post elections', '2019'])
+                # We only need to do this if one of the 2019 options are selected
+                if context['year'] == '2019' or context['year'] == '2019 - post elections':
+                    attendance_pre_election, attendance_post_election = (
+                        self.divide_pre_and_post_election_records(annual_attendance['meetings_by_member']))
+
+                    if context['year'] == '2019':
+                        annual_attendance = {
+                            'start_date': '2019-01-01',
+                            'end_date': '2019-06-30',
+                            'meetings_by_member': attendance_pre_election}
+
+                    elif context['year'] == '2019 - post elections':
+                        year = '2019 - post elections'
+                        annual_attendance = {
+                            'start_date': '2019-07-01',
+                            'end_date': '2019-12-31',
+                            'meetings_by_member': attendance_post_election}
+
+            else:
+                context['years'].append(year)
 
             if year == context['year']:
                 parties = set(ma['member']['party_name'] for
