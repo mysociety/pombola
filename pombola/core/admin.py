@@ -261,6 +261,7 @@ class OrganisationAdmin(StricterSlugFieldMixin, admin.ModelAdmin):
     list_display = ['slug', 'name', 'kind']
     list_filter = ['kind']
     search_fields = ['name']
+    exclude = ['show_attendance']
 
 
 @admin.register(models.OrganisationKind)

@@ -23,4 +23,10 @@ class ZAPlace(Place):
                 org_rels_as_a__organisation_b=self.organisation,
                 kind__slug='party',
                 )
-            
+
+
+class AttendanceForOrganisationToggle(Organisation):
+    class Meta:
+        proxy = True
+        verbose_name = 'Toggle attendance for party'
+        verbose_name_plural = 'Toggle attendance for parties'

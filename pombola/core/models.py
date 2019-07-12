@@ -754,6 +754,10 @@ class Organisation(ModelBase, HasImageMixin, IdentifierMixin):
         help_text="The number of seats this organisation nominally has."
     )
 
+    show_attendance = models.BooleanField(
+        default=False,
+        help_text="Toggles attendance records on person detail pages for people who belong to this organization.")
+
     fields_to_whitespace_normalize = ['name']
 
     objects = OrganisationQuerySet.as_manager()
