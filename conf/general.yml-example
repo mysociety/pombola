@@ -28,14 +28,6 @@ GOOGLE_ANALYTICS_ACCOUNT: ''
 SURVEYGIZMO_API_TOKEN: ''
 SURVEYGIZMO_API_SECRET: ''
 
-# If you're running the experiment with the county performance page
-# test for Kenya, then put the experiment key here
-COUNTY_PERFORMANCE_EXPERIMENT_KEY: ''
-
-# If you're running the experiment with the youth employment bill page
-# test for Kenya, then put the experiment key here
-YOUTH_EMPLOYMENT_BILL_EXPERIMENT_KEY: ''
-
 # The IEBC API credentials for fetching aspirant data:
 IEBC_API_ID: ''
 IEBC_API_SECRET: ''
@@ -55,10 +47,6 @@ FROM_EMAIL: 'you@example.com'
 # You'll need to put your hostname here
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#std:setting-ALLOWED_HOSTS
 ALLOWED_HOSTS: ['pombola.example.com', 'localhost']
-
-# If the local version of pdftohtml is wrong (ie != 0.12.4) - blank means do it
-# locally
-KENYA_PARSER_PDF_TO_HTML_HOST: ''
 
 # Where is the selenium server? (If empty then selenium tests can't run)
 # download it from here: http://seleniumhq.org/download/
@@ -87,7 +75,7 @@ POLLDADDY_WIDGET_ID: ''
 # from other apps.  Note that we also use this setting in a command
 # (core_create_parliamentary_sessions) to determine the country that this
 # instance of Pombola is set up for.
-COUNTRY_APP: kenya
+COUNTRY_APP: south_africa
 
 # ZA Hansard Parsing config (can be left blank on for other instances)
 # Username and password for pmg_scraper command
@@ -119,11 +107,6 @@ EMAIL_USE_TLS: false
 # addresses to longitude / latitude. You can specify the key to use
 # here:
 GOOGLE_MAPS_GEOCODING_API_KEY: ''
-
-# Config for Kenya SMS API
-KENYA_SMS_API_URL: 'https://app.bongasms.co.ke/api/fetch-messages'
-KENYA_SMS_API_SHORT_CODE: ''
-KENYA_SMS_API_KEY: ''
 
 # Config for Google Site verification
 GOOGLE_SITE_VERIFICATION: ''

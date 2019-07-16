@@ -43,9 +43,4 @@
     {% endif %}
   {% endwith %}
 
-  {% if settings.COUNTRY_APP != 'kenya' %}
-    {# Kenyan comments are looked after by pombola/kenya/templates/core/object_base.html #}
-    {% include 'disqus_comments.html' %}
-  {% endif %}
-
 {% endblock %}

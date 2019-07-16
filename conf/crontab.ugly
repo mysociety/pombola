@@ -8,12 +8,12 @@ MAILTO=cron-!!(*= $site *)!!@mysociety.org
 
 # Set the virtualenv and add it to the path so that the correct python is used -
 # requires that scripts start with '#!/usr/bin/env python'
-# If you are running this with a different location for the virtualenv, you'll 
+# If you are running this with a different location for the virtualenv, you'll
 # need to update both `VIRTUAL_ENV` and `PATH` to reflect this.
 VIRTUAL_ENV="/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv"
 
 # Commonlib now included from the system-wide installation (`/data/mysociety/bin`).
-# If you want to use any of our generic scripts (e.g. `output-on-error`) you'll 
+# If you want to use any of our generic scripts (e.g. `output-on-error`) you'll
 # need to clone this repository somewhere and add it to the `PATH`.
 PATH=/data/vhost/!!(*= $vhost *)!!/pombola/bin:/data/mysociety/bin:/data/mysociety/commonlib/bin:/data/vhost/!!(*= $vhost *)!!/pombola-virtualenv/bin:/usr/local/bin:/usr/bin:/bin
 
@@ -54,12 +54,6 @@ PYTHONIOENCODING=utf-8
 # Generate the Popolo JSON files
 33 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
 50 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json --pombola /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://info.mzalendo.com
-
-# Check for any recurring data problems:
-47 4 * * * !!(*= $user *)!! run_management_command kenya_check_for_recurring_problems
-
-# Import messages from SMS API
-0 * * * *  !!(*= $user *)!! output-on-error run_management_command kenya_sms_retrieve_messages
 
 !!(* } elsif ($vhost eq 'www.shineyoureye.org') { *)!!
 23 2 * * * !!(*= $user *)!! run_management_command core_export_to_popolo_json /data/vhost/!!(*= $vhost *)!!/media_root/popolo_json/ http://www.shineyoureye.org

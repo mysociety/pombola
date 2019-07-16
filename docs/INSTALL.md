@@ -20,10 +20,10 @@ git clone https://github.com/mysociety/pombola.git
 
 ## Vagrant
 
-The `Vagrantfile` will set up the Kenyan site by default. You can
+The `Vagrantfile` will set up the South African site by default. You can
 override this by setting `COUNTRY_APP` in the environment, e.g.:
 ```
-COUNTRY_APP=south_africa vagrant up
+COUNTRY_APP=kenya vagrant up
 ```
 Or by creating/updating to relevant variable in `conf/general.yml`
 manually (otherwise this will be created the first time you run

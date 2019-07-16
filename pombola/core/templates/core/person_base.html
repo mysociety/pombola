@@ -87,20 +87,12 @@
       </ul>
       {% endif %}
 
-      <h3>{% if settings.COUNTRY_APP == 'kenya' %}
-        Party &amp; Coalition
-      {% else %}
-        Party
-      {% endif %}</h3>
+      <h3>Party</h3>
       <ul class="party-memberships">
           {% for party in object.parties_and_coalitions %}
               <li><a href="{{ party.get_absolute_url }}" class="party-membership party-membership--{{ party.kind.name | slugify }}">{{ party.name }}</a></li>
           {% empty %}
-              <li>{% if settings.COUNTRY_APP == 'kenya' %}
-                Not a member of any parties or coalitions
-              {% else %}
-                Not a member of any party
-              {% endif %}</li>
+              <li>Not a member of any party</li>
           {% endfor %}
       </ul>
   </div>

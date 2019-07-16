@@ -51,12 +51,6 @@ class Command(BaseCommand):
             'popolo_name_resolver_entityname',
             'writeinpublic_configuration',
         ])
-        if settings.COUNTRY_APP in ('kenya',):
-            # Ignore SMS tables as they contain phone numbers.
-            tables_to_ignore.update([
-                'sms_message',
-                'sms_question',
-            ])
         tables_to_dump = [
             t for t in tables if t not in tables_to_ignore
         ]
@@ -157,28 +151,6 @@ class Command(BaseCommand):
                 'spinner_imagecontent',
                 'spinner_quotecontent',
                 'spinner_slide',
-            ]
-        if settings.COUNTRY_APP in ('kenya',):
-            # hansard, place_data, projects, votematch, wordcloud
-            expected_tables += [
-                'hansard_alias',
-                'hansard_entry',
-                'hansard_sitting',
-                'hansard_source',
-                'hansard_venue',
-                'place_data_entry',
-                'projects_project',
-                'votematch_answer',
-                'votematch_party',
-                'votematch_quiz',
-                'votematch_stance',
-                'votematch_statement',
-            ]
-        if settings.COUNTRY_APP in ('kenya',):
-            # place_data, bills
-            expected_tables += [
-                'bills_bill',
-
             ]
         unexpected = set(tables_to_dump) - set(expected_tables)
         if unexpected:

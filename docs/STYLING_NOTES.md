@@ -11,9 +11,9 @@ You can compile the SASS using `make css` in the project root. This uses [compas
 The main entry point for the SASS is the `<country_name>.scss` file. These are largely similar and let you include or not styles specific to the various apps. Note that often these will contain entries like:
 
 ``` scss
-@import "colours_kenya";
+@import "colours_south_africa";
 /// ... snip ...
-@import "kenya_overrides";
+@import "south_africa_overrides";
 ```
 
 All the `.scss` files should be considered generic for all countries apart from ones like those above, that contain specific tweaks for the specific country.
@@ -28,4 +28,4 @@ Your app will have a `base.html` template that should extend `default_base.html`
 
 ## Static assets (images, js, etc)
 
-Novel assets, and overrides, should go into `/pombola/<country_app>/static` (eg [Kenya's](https://github.com/mysociety/pombola/tree/master/pombola/kenya/static)). Anything that appears here will be used in preference to assets from the core or other apps.
+Novel assets, and overrides, should go into `/pombola/<country_app>/static` (eg [South Africa's](https://github.com/mysociety/pombola/tree/master/pombola/south_africa/static)). Anything that appears here will be used in preference to assets from the core or other apps.

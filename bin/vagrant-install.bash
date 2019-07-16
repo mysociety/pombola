@@ -4,7 +4,7 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-COUNTRY_APP=${COUNTRY_APP:-kenya}
+COUNTRY_APP=${COUNTRY_APP:-south_africa}
 DATADIR=${DATADIR:-data}
 
 DB_NAME="pombola"
@@ -53,9 +53,6 @@ bin/prepare_environment.bash
 
 # Load data
 case "$COUNTRY_APP" in
-  kenya )
-    LIVE_URL='http://info.mzalendo.com'
-  ;;
   south_africa )
     LIVE_URL='https://www.pa.org.za'
   ;;
