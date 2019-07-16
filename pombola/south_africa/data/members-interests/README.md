@@ -6,9 +6,15 @@ There are several files in this directory:
 In [/pdf_scraper](https://github.com/mysociety/pombola/tree/master/pombola/south_africa/data/members-interests/interests/scraper) there's a script and requirements file you will need to be able to scrape the member's interests PDF as released by Parliament.
 
 You will need poppler installed on your system, e.g.
-`brew install poppler`
+`brew install poppler` or `apt-get install python-poppler`
 
 Create a virtual environment, activate and install packages in requirements.txt
+
+Get the fontspec ids which are used to determine what content we are looking at:
+`python scrape_interests_pdf.py --input <filename>.pdf --print-font-ids=True`
+
+Set the `font_id_*` vars with these values in `scrape_interests_pdf.py`.
+These values can change from year to year, and a trail and error approach is used to use the correct values.
 
 Run the script with the necessary arguments, e.g.
 `python scrape_interests_pdf.py --input 2017.pdf --output 2017.json --year 2017 --source https://www.parliament.gov.za/storage/app/media/Ethics/2017Register.pdf`
