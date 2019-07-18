@@ -400,11 +400,16 @@ class SAPersonDetail(PersonSpeakerMappingsMixin, PersonDetail):
         if self.object.date_of_death is not None:
             context['former_parties'] = self.get_former_parties(self.object)
 
-        try:
-            context['attendance'], context['latest_meetings_attended'] = \
-                self.get_attendance_data_for_display()
-        except AttendanceAPIDown:
-            context['attendance'] = context['latest_meetings_attended'] = \
-                'UNAVAILABLE'
+        show_attendance = False
+        for party in self.object.parties():
+            if party.show_attendance:
+                show_attendance = True
+        if show_attendance:
+            try:
+                context['attendance'], context['latest_meetings_attended'] = \
+                    self.get_attendance_data_for_display()
+            except AttendanceAPIDown:
+                context['attendance'] = context['latest_meetings_attended'] = \
+                    'UNAVAILABLE'
 
         return context

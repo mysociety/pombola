@@ -340,6 +340,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             slug='national-assembly',
             name='National Assembly',
             kind=parliament,
+            show_attendance=True
             )
         old_org = models.Organisation.objects.create(
             slug='old-assembly',
@@ -500,7 +501,15 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
             len(expected[1]['categories'][2]['entries'][0])
         )
 
+    def _setup_party_for_attendance(self, show_attendance):
+        org_kind_party = models.OrganisationKind.objects.create(name='Party', slug='party')
+        party = models.Organisation.objects.create(name='Party', slug='party', kind=org_kind_party, show_attendance=show_attendance)
+        person = models.Person.objects.get(slug='moomin-finn')
+        positiontitle = models.PositionTitle.objects.create(name='Member', slug='member')
+        models.Position.objects.create(person=person, organisation=party, title=positiontitle)
+
     def test_attendance_data(self):
+        self._setup_party_for_attendance(True)
         test_data_path = os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
             'data/test/attendance_587.json',
@@ -548,6 +557,7 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
     @patch('requests.get', side_effect=connection_error)
     def test_attendance_data_requests_errors(self, m):
+        self._setup_party_for_attendance(True)
         # Check context if identifier exists, cache lookup misses
         # and the PMG API is unavailable.
         pmg_api_cache = caches['pmg_api']
@@ -562,6 +572,26 @@ class SAPersonDetailViewTest(PersonSpeakerMappingsMixin, TestCase):
 
         context = self.client.get(reverse('person', args=('moomin-finn',))).context
         assert context['attendance'] == 'UNAVAILABLE'
+
+    def test_no_attendance_if_show_attendance_false(self):
+        self._setup_party_for_attendance(False)
+        test_data_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'data/test/attendance_587.json',
+            )
+        with open(test_data_path) as f:
+            raw_data = json.load(f)
+
+        pmg_api_cache = caches['pmg_api']
+        pmg_api_cache.set(
+            "https://api.pmg.org.za/member/moomin-finn/attendance/",
+            raw_data['results'],
+            )
+
+        context = self.client.get(reverse('person', args=('moomin-finn',))).context
+
+        self.assertEqual('attendance' in context, False)
+
 
     def _setup_example_positions(self, past, current):
         parliament = models.OrganisationKind.objects.create(
