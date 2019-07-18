@@ -22,7 +22,7 @@ import django
 from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts  import render_to_response, get_object_or_404, redirect
 from django.template   import RequestContext
 from django.views.decorators.cache import cache_control, never_cache
@@ -608,6 +608,31 @@ def position(request, pt_slug, ok_slug=None, o_slug=None):
                 handle_approx_date(position.start_date),
                 handle_approx_date(position.end_date)
             ])
+
+        return response
+
+    elif request.GET.get('format') == 'popolo':
+
+        persons = []
+
+        for position in positions:
+
+            person = position.person
+
+            # Only append the person if they have an email address
+            email_query = person.contacts.filter(kind__slug='email').order_by('-preferred')
+            if email_query.exists():
+                persons.append(
+                    {
+                        'id': request.build_absolute_uri(person.get_absolute_url())
+                                    .replace('http://', 'https://'),
+                        'name': person.name,
+                        'email': email_query.first().value,
+                        'contact_details': []
+                    }
+                )
+
+        response = JsonResponse({'persons': persons})
 
         return response
 
