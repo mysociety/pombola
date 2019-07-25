@@ -296,4 +296,9 @@ urlpatterns += (
         views.CommitteesPopoloJson.as_view(),
         name='sa-committees-popolo-json'
     ),
+    url(
+        r'^api/national-assembly/popolo.json$',
+        views.NAMembersPopoloJson.as_view(),
+        name='sa-national-assembly-popolo-json'
+    ),
 )

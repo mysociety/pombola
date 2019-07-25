@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.views.generic import ListView
 
-from pombola.core.models import Organisation
+from pombola.core.models import Person, Organisation, Position
 
 
 # Output Popolo JSON suitable for WriteInPublic for any committees that have an
@@ -26,3 +26,30 @@ class CommitteesPopoloJson(ListView):
                 ]
             }
         )
+
+
+# Output Popolo JSON suitable for WriteInPublic for National Assembly members that have an
+# email address.
+class NAMembersPopoloJson(ListView):
+    def render_to_response(self, context, **response_kwargs):
+        return JsonResponse(
+            {
+                "persons": [
+                    {
+                        "id": person.writeinpublic_identifier,
+                        "name": person.name,
+                        "email": person.contacts.filter(kind__slug="email")
+                        .order_by("-preferred")
+                        .first()
+                        .value,
+                        "contact_details": [],
+                    }
+                    for person in context["object_list"]
+                ]
+            }
+        )
+
+    def get_queryset(self):
+        positions = Position.objects.currently_active()
+        person_ids = positions.values_list("person", flat=True).distinct()
+        return Person.objects.filter(id__in=person_ids, contacts__kind__slug="email")
