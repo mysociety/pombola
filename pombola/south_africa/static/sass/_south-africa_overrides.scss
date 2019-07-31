@@ -2943,12 +2943,29 @@ ul.attendance__notes {
     }
 }
 
+#page {
+    .members-interest{
+        h3 {
+            background-color: $colour-lighter-grey;
+            padding: 0.6em;
+        }
+
+        h4 {
+            padding-left: 0.6em;
+        }
+    }
+}
+
 .members-interests {
     .members-interests-filter {
         padding: 1em;
         background-color: $colour_lighter_grey;
         vertical-align: top;
+        margin-bottom: 25px;
 
+        hr {
+            margin-bottom: 25px;
+        }
         label {
             width: 90px;
             display: inline-block;
@@ -2965,6 +2982,29 @@ ul.attendance__notes {
         select, input[type="text"] {
             vertical-align: top;
         }
+    }
+
+    #group-interests-form {
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .group-select {
+        font-size: 0.8em;
+        opacity: 0.8;
+        background-color: $colour_grey;
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .selected {
+        background-color: $colour_terracotta;
+        opacity: 0.95;
+    }
+
+    sup {
+        font-size: 0.8em;
     }
 }
 
@@ -3514,5 +3554,5 @@ ul.attendance__notes {
             color: #333;
         }
     }
-    
+
 }
