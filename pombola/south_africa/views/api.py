@@ -41,7 +41,7 @@ class NAMembersPopoloJson(ListView):
                         "email": person.contacts.filter(kind__slug="email")
                         .order_by("-preferred")
                         .first()
-                        .value,
+                        .value.strip(),
                         "contact_details": [],
                     }
                     for person in context["object_list"]
