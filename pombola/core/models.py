@@ -485,18 +485,6 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin, IdentifierMixin):
     def everypolitician_uuid(self):
         return self.get_identifier('everypolitician')
 
-    # We previously used EveryPolitician popolo to feed the WriteInPublic
-    # install for South Africa. However when we switched away from using
-    # EveryPolitician we needed a replacement identifier. This method
-    # returns the EveryPolitician UUID if available, otherwise it returns
-    # a custom identifier.
-    @property
-    def writeinpublic_identifier(self):
-        if self.everypolitician_uuid:
-            return self.everypolitician_uuid
-        else:
-            return u"peoples-assembly-person-{}".format(self.id)
-
     def additional_names(self, include_name_to_use=False):
         filter_args = {}
         if not include_name_to_use:
