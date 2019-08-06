@@ -52,4 +52,4 @@ class NAMembersPopoloJson(ListView):
     def get_queryset(self):
         positions = Position.objects.currently_active()
         person_ids = positions.values_list("person", flat=True).distinct()
-        return Person.objects.filter(id__in=person_ids, contacts__kind__slug="email")
+        return Person.objects.filter(id__in=person_ids, contacts__kind__slug="email").distinct()
