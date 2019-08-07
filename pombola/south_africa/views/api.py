@@ -45,6 +45,8 @@ class NAMembersPopoloJson(ListView):
                         "contact_details": [],
                         "memberships": [
                             {
+                                "id": "membership-{}".format(person.id),
+                                "person_id": str(person.id),
                                 "role": "member",
                             },
                         ],
