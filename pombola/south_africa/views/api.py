@@ -43,6 +43,11 @@ class NAMembersPopoloJson(ListView):
                         .first()
                         .value.strip(),
                         "contact_details": [],
+                        "memberships": [
+                            {
+                                "role": "member",
+                            },
+                        ],
                     }
                     for person in context["object_list"]
                 ]
