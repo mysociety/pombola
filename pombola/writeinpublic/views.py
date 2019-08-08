@@ -245,7 +245,7 @@ class WriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
         person_slug = self.kwargs['person_slug']
         person = get_object_or_404(Person, slug=person_slug)
         context['person'] = person
-        person_uri = 'https://www.pa.org.za/api/national-assembly/popolo.json#person-{}'.format(person.writeinpublic_identifier)
+        person_uri = 'https://www.pa.org.za/api/national-assembly/popolo.json#person-{}'.format(person.id)
         context['messages'] = self.client.get_messages(person_uri)
         return context
 
