@@ -8,54 +8,40 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 
-from pombola.core.models import Person, Organisation
+from pombola.core.models import Person, Organisation, Position
 
 from .forms import RecipientForm, DraftForm, PreviewForm, ModelChoiceField
 from .client import WriteInPublic
 from .models import Configuration
 
 
-def person_everypolitician_uuid_required(function):
-    def wrap(request, *args, **kwargs):
-        person = Person.objects.get(slug=kwargs['person_slug'])
-        if person.everypolitician_uuid is None:
-            raise Http404("Person is missing an EveryPolitician UUID")
-        else:
-            return function(request, *args, **kwargs)
-    wrap.__doc__ = function.__doc__
-    wrap.__name__ = function.__name__
-    return wrap
-
-
 class PersonAdapter(object):
     def filter(self, ids):
-        return Person.objects.filter(
-            identifiers__scheme='everypolitician',
-            identifiers__identifier__in=ids,
-        )
+        return Person.objects.filter(id__in=ids)
 
     def get(self, object_id):
-        return Person.objects.get(
-            identifiers__scheme='everypolitician',
-            identifiers__identifier=object_id,
-        )
+        return Person.objects.get(id=person_id)
 
     def get_by_id(self, object_id):
         return Person.objects.get(pk=object_id)
 
     def get_form_kwargs(self, step=None):
+        positions = Position.objects.currently_active().filter(
+            organisation__slug='national-assembly'
+        )
+        person_ids = positions.values_list("person", flat=True).distinct()
+        queryset = Person.objects.filter(
+            id__in=person_ids, contacts__kind__slug="email"
+        ).distinct().order_by('legal_name')
         step_form_kwargs = {
             'recipients': {
-                'queryset': Person.objects.filter(
-                    identifiers__scheme='everypolitician',
-                    identifiers__identifier__isnull=False,
-                ),
+                'queryset': queryset,
             },
         }
         return step_form_kwargs.get(step, {})
 
     def object_ids(self, objects):
-        return [p.everypolitician_uuid for p in objects]
+        return [p.id for p in objects]
 
     def get_templates(self):
         return {
@@ -251,7 +237,6 @@ class WriteInPublicMessage(WriteInPublicMixin, TemplateView):
 class WriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
     template_name = 'writeinpublic/messages.html'
 
-    @method_decorator(person_everypolitician_uuid_required)
     def dispatch(self, *args, **kwargs):
         return super(WriteToRepresentativeMessages, self).dispatch(*args, **kwargs)
 
@@ -260,11 +245,8 @@ class WriteToRepresentativeMessages(WriteInPublicMixin, TemplateView):
         person_slug = self.kwargs['person_slug']
         person = get_object_or_404(Person, slug=person_slug)
         context['person'] = person
-        if person.everypolitician_uuid is None:
-            context['messages'] = []
-        else:
-            person_uri = 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/South_Africa/Assembly/ep-popolo-v1.0.json#person-{}'.format(person.everypolitician_uuid)
-            context['messages'] = self.client.get_messages(person_uri)
+        person_uri = 'https://www.pa.org.za/api/national-assembly/popolo.json#person-{}'.format(person.writeinpublic_identifier)
+        context['messages'] = self.client.get_messages(person_uri)
         return context
 
 class WriteToCommitteeMessages(WriteInPublicMixin, TemplateView):
