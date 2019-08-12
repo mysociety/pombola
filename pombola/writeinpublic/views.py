@@ -20,10 +20,10 @@ class PersonAdapter(object):
         return Person.objects.filter(id__in=ids)
 
     def get(self, object_id):
-        return Person.objects.get(id=person_id)
+        return Person.objects.get(id=object_id)
 
     def get_by_id(self, object_id):
-        return Person.objects.get(pk=object_id)
+        return self.get(object_id)
 
     def get_form_kwargs(self, step=None):
         positions = Position.objects.currently_active().filter(
