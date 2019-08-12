@@ -744,6 +744,7 @@ def robots(request):
         'robots.txt',
         {
             'staging': settings.STAGING,
+            'country': settings.COUNTRY_APP,
         },
         context_instance=RequestContext(request),
         content_type='text/plain',
