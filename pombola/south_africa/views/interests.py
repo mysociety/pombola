@@ -321,6 +321,12 @@ class SAMembersInterestsIndex(TemplateView):
     def get_numberbysource_view(self, context):
         release_content_type = ContentType.objects.get_for_model(Release)
 
+        context['categories'] = Category.objects.filter(
+            slug__in=['sponsorships',
+                      'gifts-and-hospitality',
+                      'benefits',
+                      'pensions'])
+
         # numberbysource view - number of declarations by source per category
         context['layout'] = 'numberbysource'
         if context['category'] == 'all' and context['release'] == 'all':

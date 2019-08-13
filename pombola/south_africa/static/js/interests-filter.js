@@ -10,4 +10,8 @@ jQuery (function($) {
         }
     });
     $('#display').trigger("change");
+
+    $('.group-select').on('click', function() {
+        $('#group-interests-form').submit();
+    });
 });
