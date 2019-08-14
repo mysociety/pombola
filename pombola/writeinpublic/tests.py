@@ -143,7 +143,11 @@ class WriteInPublicNewMessageViewTest(TestCase):
             slug='south-africa-assembly'
         )
         person = Person.objects.create()
-        person.identifiers.create(scheme='everypolitician', identifier='test')
+        parliament = OrganisationKind.objects.create(slug='parliament', name='Parliament')
+        na = Organisation.objects.create(slug='national-assembly', name='National Assembly', kind=parliament)
+        person.position_set.create(organisation=na)
+        ck_email, _ = ContactKind.objects.get_or_create(slug='email', name='Email')
+        person.contacts.create(kind=ck_email, value='test@example.com', preferred=True)
         response = self.client.get(reverse('writeinpublic:writeinpublic-new-message'))
         self.assertRedirects(response, reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'recipients'}))
 
@@ -156,6 +160,7 @@ class WriteInPublicNewMessageViewTest(TestCase):
             'write_in_public_new_message-current_step': 'recipients',
             'recipients-persons': person.id,
         })
+
         self.assertRedirects(response, reverse('writeinpublic:writeinpublic-new-message-step', kwargs={'step': 'draft'}))
 
         # GET the draft step
@@ -236,8 +241,7 @@ class PersonAdapterTest(TestCase):
     def test_get(self):
         adapter = PersonAdapter()
         person = Person.objects.create()
-        person.identifiers.create(scheme='everypolitician', identifier='test')
-        self.assertEqual(adapter.get('test'), person)
+        self.assertEqual(adapter.get(person.id), person)
 
 
 class CommitteeAdapterTest(TestCase):
