@@ -9,7 +9,7 @@ from popolo_name_resolver.resolve import (
     EntityName, ResolvePopoloName, recreate_entities
 )
 
-from za_hansard.importers.import_json import ImportJson
+from pombola.za_hansard.importers.import_json import ImportJson
 
 
 class ImportJsonTests(InstanceTestCase):

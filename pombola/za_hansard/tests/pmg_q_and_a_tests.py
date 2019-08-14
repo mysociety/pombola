@@ -6,7 +6,7 @@ from mock import patch
 from django.core.management import call_command
 from django.test import TestCase
 
-from za_hansard.models import Answer, Question
+from pombola.za_hansard.models import Answer, Question
 
 EXAMPLE_QUESTION = {
     'question': 'Why did the chicken cross the road?',
@@ -38,7 +38,7 @@ EXAMPLE_QUESTION = {
 
 class PMGAPITests(TestCase):
 
-    @patch('za_hansard.management.commands.za_hansard_q_and_a_scraper.all_from_api')
+    @patch('pombola.za_hansard.management.commands.za_hansard_q_and_a_scraper.all_from_api')
     def test_new_q_and_a_created(self, fake_all_from_api):
         def api_one_question_and_answer(url):
             if url == 'https://api.pmg.org.za/minister/':
@@ -100,7 +100,7 @@ class PMGAPITests(TestCase):
         self.assertEqual(answer.sayit_section, None)
         self.assertEqual(answer.pmg_api_url, 'http://api.pmg.org.za/example-question/5678/')
 
-    @patch('za_hansard.management.commands.za_hansard_q_and_a_scraper.all_from_api')
+    @patch('pombola.za_hansard.management.commands.za_hansard_q_and_a_scraper.all_from_api')
     def test_only_new_answer_if_question_exists(self, fake_all_from_api):
         def api_one_question_and_answer(url):
             if url == 'https://api.pmg.org.za/minister/':
@@ -163,7 +163,7 @@ class PMGAPITests(TestCase):
         self.assertEqual(question.pmg_api_member_pa_url, 'http://www.pa.org.za/person/groucho-marx/')
         self.assertEqual(question.pmg_api_source_file_url, 'http://example.org/chicken-joke.docx')
 
-    @patch('za_hansard.management.commands.za_hansard_q_and_a_scraper.all_from_api')
+    @patch('pombola.za_hansard.management.commands.za_hansard_q_and_a_scraper.all_from_api')
     def test_nothing_created_if_both_exist(self, fake_all_from_api):
         def api_one_question_and_answer(url):
             if url == 'https://api.pmg.org.za/minister/':
@@ -242,7 +242,7 @@ class PMGAPITests(TestCase):
         self.assertEqual(answer.date, date(2016, 9, 1))
         self.assertEqual(answer.pmg_api_url, 'http://api.pmg.org.za/example-question/5678/')
 
-    @patch('za_hansard.management.commands.za_hansard_q_and_a_scraper.all_from_api')
+    @patch('pombola.za_hansard.management.commands.za_hansard_q_and_a_scraper.all_from_api')
     def test_question_created_if_answer_exists(self, fake_all_from_api):
         def api_one_question_and_answer(url):
             if url == 'https://api.pmg.org.za/minister/':

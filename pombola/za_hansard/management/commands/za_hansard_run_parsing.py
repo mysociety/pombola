@@ -19,8 +19,8 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
 
-from za_hansard.models import Source, SourceUrlCouldNotBeRetrieved
-from za_hansard.parse import ZAHansardParser
+from pombola.za_hansard.models import Source, SourceUrlCouldNotBeRetrieved
+from pombola.za_hansard.parse import ZAHansardParser
 
 class FailedToRetrieveSourceException (Exception):
     pass

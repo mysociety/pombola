@@ -15,11 +15,11 @@ from django.core.management.base import BaseCommand, CommandError
 
 from instances.models import Instance
 
-import za_hansard.chairperson as chair
-from za_hansard.chairperson import strip_tags_from_html
-from za_hansard.datejson import DateEncoder
-from za_hansard.importers.import_json import ImportJson
-from za_hansard.models import PMGCommitteeAppearance, PMGCommitteeReport
+import pombola.za_hansard.chairperson as chair
+from pombola.za_hansard.chairperson import strip_tags_from_html
+from pombola.za_hansard.datejson import DateEncoder
+from pombola.za_hansard.importers.import_json import ImportJson
+from pombola.za_hansard.models import PMGCommitteeAppearance, PMGCommitteeReport
 
 # This scraper relies on certain conventions in the text that's
 # authored by PMG in their committee reports. For example, the first

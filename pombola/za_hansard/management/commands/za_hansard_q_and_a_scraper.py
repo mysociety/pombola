@@ -22,8 +22,8 @@ from django.core.exceptions import MultipleObjectsReturned
 
 import requests
 
-from za_hansard.models import Question, Answer, QuestionPaper
-from za_hansard.importers.import_json import ImportJson
+from pombola.za_hansard.models import Question, Answer, QuestionPaper
+from pombola.za_hansard.importers.import_json import ImportJson
 from instances.models import Instance
 
 from speeches.models import Section, Speaker, Speech

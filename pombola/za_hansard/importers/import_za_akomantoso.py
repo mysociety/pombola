@@ -5,7 +5,7 @@ import re
 
 from lxml import etree
 
-from za_hansard.importers.import_base import ImportZAMixin
+from pombola.za_hansard.importers.import_base import ImportZAMixin
 from speeches.importers.import_akomantoso import ImportAkomaNtoso
 from speeches.models import Section, Speech
 

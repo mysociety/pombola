@@ -4,9 +4,9 @@ import pytz
 import time
 import sys
 
-from za_hansard.importers.import_za_akomantoso import ImportZAAkomaNtoso
+from pombola.za_hansard.importers.import_za_akomantoso import ImportZAAkomaNtoso
 from speeches.models import Section, Tag, Speech
-from za_hansard.models import Source
+from pombola.za_hansard.models import Source
 from instances.models import Instance
 
 from django.conf import settings

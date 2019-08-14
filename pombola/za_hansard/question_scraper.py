@@ -16,7 +16,7 @@ import parslepy
 from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
 
-from za_hansard.models import Question, QuestionPaper
+from pombola.za_hansard.models import Question, QuestionPaper
 
 # from https://github.com/scraperwiki/scraperwiki-python/blob/a96582f6c20cc1897f410d522e2a5bf37d301220/scraperwiki/utils.py#L38-L54
 # Copied rather than included as the scraperwiki __init__.py was having trouble

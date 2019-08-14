@@ -1,5 +1,5 @@
 from speeches.management.import_commands import ImportCommand
-from za_hansard.importers.import_json import ImportJson
+from pombola.za_hansard.importers.import_json import ImportJson
 
 class Command(ImportCommand):
     importer_class = ImportJson

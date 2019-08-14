@@ -7,6 +7,7 @@ ALL_OPTIONAL_APPS = ('pombola.hansard',
                      'pombola.spinner',
                      'pombola.bills',
                      'pombola.wordcloud',
+                     'pombola.za_hansard',
                      )
 
 APPS_REQUIRED_BY_SPEECHES = ('django_select2',

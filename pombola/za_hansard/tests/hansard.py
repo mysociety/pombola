@@ -11,9 +11,9 @@ from django.conf import settings
 
 from instances.models import Instance
 
-from za_hansard.models import Source
+from pombola.za_hansard.models import Source
 
-from za_hansard.parse import ZAHansardParser
+from pombola.za_hansard.parse import ZAHansardParser
 from lxml import etree
 
 import os

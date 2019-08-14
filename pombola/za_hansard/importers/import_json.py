@@ -3,7 +3,7 @@ import json
 import re
 from urlparse import urlsplit
 
-from za_hansard.importers.import_base import ImportZAMixin
+from pombola.za_hansard.importers.import_base import ImportZAMixin
 from speeches.importers.import_base import ImporterBase
 from speeches.models import Section, Speech, Tag
 

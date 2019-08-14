@@ -9,7 +9,7 @@ from instances.tests import InstanceTestCase
 from popolo_name_resolver.resolve import EntityName, recreate_entities
 
 from speeches.models import Speaker
-from za_hansard.importers.import_za_akomantoso import ImportZAAkomaNtoso, title_case_heading
+from pombola.za_hansard.importers.import_za_akomantoso import ImportZAAkomaNtoso, title_case_heading
 
 import logging
 logging.disable(logging.WARNING)

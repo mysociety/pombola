@@ -3,7 +3,7 @@
 import calendar
 
 from speeches.models import Section
-from za_hansard.models import Source
+from pombola.za_hansard.models import Source
 
 from django.core.management.base import BaseCommand
 
