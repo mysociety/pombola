@@ -1,0 +1,130 @@
+[
+ {
+  "answer_type": "W", 
+  "askedby": "D A Worth", 
+  "date": "2013-11-01", 
+  "identifier": "CW647E", 
+  "oral_number": null, 
+  "parent_section_titles": [
+   "Questions", 
+   "Questions asked to the Minister of Public Works"
+  ], 
+  "parliament": 4, 
+  "pmg_api_member_pa_url": null,
+  "pmg_api_source_file_url": null,
+  "pmg_api_url": null,
+  "questionto": "Minister of Public Works", 
+  "speeches": [
+   {
+    "date": "2013-11-01", 
+    "intro": "437. Mr D A Worth (DA-FS) to ask the Minister of Public Works:", 
+    "personname": "D A Worth", 
+    "source_url": "http://www.parliament.gov.za/live/commonrepository/Processed/20131107/548302_1.pdf", 
+    "tags": [
+     "question"
+    ], 
+    "text": "Whether his department will repair the damaged concrete and wire fence around the Tempe Military Base in Lucas Steyn Street, Heuwelsig Suburb, Mangaung in the Free State which (a) poses a security and safety risk and (b) has received many complaints from concerned citizens; if not, why not; if so, (i) when is it anticipated that his department will effect the necessary repairs and (ii) what are the further relevant details?", 
+    "translated": false, 
+    "type": "question"
+   }
+  ], 
+  "title": "CW647E - 01 November 2013", 
+  "written_number": 437
+ }, 
+ {
+  "answer_type": "W", 
+  "askedby": "K A Sinclair", 
+  "date": "2013-10-25", 
+  "identifier": "CW611E", 
+  "oral_number": null, 
+  "parent_section_titles": [
+   "Questions", 
+   "Questions asked to the Minister of Labour"
+  ], 
+  "parliament": 4, 
+  "pmg_api_member_pa_url": null,
+  "pmg_api_source_file_url": null,
+  "pmg_api_url": null,
+  "questionto": "Minister of Labour", 
+  "speeches": [
+   {
+    "date": "2013-10-25", 
+    "intro": "416. Mr K A Sinclair (COPE-NC) to ask the Minister of Labour: [223] (Interdepartmental transfer \u2013 01/11)", 
+    "personname": "K A Sinclair", 
+    "source_url": "http://www.parliament.gov.za/live/commonrepository/Processed/20131107/548302_1.pdf", 
+    "tags": [
+     "question"
+    ], 
+    "text": "Whether the National Economic Development and Labour Council (Nedlac) is fulfilling its strategic objectives in enhancing and supporting economic development and growth in South Africa; if not, why not; if so, what are the relevant details?", 
+    "translated": false, 
+    "type": "question"
+   }
+  ], 
+  "title": "CW611E - 25 October 2013", 
+  "written_number": 416
+ }, 
+ {
+  "answer_type": "W", 
+  "askedby": "K A Sinclair", 
+  "date": "2013-10-25", 
+  "identifier": "CW616E", 
+  "oral_number": null, 
+  "parent_section_titles": [
+   "Questions", 
+   "Questions asked to the Minister of Trade and Industry"
+  ], 
+  "parliament": 4, 
+  "pmg_api_member_pa_url": null,
+  "pmg_api_source_file_url": null,
+  "pmg_api_url": null,
+  "questionto": "Minister of Trade and Industry", 
+  "speeches": [
+   {
+    "date": "2013-10-25", 
+    "intro": "421. Mr K A Sinclair (COPE-NC) to ask the Minister of Trade and Industry: [228] (Interdepartmental transfer \u2013 01/11)", 
+    "personname": "K A Sinclair", 
+    "source_url": "http://www.parliament.gov.za/live/commonrepository/Processed/20131107/548302_1.pdf", 
+    "tags": [
+     "question"
+    ], 
+    "text": "(1) What lessons have been learnt from a certain automotive company\u2019s experience (name furnished) regarding the relationship between management and workers\u2019 unions to secure future economic stability and development; (2) whether his department has any plans to improve such relations to benefit the economy; if not, why not; if so, what plans?", 
+    "translated": false, 
+    "type": "question"
+   }
+  ], 
+  "title": "CW616E - 25 October 2013", 
+  "written_number": 421
+ }, 
+ {
+  "answer_type": "W", 
+  "askedby": "M J R de Villiers", 
+  "date": "2013-10-25", 
+  "identifier": "CW603E", 
+  "oral_number": null, 
+  "parent_section_titles": [
+   "Questions", 
+   "Questions asked to the Minister of Public Works"
+  ], 
+  "parliament": 4, 
+  "pmg_api_member_pa_url": null,
+  "pmg_api_source_file_url": null,
+  "pmg_api_url": null,
+  "questionto": "Minister of Public Works", 
+  "speeches": [
+   {
+    "date": "2013-10-25", 
+    "intro": "409. Mr M J R de Villiers (DA-WC) to ask the Minister of Public Works: [215] (Interdepartmental transfer \u2013 01/11)", 
+    "personname": "M J R de Villiers", 
+    "source_url": "http://www.parliament.gov.za/live/commonrepository/Processed/20131107/548302_1.pdf", 
+    "tags": [
+     "question"
+    ], 
+    "text": "(a) What were the reasons for a cut back on the allocation for the Expanded Public Works Programme to municipalities in the 2013-14 financial year and (b) what effect will this have on (i) job creation and (ii) service delivery?", 
+    "translated": false, 
+    "type": "question"
+   }
+  ], 
+  "title": "CW603E - 25 October 2013", 
+  "written_number": 409
+ }
+]

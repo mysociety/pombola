@@ -1,0 +1,1477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Parliament Content</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" /> 
+
+
+	<meta http-equiv="X-UA-Compatible" content="chrome=IE8">
+	<link href="/live/2013/css/css_base.css" rel="stylesheet" type="text/css" />
+    <link href="/live/2013/css/css_jquery_base.css" rel="stylesheet" type="text/css" />
+	<link href="styles.css" rel="stylesheet" type="text/css">
+    
+	<script type="text/javascript" src="/live/2013/js/jquery-1.7.2.min.js"></script>
+
+	<!-- tabbing -->
+	<script src="/live/2013/js/jquery.ui.core.min.js"></script>
+	<script src="/live/2013/js/jquery.ui.widget.min.js"></script>
+    <script src="/live/2013/js/jquery.ui.tabs.min.js"></script>
+    <!-- end Tabbinng -->
+	
+	<script defer="defer" type="text/javascript" src="/live/2013/js/jquery.flexslider.js"></script>
+    <!-- Optional FlexSlider Additions (USED) -->
+    <script type="text/javascript" src="/live/2013/js/jquery.easing.js"></script>
+    <script type="text/javascript" src="/live/2013/js/jquery.mousewheel.js"></script>
+	
+	<!-- default text remover -->
+	<script type="text/javascript">
+    $(window).load(function() {
+        $('.input-search').each(function() {
+            var default_value = this.value;
+            $(this).focus(function() {
+                if(this.value == default_value) {
+                    this.value = '';
+                }
+            });
+            $(this).blur(function() {
+                if(this.value == '') {
+                    this.value = default_value;
+                }
+            });
+        });
+    });
+    </script>
+	<!-- End default text remover -->
+	
+	<!-- ajax-content-replacer -->
+	<script type="text/javascript">
+	$(window).load(function() {
+		
+		$(".hover-effect-me").on({
+			mouseover: function() {
+				$(this).addClass("hovering");
+				//alert("enter")
+			},
+			mouseout: function(){
+				$(this).removeClass("hovering");
+				//alert("exit")
+			}
+		});
+		$(document.body).on("click", "a.ajax-content-replacer", function() {
+			var contentID = "";
+			var contentID = "contentID="+$(this).attr("id-to-load");
+			var pathToLoad = $(this).attr("href");
+			if (contentID != ""){
+				//alert(contentID);
+				//$(this).parent().parent().parent().children(".replace-area").prepend(contentID);
+				$(this).parents(".layout-row").children(".replace-area").empty().load(pathToLoad+"?"+contentID, function(response, status, xhr) {  
+					if (status == "error") {    
+						var msg = "Couldn't load this content. We'll try to fix this as soon as possible.";    
+						$(this).parents(".layout-row").children(".replace-area").empty().html(msg);
+						alert(response);
+						alert(msg + xhr.status + " " + xhr.statusText);  																																											  					}
+				});
+			};
+			return false;
+		});		
+	});
+	</script>
+<!-- End ajax-content-replacer -->
+
+<!-- gallery color box -->
+    <script src="/live/2013/js/jquery.colorbox-min.js"></script>
+    <script>
+			$(document).ready(function(){
+				//Examples of how to assign the ColorBox event to elements
+				$(".group1").colorbox({rel:'group1'});
+				$(".youtube").colorbox({iframe:true, innerWidth:425, innerHeight:344});
+				
+			});
+		</script>
+<!-- gallery color box -->
+<!-- select style -->
+	<link href="/live/2013/css/core-ui-select.css" rel="stylesheet" type="text/css">
+    <link href="/live/2013/css/jquery.scrollpane.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/live/2013/js/jquery.scrollpane.js"></script>
+    <script type="text/javascript" src="/live/2013/js/jquery.core-ui-select.js"></script>
+    <script>
+    $(window).load(function () {
+        $('#optiongroup').coreUISelect({
+            jScrollPane : {
+                verticalDragMinHeight: 20,
+                verticalDragMaxHeight: 20,
+                showArrows : true
+            }
+        });
+    });
+	</script>
+<!-- ends select style -->
+</head>
+<body>
+<div class="top-bg">
+	<div id="header-holder" class="layout-max-width auto-margin-left-right">
+    	<div class="layout-row">
+            <div class="site-tools">
+				<!-- Begin Container #464 -->
+<div id="Xcontainer8" class="Xcontainerfreeform">
+<script type="text/javascript">
+	$(function() {
+	// bind change event to select
+		$('#optiongroup').bind('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+		});
+	});
+</script>
+<form name="quickSearch" method="GET" action="/live/content.php">
+                    <label>SITE TOOLS</label>
+                    <span class="select-styled">
+						<select size="1" name="quickLinkURL" id="optiongroup">
+							<option>-- Quicklinks --</option>
+							<option value="http://webmail.parliament.gov.za">Parliament Webmail</option>
+<option value="http://www.parliament.gov.za/live/content.php?Category_ID=134">Careers</option>
+<option value="http://faranani.parliament.gov.za/main/home.aspx">Faranani (Parliament Intranet)</option>
+<option value="content.php?Item_ID=3185">Library Resources Page</option>
+<option value="http://www.parliament.gov.za/live/content.php?Item_ID=1687">Library VPN Access: About</option>
+<option value="http://vpn.parliament.gov.za">Library VPN Access</option>
+<option value="content.php?Item_ID=276">Live Streaming</option>
+<option value="content.php?Item_ID=448">Procurement</option>
+<option value="/live/content.php?Item_ID=59">Public Participation</option>
+<option value="/live/content.php?Item_ID=45">Contact Us</option>
+						</select>
+                    </span>
+                    <a class="print-ico-btn" href="" onclick="javascript: window.open ('contentpopup.php?Item_ID=&Category_ID=236', 'popup2642', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,copyhistory=no,width=625,height=310'); " title="Print this page">print</a><a class="a-ico-btn" title="Switch between font sizes" href="fontsetting.php?Size=3&Dest_URL=%2Flive%2Fcontent.php%3FCategory_ID%3D236%26DocumentStart%3D10">a</a><!--<a class="mail-ico-btn" title="Email this page to a friend" href="#" onclick="javascript: window.open ('pagebuilder/components/ensight/content_toolbox_email.php?Item_ID=&Language=-99&Version=-99&Category_ID=236', 'popup9455', 'toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,resizable=yes,copyhistory=no,width=625,height=310');">mail</a>-->
+					<span><input class="input-search" name="SearchIncKeyword" type="text" value="-- Quick Search --"/><input class="submit-btn" name="Submit" type="submit" value=" " />
+					<input type="hidden" name="Item_ID" value="231" />
+					<input type="hidden" name="HasSearched" value="1" />
+					<input type="hidden" name="Simple" value="1" />
+					<input type="hidden" name="Session_ID" value="2981106ada31bf45b1eb1f565c787aba" /></span>
+                    <a href="content.php?Item_ID=231&KeywordQuery="><em>Advanced</em></a>
+                </form></div>
+<!-- End Container -->
+            </div>
+        </div>
+    	<div class="layout-row">
+        	<a href="/"><img src="/live/2013/upload/setup_files/parliment-logo.jpg" width="277" height="136" /></a>
+        </div>
+        <div class="layout-row">
+        	<!-- menu -->
+			<!-- Begin Container #465 -->
+<div id="Xcontainer9" class="Xcontainerfreeform">
+<!-- Menu -->
+	<script type="text/javascript" src="/live/2013/js/hoverIntent.js"></script>
+    <script type="text/javascript" src="/live/2013/js/superfish.js"></script>
+	<script type="text/javascript">
+    jQuery(function(){
+		jQuery("ul.sf-menu").superfish({
+            autoArrows:  false,
+            dropShadows: false,
+            delay: 300,
+            disableHI: true,
+            speed:  "150"
+        });		
+    });
+	
+	$(window).load(function(){
+		$("ul.sf-menu ul").each(
+		  function() {
+			var elem = $(this);
+			if (elem.children().length == 0) {
+			  elem.remove();
+			}
+		  }
+		);
+		
+		$(".sf-menu a").each(
+		  function() {
+			var elem = $(this);
+			hrefval = elem.attr("href");
+			if (hrefval == '') {
+				//elem.removeAttr("href");
+				elem.attr("class","no-link");
+				elem.parent().attr("class","no-link");
+				
+			}
+			
+			/*if (elem.children().length == 0) {
+			  elem.remove();
+			}*/
+		  }
+		);
+
+		
+		
+	});
+    </script>
+<!-- End Menu -->
+<ul class="sf-menu"><li>
+<div class="menu-item">
+<a href="monster.php?Src=popup_menu&URL=index.php"><B>HOME<BR/></B></a>
+</div>
+</li>
+<li>
+<div class="menu-item">
+<a href="/live/content.php?Category_ID=3"><B>OUR<BR/>PARLIAMENT  </B></a>
+</div>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=10">Who we are</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=11">Our constitution</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=12">Our vision</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=13">Our values</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=14">Our people</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=15">Our emblem and symbols</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=17">What Parliament does</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=18">A Beginner's Guide</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=19">Legislation</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=20">Oversight</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=21">Public Participation</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=23">Co-operative government</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=22">International Participation</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=174">Strategic Plan of Parliament</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=24">Elections</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=25">How Parliament is structured</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=26">National Assembly</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=147">NA Rules</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=148">State of Parties in the NA</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=149">NA Guide to Procedure</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=150">Procedural Developments in the NA</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=27">National Council of Provinces</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=153">NCOP Rules</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=154">State of Parties in the NCOP</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=29">Members of Parliament</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=28">Committees</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=30">Powers & Responsibilities</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=40">Parliament's photos</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=41">Outside Parliament</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=42">Inside Parliament</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=43">Parliamentary Art</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=32">Visit Parliament</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=39">Directions</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=35">Arrange a tour</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=157">Attending a debate</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=37">Contact us</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="menu-item">
+<a href="/live/content.php?Category_ID=4"><B>BUSINESS<BR/>OF  PARLIAMENT  </B></a>
+</div>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=45">What's on</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=333">Press Release</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="">News</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=252">Latest News</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=158">Media Management</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=56">Projects and Events</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=162">Parliamentary papers</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=238">Order Papers</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=228">Minutes of Proceedings</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=497">Minutes of Committee Meetings</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=227">Announcements, Tablings & Reports</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=234">Question Papers</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=236">Internal Question Papers</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=71">Legislation</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=72">Bills before Parliament</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=325">Status on Section 76 Bills Before the NCOP</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=73">Final Mandates</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=255">Negotiating Mandates</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=74">Acts of Parliament</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=77">Committees</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=78">NA Committee Business</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=79">NCOP Committee Business</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=80">Joint Committee Business</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=81">Committees in Full</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=84">Ad-hoc Committee Business</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=317">Calls for Submissions and Nominations</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=87">Oversight</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=326">Interventions by NCOP</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=320">Office on Inst. Supporting Democracy</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=132">Parliamentary Service</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=134">Careers at Parliament</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=225">Procurement</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="menu-item">
+<a href="/live/content.php?Category_ID=5"><B>OFFICE-BEARERS<BR/>&  MEMBERS  </B></a>
+</div>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=102">Leader of Government Business</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=167">Ministers</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=168">Deputy Ministers</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=169">Chief Whips</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=103">Whips</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=104">Committee chairpersons</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=97">All members</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=98">Members of National Assembly</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=99">Members of the NCOP</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=106">NCOP provincial delegation</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=186">Eastern Cape</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=188">Free State</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=187">Gauteng</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=189">Kwa-Zulu Natal</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=191">Limpopo</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=193">Mpumalanga</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=194">Northern Cape</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=192">North West</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=190">Western Cape</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=83">Code of conduct</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=107">Political party list</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="menu-item">
+<a href="/live/content.php?Category_ID=6"><B>PARTICIPATE<BR/>IN  PARLIAMENT  </B></a>
+</div>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=112">Forums</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=136">Meetings</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=170">Parliamentary Democracy Offices</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=53">Submissions</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=54">Petitions</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=55">Contact your member</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=57">Media</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="menu-item">
+<a href="/live/content.php?Category_ID=7"><B>PUBLICATIONS<BR/></B></a>
+</div>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=119">Hansard</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=241">Hansard Replies</a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=246">NA Question and Replies</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=248">NA Executive Replies to Questions</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=249">NCOP Executive Replies to Questions</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=120">Business Publications</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=560">Insession</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=561">Oversight Forum</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=173">Educational Publications</a>
+<ul>
+</ul>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=122">Parliamentary library</a>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- End Container -->
+            <!-- End menu -->
+        </div>
+    </div>
+	
+    <div id="body-holder" class="layout-max-width auto-margin-left-right shadow-2">
+		<div class="makeh1work" style="width:auto; margin-left:auto; margin-right:auto; padding-left:20px; padding-right:20px;">
+			<!-- Begin Container #466 -->
+<div id="Xcontainer4" class="Xcontainerfreeform">
+<!-- Content item component -->
+<P>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD vAlign=top>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD class=navContent_tiler>&nbsp;</TD>
+<TD width=115><IMG height=15 src="http://www.parliament.gov.za/live/images/nav_content_grad.jpg" width=115></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD vAlign=top height=60><IMG height=10 src="http://www.parliament.gov.za/live/images/spacer.gif" width=1><BR><SPAN class=breadCrumbs><img src="/content/hd_papers~1.gif" width="250" height="22" border="0" align="" alt="" hspace="0" vspace="0" /><BR><!-- Breadcrumbs component -->
+You are Here:  &gt; <A href="/live/content.php?Category_ID=4" class="breadCrumbs">Business Of Parliament</A>
+ &gt; <A href="/live/content.php?Category_ID=162" class="breadCrumbs">Parliamentary papers</A>
+ &gt; Internal Question Papers</SPAN></TD>
+<TD vAlign=top width=115><IMG height=40 src="http://www.parliament.gov.za/live/images/nav_content_tr.jpg" width=115></TD></TR></TBODY></TABLE></TD>
+<TD class=content_tiler vAlign=top width=1><IMG height=15 src="http://www.parliament.gov.za/live/images/nav_1pixel.gif" width=1></TD>
+<TD vAlign=top width=257><IMG height=92 src="http://www.parliament.gov.za/live/images/content_image.jpg" width=257></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD vAlign=top align=left>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD vAlign=center><B class=darker>LATEST INTERNAL QUESTION PAPERS</B></TD>
+<TD vAlign=top width=14><IMG height=29 src="http://www.parliament.gov.za/live/images/contetn_sep_short.jpg" width=14></TD>
+<TD vAlign=top align=right width=225><IMG height=29 src="http://www.parliament.gov.za/live/images/table_page_end_t.jpg" width=49></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD width="99%">
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD>&nbsp;Click on View Document to see more details	.
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tableOrange">
+<tr>
+	<td class="white"><img src="images/spacer.gif" width="1" height="3"></td>
+</tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableOrange_sep">
+<tr>
+	          <td style="height:21px; width:300px" height="21px" valign="middle" class="table_col_bg">Document Name</td>
+          <td width="3">&nbsp;</td>
+		<td style="height:21px; width:100px"" height="21px" valign="middle" nowrap class="table_col_bg">Date</td><td width="3">&nbsp;</td>
+		<td style="height:21px;" height="21px" valign="middle" nowrap class="table_col_bg">House</td><td width="3">&nbsp;</td>
+		<td style="height:21px;" height="21px" valign="middle" nowrap class="table_col_bg">Language</td>	<td width="3">&nbsp;</td>
+	<td style="height:21px; width:200px" height="21px" valign="middle" nowrap class="table_col_bg">View Details</td>
+</tr>
+
+<tr bgcolor="#FFFFFF">
+	<td height="10" colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr bgcolor="#FFFFFF"><td height="30" valign="middle" class="pad">QC130826.i25A</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">26 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Council of Provinces</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">Afrikaans</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QC130826.i25A<br />Date Published : 26 August 2013<br />House : National Council of Provinces<br />Language : Afrikaans<br />Document Number : 537314<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130902/537314_1.pdf">View Document</a>&nbsp;&nbsp;(68.56 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr class="tdalt"><td height="30" valign="middle" class="pad">QC130826.i25E</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">26 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Council of Provinces</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">English</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QC130826.i25E<br />Date Published : 26 August 2013<br />House : National Council of Provinces<br />Language : English<br />Document Number : 537316<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130902/537316_1.pdf">View Document</a>&nbsp;&nbsp;(68.80 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr bgcolor="#FFFFFF"><td height="30" valign="middle" class="pad">QN130823.i28E</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">23 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Assembly</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">English</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QN130823.i28E<br />Date Published : 23 August 2013<br />House : National Assembly<br />Language : English<br />Document Number : 536598<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130823/536598_1.pdf">View Document</a>&nbsp;&nbsp;(1,264.42 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr class="tdalt"><td height="30" valign="middle" class="pad">QN130823.i28A</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">23 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Assembly</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">Afrikaans</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QN130823.i28A<br />Date Published : 23 August 2013<br />House : National Assembly<br />Language : Afrikaans<br />Document Number : 536599<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130823/536599_1.pdf">View Document</a>&nbsp;&nbsp;(1,311.13 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr bgcolor="#FFFFFF"><td height="30" valign="middle" class="pad">QC130823.i24E</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">23 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Council of Provinces</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">English</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QC130823.i24E<br />Date Published : 23 August 2013<br />House : National Council of Provinces<br />Language : English<br />Document Number : 536605<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130826/536605_1.pdf">View Document</a>&nbsp;&nbsp;(268.79 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr class="tdalt"><td height="30" valign="middle" class="pad">QC130823.i24A</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">23 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Council of Provinces</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">Afrikaans</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QC130823.i24A<br />Date Published : 23 August 2013<br />House : National Council of Provinces<br />Language : Afrikaans<br />Document Number : 536607<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130826/536607_1.pdf">View Document</a>&nbsp;&nbsp;(278.41 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr bgcolor="#FFFFFF"><td height="30" valign="middle" class="pad">QN130816.i27E</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">16 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Assembly</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">English</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QN130816.i27E<br />Date Published : 16 August 2013<br />House : National Assembly<br />Language : English<br />Document Number : 532213<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130820/532213_1.pdf">View Document</a>&nbsp;&nbsp;(1,523.84 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr class="tdalt"><td height="30" valign="middle" class="pad">QC130816.i23A</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">16 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Council of Provinces</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">Afrikaans</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QC130816.i23A<br />Date Published : 16 August 2013<br />House : National Council of Provinces<br />Language : Afrikaans<br />Document Number : 533705<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130820/533705_1.pdf">View Document</a>&nbsp;&nbsp;(222.96 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr bgcolor="#FFFFFF"><td height="30" valign="middle" class="pad">QC130816.i23E</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">16 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Council of Provinces</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">English</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QC130816.i23E<br />Date Published : 16 August 2013<br />House : National Council of Provinces<br />Language : English<br />Document Number : 533707<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130820/533707_1.pdf">View Document</a>&nbsp;&nbsp;(217.37 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr class="tdalt"><td height="30" valign="middle" class="pad">QN130816.i27A</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">16 August 2013</td><td valign="middle">&nbsp;</td><td height="30" valign="middle" class="pad">National Assembly</td><td valign="middle">&nbsp;</td><td height="30" align="center" valign="middle" class="pad">Afrikaans</td><td valign="middle">&nbsp;</td>
+				<td align="left" valign="middle" class="pad">
+				
+				<table border="0" cellpadding="0" cellspacing="0"  onMouseOver="popup('View Document','Document Summary: <br/><b>QUEST_INTE</b><br/>Document Name : QN130816.i27A<br />Date Published : 16 August 2013<br />House : National Assembly<br />Language : Afrikaans<br />Document Number : 531886<br /><p>Click on View Document to access this document.</p>',0,0)" onMouseOut="kill()">
+				<tr>
+					<td valign="bottom">
+					<img src="images/icon_pdf.gif" border="0">
+					</td>
+					<td valign="top">
+					&nbsp;&nbsp;<a href="commonrepository/Processed/20130819/531886_1.pdf">View Document</a>&nbsp;&nbsp;(1,654.28 kb)
+					</td>
+				</tr>
+				</table>
+				
+				</td>
+			  </tr><tr bgcolor="#FFFFFF">
+	<td colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr><tr bgcolor="#FFFFFF" height="50px" valign="middle">
+	<td height="10" colspan="11" valign="top">
+	
+	<table border="0" style="width:100%">
+	<tr>
+		<td width="60%" align="left" valign="middle" style="vertical-align:top;" >
+		
+		<table border="0" width="100%" style="height:26px" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td valign="middle" style="" width="70%" class="pad">
+							Displaying 11 &ndash; 20 of the most recent 849							</td>
+			<td valign="middle" width="">
+			&nbsp;&nbsp;|&nbsp;&nbsp;<b><a style='text-weight:bolder;' href="content.php?Category_ID=236&DocumentStart=10&DocumentStart=0">Previous</a></b>    			    &nbsp;&nbsp;|&nbsp;&nbsp;<b><a style='text-weight:bolder;' href="content.php?Category_ID=236&DocumentStart=10&DocumentStart=20">Next</a></b>&nbsp;&nbsp;|&nbsp;&nbsp;
+    						</td>
+			<td valign="top"  style="vertical-align:top;"><!-- <a href="content.php?Category_ID=236&DocumentStart=10&ShowAll=1"><img src="images/but_All.gif" width="50" height="19" border="0"></a> --></td>
+		</tr>
+		</table>
+		
+	</td>
+	<td align="right" valign="middle" style=" height:13px" colspan="4">
+		
+		<div id="filterdisplay" style="z-order:-2">
+		<table border="0" cellpadding="1" cellspacing="0" style="width:100%;" border="1"> 
+		<tr>
+			<td style="height:13px;" valign="middle"><b>Filter results by : </b></td>
+			<td style=""  align="right" >
+			<Select style="width:70px" id="yearDD" onchange="">
+			<option value="DontShow">- Year -</option>
+			<option value="ShowAll">All years</option>
+								<option value="2013">2013</option>
+										<option value="2012">2012</option>
+										<option value="2011">2011</option>
+										<option value="2010">2010</option>
+										<option value="2009">2009</option>
+										<option value="2008">2008</option>
+										<option value="2007">2007</option>
+										<option value="2006">2006</option>
+										<option value="2005">2005</option>
+										<option value="2004">2004</option>
+										<option value="2003">2003</option>
+										<option value="2002">2002</option>
+										<option value="2001">2001</option>
+										<option value="2000">2000</option>
+										<option value="1999">1999</option>
+										<option value="1998">1998</option>
+										<option value="1997">1997</option>
+										<option value="1996">1996</option>
+										<option value="1995">1995</option>
+										<option value="1994">1994</option>
+										<option value="1993">1993</option>
+										<option value="1992">1992</option>
+										<option value="1991">1991</option>
+										<option value="1990">1990</option>
+										<option value="1989">1989</option>
+										<option value="1988">1988</option>
+										<option value="1987">1987</option>
+										<option value="1986">1986</option>
+										<option value="1985">1985</option>
+										<option value="1984">1984</option>
+										<option value="1983">1983</option>
+										<option value="1982">1982</option>
+										<option value="1981">1981</option>
+										<option value="1980">1980</option>
+										<option value="1979">1979</option>
+										<option value="1978">1978</option>
+										<option value="1977">1977</option>
+										<option value="1976">1976</option>
+										<option value="1975">1975</option>
+										<option value="1974">1974</option>
+										<option value="1973">1973</option>
+										<option value="1972">1972</option>
+										<option value="1971">1971</option>
+										<option value="1970">1970</option>
+								</select>&nbsp;&nbsp;
+			</td>
+			
+			<!--<td  width="22px" valign="bottom"><a  href="#"><img border="0" src="images/but_go.gif" onclick="
+			if ( document.getElementById('yearDD').value != 'DontShow') {
+				location.href='/live/content.php?Category_ID=236&DocumentStart=10&fYear=' + document.getElementById('yearDD').value + '&fMonth=' + document.getElementById('monthDD').value;
+			} else{
+				alert('Please select a year');
+			} 
+			"/></a>&nbsp;&nbsp;</td>-->
+		
+		<div id="DIVmonthDD"  style="visibility: visible">
+			<td align="right" style="height:13px">
+			<Select style="width:80px;" id="monthDD">
+				<option value="DontShow">- Months -</option>
+				<option value="DontShow">All months</option>
+				
+										<option value="1">January</option>
+												<option value="2">February</option>
+												<option value="3">March</option>
+												<option value="4">April</option>
+												<option value="5">May</option>
+												<option value="6">June</option>
+												<option value="7">July</option>
+												<option value="8">August</option>
+												<option value="9">September</option>
+												<option value="10">October</option>
+												<option value="11">November</option>
+												<option value="12">December</option>
+										
+			</select>&nbsp;&nbsp;</td>
+			<td   width="13px" valign="middle"><a  href="#"><img border="0" src="images/but_go.gif" onclick="
+			if ( document.getElementById('yearDD').value != 'DontShow') {
+				location.href='/live/content.php?Category_ID=236&DocumentStart=10&fYear=' + document.getElementById('yearDD').value + '&fMonth=' + document.getElementById('monthDD').value;
+			} else{
+				alert('Please select a year');
+			} 
+			"/></a>&nbsp;&nbsp;
+			</td>
+		</tr>
+		</table>
+		</div>
+		
+		</td>
+	</tr>
+	</table>
+	</td>
+</tr>	
+<tr bgcolor="#FFFFFF">
+	<td height="10" colspan="11" valign="top">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="3" colspan="11" valign="middle" class="tableSmlstHr"></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+</TD></TR></TBODY></TABLE>
+<P><form name="documentKeywordForm" method="GET" action="/live/content.php?SearchExclKeyword=&SearchPhrase=&BackYears=100&StartDate_Day=00&StartDate_Month=00&StartDate_Year=0000&StartDate=&EndDate_Day=00&EndDate_Month=00&EndDate_Year=0000&EndDate=&ContentType_Event=0&ContentType_Member=0&ContentType_Committee=0&ContentType_Other=0&x=37&y=14">
+
+
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td height="20"><b class="brownHeading">Keyword Search</b></td>
+</tr>
+</table>
+
+<input type="hidden" name="Sub_QUEST_INTE" value="1" />
+<input type="hidden" name="ContentType_Document" value="1" />
+<input type="hidden" name="Session_ID" value="2981106ada31bf45b1eb1f565c787aba" />
+<input type="hidden" name="Item_ID" value="231" />
+<input type="hidden" name="HasSearched" value="1" />
+
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<!--<tr>
+	<td height="20" valign="top"><p><b class="brownHeading">Document Search </b></p></td>
+</tr>-->
+<tr>
+	<td height="30">
+		<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="60"><b>Keyword</b></td>
+			<td align="center">
+      <input type="text" name="SearchIncKeyword"  id = "DocumentKeywordSearch" value=""></td>
+			<!--<input type="hidden" name="fYear" value="" />
+			<input type="hidden" name="fMonth" value="" />-->
+			<!--td width="60" align="center">Sector</td>
+			<td align="center"><select name="select2" style="width:150px;">
+			<option>Rob, please provide options</option>
+			</select></td>
+            -->
+		<!--<td width="80" align="center"><a href="#"><img src="images/but_Search.gif" width="70" height="19" border ="0" onclick="location.href='/live/content.php?Category_ID=236&DocumentStart=10&DocumentKeywordSearch=' + document.getElementById('DocumentKeywordSearch').value + '&fYear=' + document.getElementById('yearDD').value + '&fMonth=' + document.getElementById('monthDD').value; " /></a></td>-->
+		<td width="80" align="center"><input type="image" src="/live/images/but_Search.gif" width="70" height="19" border ="0" /></a></td>
+		</tr>
+		</table>
+		<table border="0" cellpadding="0" cellspacing="0"> 
+		<tr>
+			<td width="60">&nbsp;&nbsp;</td>
+			<td align="center">
+			<Select id="yearDD" name="yearDD" onchange="">
+			<option value="DontShow">- Year -</option>
+			<option value="ShowAll">All years</option>
+								<option value="2013">2013</option>
+										<option value="2012">2012</option>
+										<option value="2011">2011</option>
+										<option value="2010">2010</option>
+										<option value="2009">2009</option>
+										<option value="2008">2008</option>
+										<option value="2007">2007</option>
+										<option value="2006">2006</option>
+										<option value="2005">2005</option>
+										<option value="2004">2004</option>
+										<option value="2003">2003</option>
+										<option value="2002">2002</option>
+										<option value="2001">2001</option>
+										<option value="2000">2000</option>
+										<option value="1999">1999</option>
+										<option value="1998">1998</option>
+										<option value="1997">1997</option>
+										<option value="1996">1996</option>
+										<option value="1995">1995</option>
+										<option value="1994">1994</option>
+										<option value="1993">1993</option>
+										<option value="1992">1992</option>
+										<option value="1991">1991</option>
+										<option value="1990">1990</option>
+										<option value="1989">1989</option>
+										<option value="1988">1988</option>
+										<option value="1987">1987</option>
+										<option value="1986">1986</option>
+										<option value="1985">1985</option>
+										<option value="1984">1984</option>
+										<option value="1983">1983</option>
+										<option value="1982">1982</option>
+										<option value="1981">1981</option>
+										<option value="1980">1980</option>
+										<option value="1979">1979</option>
+										<option value="1978">1978</option>
+										<option value="1977">1977</option>
+										<option value="1976">1976</option>
+										<option value="1975">1975</option>
+										<option value="1974">1974</option>
+										<option value="1973">1973</option>
+										<option value="1972">1972</option>
+										<option value="1971">1971</option>
+										<option value="1970">1970</option>
+								</select>
+			</td>	
+		<div id="DIVmonthDD"  style="visibility: hidden">
+			<td align="left" style="height:13px">
+			<Select style="width:80px;" id="monthDD" name="monthDD">
+				<option value="DontShow">- Months -</option>
+				<option value="DontShow">All months</option>
+				
+										<option value="1">January</option>
+												<option value="2">February</option>
+												<option value="3">March</option>
+												<option value="4">April</option>
+												<option value="5">May</option>
+												<option value="6">June</option>
+												<option value="7">July</option>
+												<option value="8">August</option>
+												<option value="9">September</option>
+												<option value="10">October</option>
+												<option value="11">November</option>
+												<option value="12">December</option>
+										
+			</select></td>
+			
+			
+		</tr>
+		</table>
+		</div>
+	</td>
+</tr>
+</table>
+</form>
+</P></TD>
+<TD><IMG height=1 src="http://www.parliament.gov.za/live/images/spacer.gif" width=10></TD></TR></TBODY></TABLE></TD>
+<TD vAlign=top width=18><IMG height=124 src="http://www.parliament.gov.za/live/images/table_page_end_r.jpg" width=18></TD></TR></TBODY></TABLE></P></div>
+<!-- End Container -->
+		</div>
+	</div>
+	<div id="footer-holder" class="layout-max-width auto-margin-left-right color-grey">
+    	<div class="spacing-block">
+			<!-- Explore Parliament --><!-- Begin Container #467 -->
+<div id="Xcontainer15" class="Xcontainerfreeform">
+<h3>EXPLORE PARLIAMENT</h3>
+<div class="layout-row"><div class="layout-colomn-left width-1-5">
+<a href="/live/content.php?Category_ID=3"><strong><B>OUR<BR/>PARLIAMENT  </B></strong></a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=10">Who we are</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=17">What Parliament does</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=25">How Parliament is structured</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=40">Parliament's photos</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=32">Visit Parliament</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=37">Contact us</a>
+</li>
+</ul>
+</div>
+<div class="layout-colomn-left width-1-5">
+<a href="/live/content.php?Category_ID=4"><strong><B>BUSINESS<BR/>OF  PARLIAMENT  </B></strong></a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=45">What's on</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=333">Press Release</a>
+</li>
+<li>
+<a href="">News</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=56">Projects and Events</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=162">Parliamentary papers</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=71">Legislation</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=77">Committees</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=87">Oversight</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=326">Interventions by NCOP</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=320">Office on Inst. Supporting Democracy</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=132">Parliamentary Service</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=134">Careers at Parliament</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=225">Procurement</a>
+</li>
+</ul>
+</div>
+<div class="layout-colomn-left width-1-5">
+<a href="/live/content.php?Category_ID=5"><strong><B>OFFICE-BEARERS<BR/>&  MEMBERS  </B></strong></a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=102">Leader of Government Business</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=167">Ministers</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=168">Deputy Ministers</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=169">Chief Whips</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=103">Whips</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=104">Committee chairpersons</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=97">All members</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=106">NCOP provincial delegation</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=83">Code of conduct</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=107">Political party list</a>
+</li>
+</ul>
+</div>
+<div class="layout-colomn-left width-1-5">
+<a href="/live/content.php?Category_ID=6"><strong><B>PARTICIPATE<BR/>IN  PARLIAMENT  </B></strong></a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=112">Forums</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=136">Meetings</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=170">Parliamentary Democracy Offices</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=53">Submissions</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=54">Petitions</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=55">Contact your member</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=57">Media</a>
+</li>
+</ul>
+</div>
+<div class="layout-colomn-left width-1-5">
+<a href="/live/content.php?Category_ID=7"><strong><B>PUBLICATIONS<BR/></B></strong></a>
+<ul>
+<li>
+<a href="/live/content.php?Category_ID=119">Hansard</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=241">Hansard Replies</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=120">Business Publications</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=560">Insession</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=561">Oversight Forum</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=173">Educational Publications</a>
+</li>
+<li>
+<a href="/live/content.php?Category_ID=122">Parliamentary library</a>
+</li>
+</ul>
+</div>
+</div></div>
+<!-- End Container -->
+<!-- Tabs --><!-- Explore Parliament -->
+            <!-- Footer Static Links --><!-- Begin Container #468 -->
+<div id="Xcontainer16" class="Xcontainerfreeform">
+<!-- Content item component -->
+<P class="text-center footer-link-space"><A href=" 
+/live/content.php?Item_ID=510">Disclaimer</A> | <A href=" 
+/live/content.php?Item_ID=85">Glossary</A> | <A href=" 
+/live/content.php?Item_ID=466">Sitemap</A> | <A href=" 
+/live/content.php?Item_ID=448">Procurement</A> | <A href=" 
+/live/content.php?Item_ID=68">FAQ's</A> | <A href=" 
+/live/content.php?Item_ID=16">Did You Know</A> | <A href=" 
+/live/content.php?Item_ID=8">Related Links</A> | <A target="_blank" href=" 
+http://webmail.parliament.gov.za/">Webmail</A></P></div>
+<!-- End Container -->
+<!-- Tabs --><!-- Footer Static Links -->
+        </div>
+    </div>
+</div>
+<div id="dek" >a</div>
+<script type="text/javascript" src="popup.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31411187-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>
