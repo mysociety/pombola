@@ -174,7 +174,7 @@ they handle scraping and presenting proceedings from parliament.
 * Mzalendo: everything's in the pombola.hansard
   application. Name resolution and correction is done using the
   Alias model.
-* People's Assembly: scrapers are in a submodule called
+* People's Assembly: scrapers are in an app called
   'za-hansard' which produce JSON. That JSON is imported into
   SayIt models. SayIt's person model (from django-popolo) is
   linked to Pombola models using the PombolaSayItJoin model from
@@ -210,14 +210,14 @@ to support them. For example:
 
 #### za-hansard scrapers and importing data
 
-The scrapers in the za-hansard repository are run from the
+The scrapers in the za-hansard app are run from the
 `bin/update_za_hansard.bash` script. It first updates the SayIt
 people from Pombola, in case people have been updated or created
 in the Pombola admin. Then it asks popolo-name-resolver to
 repopulate Elasticsearch with name variants. Then the various
 scrapers are run.
 
-The za-hansard repository is not in a good state at the moment
+The za-hansard app is not in a good state at the moment
 because of the following reasons:
 
 1. The tests don't pass.
