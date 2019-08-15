@@ -193,7 +193,7 @@ class ZAQuestionParsing(TestCase):
     pdftohtml_version = os.popen('pdftohtml -v 2>&1 | head -n 1').read().strip()
     wanted_version = '0.18.4'
     @skipUnless(
-        os.environ.get('TRAVIS') or wanted_version in pdftohtml_version,
+        os.environ.get('TRAVIS') and wanted_version in pdftohtml_version,
         "Not on TRAVIS, or versions don't watch ('%s' != '%s')" % (wanted_version, pdftohtml_version)
     )
     def test_pdf_to_xml(self):
