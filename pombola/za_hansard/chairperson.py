@@ -19,6 +19,7 @@ from bs4 import NavigableString
 #   7612
 #   8208
 
+
 def strip_tags_from_html(html):
     allowed_tags = bleach.ALLOWED_TAGS + [
         'br', 'p', 'div', 'h1', 'h2', 'h3', 'h4'
@@ -28,6 +29,7 @@ def strip_tags_from_html(html):
         tags=allowed_tags,
         strip=True
     )
+
 
 def get_from_text_version(soup):
     """e.g. for meeting with ID: 6040, 8564"""

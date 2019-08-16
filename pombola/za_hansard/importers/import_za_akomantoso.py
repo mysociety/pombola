@@ -11,10 +11,12 @@ from speeches.models import Section, Speech
 
 name_rx = re.compile(r'^(\w+) (.*?)( \((\w+)\))?$')
 
+
 def title_case_heading(heading):
     titled = heading.title()
     titled = titled.replace("'S", "'s").replace("’S", "’s")
     return titled
+
 
 class ImportZAAkomaNtoso(ImportZAMixin, ImportAkomaNtoso):
     def __init__(self, section_parent_headings=[], **kwargs):
@@ -43,16 +45,17 @@ class ImportZAAkomaNtoso(ImportZAMixin, ImportAkomaNtoso):
         mainSection = debateBody.debateSection
 
         self.title = '%s (%s)' % (
-                mainSection.heading.text,
-                etree.tostring(preface.p, method='text'))
+            mainSection.heading.text,
+            etree.tostring(preface.p, method='text'))
 
         # Get or create the sections above the one we just created and put it in there
-        parent = Section.objects.get_or_create_with_parents(instance=self.instance, headings=self.section_parent_headings)
+        parent = Section.objects.get_or_create_with_parents(
+            instance=self.instance, headings=self.section_parent_headings)
 
         section = self.make(Section, heading=self.title, parent=parent)
 
         start_date = preface.p.docDate.get('date')
-        self.set_resolver_for_date(date_string = start_date)
+        self.set_resolver_for_date(date_string=start_date)
         self.start_date = datetime.strptime(start_date, '%Y-%m-%d')
 
         self.visit(mainSection, section)
@@ -66,7 +69,8 @@ class ImportZAAkomaNtoso(ImportZAMixin, ImportAkomaNtoso):
         if match:
             honorific, fname, party, _ = match.groups()
             fname = fname.title()
-            display_name = '%s %s%s' % (honorific, fname, party if party else '')
+            display_name = '%s %s%s' % (
+                honorific, fname, party if party else '')
             # XXX Now the sayit project indexes stop words, this next line keeps
             # the test passing. This should be looked at at some point.
             # "The" is not an honorific anyway, should we be here?.
@@ -83,9 +87,9 @@ class ImportZAAkomaNtoso(ImportZAMixin, ImportAkomaNtoso):
         text = self.get_text(node)
         speaker = self.get_person(None, None)
         speech = self.make(Speech,
-            section = section,
-            start_date = self.start_date,
-            text = text,
-            speaker = speaker,
-        )
+                           section=section,
+                           start_date=self.start_date,
+                           text=text,
+                           speaker=speaker,
+                           )
         return True

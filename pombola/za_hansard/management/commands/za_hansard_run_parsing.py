@@ -22,50 +22,53 @@ from optparse import make_option
 from pombola.za_hansard.models import Source, SourceUrlCouldNotBeRetrieved
 from pombola.za_hansard.parse import ZAHansardParser
 
+
 class FailedToRetrieveSourceException (Exception):
     pass
+
 
 class Command(BaseCommand):
     help = 'Parse unparsed'
     option_list = BaseCommand.option_list + (
         make_option('--redo',
-            default=False,
-            action='store_true',
-            help='Redo already completed parses',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Redo already completed parses',
+                    ),
         make_option('--id',
-            type='str',
-            help='Parse a given id',
-        ),
+                    type='str',
+                    help='Parse a given id',
+                    ),
         make_option('--retry',
-            default=False,
-            action='store_true',
-            help='Retry attempted (but not completed) parses',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Retry attempted (but not completed) parses',
+                    ),
         make_option('--retry-download',
-            default=False,
-            action='store_true',
-            help='Retry download of previously 404\'d documents',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Retry download of previously 404\'d documents',
+                    ),
         make_option('--limit',
-            default=0,
-            type='int',
-            help='limit query (default 0 for none)',
-        ),
+                    default=0,
+                    type='int',
+                    help='limit query (default 0 for none)',
+                    ),
     )
 
     def handle(self, *args, **options):
         limit = options['limit']
 
         if options['id']:
-            sources = Source.objects.filter(id = options['id'])
+            sources = Source.objects.filter(id=options['id'])
         elif options['redo']:
             if options['retry_download']:
                 sources = Source.objects.all()
             else:
-                sources = Source.objects.filter(is404 = False)
+                sources = Source.objects.filter(is404=False)
         elif options['retry']:
-            sources = Source.objects.all().requires_completion( options['retry_download'] )
+            sources = Source.objects.all().requires_completion(
+                options['retry_download'])
         else:
             sources = Source.objects.all().requires_processing()
 
@@ -88,6 +91,7 @@ class Command(BaseCommand):
 
                 open('%s.xml' % filename, 'w').write(xml)
                 s.save()
-                self.stdout.write( "Processed %s (%d)\n" % (s.document_name, s.document_number) )
+                self.stdout.write("Processed %s (%d)\n" %
+                                  (s.document_name, s.document_number))
             except Exception as e:
                 self.stderr.write("WARN: Failed to run parsing: %s" % str(e))

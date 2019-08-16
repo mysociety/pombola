@@ -7,6 +7,7 @@ from pombola.za_hansard.models import Source
 
 from django.core.management.base import BaseCommand
 
+
 class Command(BaseCommand):
     help = 'Rename the Hansard month sections'
 
@@ -21,9 +22,11 @@ class Command(BaseCommand):
                 try:
                     month_name = calendar.month_name[int(month_section.title)]
                 except ValueError:
-                    print "skipping %s (%s)" % (month_section.title, month_section.id)
-                    continue # Probably already renamed.
+                    print "skipping %s (%s)" % (
+                        month_section.title, month_section.id)
+                    continue  # Probably already renamed.
 
-                print "renaming %s (%s) to %s" % (month_section.title, month_section.id, month_name)
+                print "renaming %s (%s) to %s" % (
+                    month_section.title, month_section.id, month_name)
                 month_section.title = month_name
                 month_section.save()

@@ -12,6 +12,7 @@ from pombola.za_hansard.models import Source
 
 from django.core.management.base import BaseCommand
 
+
 class Command(BaseCommand):
     help = 'Restructure the hansard section hierarchy'
 
@@ -19,14 +20,16 @@ class Command(BaseCommand):
 
         # The sections we are interested in are linked to the sources table, and
         # have no parent.
-        sources = Source.objects.filter(sayit_section__isnull=False, sayit_section__parent__isnull=True)
+        sources = Source.objects.filter(
+            sayit_section__isnull=False, sayit_section__parent__isnull=True)
 
         for source in sources:
             section = source.sayit_section
             print section
 
             # create the parents
-            parent = Section.objects.get_or_create_with_parents(instance=section.instance, headings=source.section_parent_headings)
+            parent = Section.objects.get_or_create_with_parents(
+                instance=section.instance, headings=source.section_parent_headings)
 
             # assign to the new section
             section.parent = parent

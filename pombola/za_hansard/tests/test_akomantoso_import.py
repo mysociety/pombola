@@ -19,7 +19,8 @@ class ImportZAAkomaNtosoTests(InstanceTestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls._in_fixtures = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test_inputs', 'hansard')
+        cls._in_fixtures = os.path.join(os.path.abspath(
+            os.path.dirname(__file__)), 'test_inputs', 'hansard')
         super(ImportZAAkomaNtosoTests, cls).setUpClass()
         call_command('update_index', interactive=False, verbosity=0)
         recreate_entities()
@@ -43,13 +44,13 @@ class ImportZAAkomaNtosoTests(InstanceTestCase):
         THRESHOLD = 48
 
         logging.info(
-                "%d above threshold %d/%d?"
-                % (len(resolved), THRESHOLD, len(speakers)))
+            "%d above threshold %d/%d?"
+            % (len(resolved), THRESHOLD, len(speakers)))
 
         self.assertTrue(
-                len(resolved) >= THRESHOLD,
-                "%d above threshold %d/%d"
-                % (len(resolved), THRESHOLD, len(speakers)))
+            len(resolved) >= THRESHOLD,
+            "%d above threshold %d/%d"
+            % (len(resolved), THRESHOLD, len(speakers)))
 
     def test_title_casing(self):
         tests = (

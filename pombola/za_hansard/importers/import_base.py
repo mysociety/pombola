@@ -53,7 +53,8 @@ class ImportZAMixin(object):
                 our_speaker.id if our_speaker else '',
                 our_speaker.name.encode('utf-8') if our_speaker else '',
                 speaker_from_slug.id if speaker_from_slug else '',
-                speaker_from_slug.name.encode('utf-8') if speaker_from_slug else '',
+                speaker_from_slug.name.encode(
+                    'utf-8') if speaker_from_slug else '',
             ])
 
     def get_person(self, name, party, pombola_person_slug=None):
@@ -86,7 +87,8 @@ class ImportZAMixin(object):
 
         if not speaker:
             try:
-                speaker = Speaker.objects.get(instance=self.instance, name=display_name)
+                speaker = Speaker.objects.get(
+                    instance=self.instance, name=display_name)
             except Speaker.DoesNotExist:
                 speaker = Speaker(instance=self.instance, name=display_name)
                 if self.commit:

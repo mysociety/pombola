@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterUniqueTogether(
             name='question',
-            unique_together=set([('written_number', 'house', 'year'), ('dp_number', 'house', 'year'), ('oral_number', 'house', 'year'), ('president_number', 'house', 'year')]),
+            unique_together=set([('written_number', 'house', 'year'), ('dp_number', 'house', 'year'), (
+                'oral_number', 'house', 'year'), ('president_number', 'house', 'year')]),
         ),
     ]

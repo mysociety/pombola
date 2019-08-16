@@ -12,16 +12,16 @@ class OneOffTagSpeechesTests(TestCase):
     def setUp(self):
 
         subsections = [
-            {   'heading': "Nested section",
+            {'heading': "Nested section",
                 'subsections': [
-                    {   'heading': "Section with speeches",
-                        'speeches': [ 4, date(2013, 3, 25), time(9, 0) ],
-                    },
-                    {   'heading': "Bill on Silly Walks",
-                        'speeches': [ 2, date(2013, 3, 25), time(12, 0) ],
-                    },
+                    {'heading': "Section with speeches",
+                        'speeches': [4, date(2013, 3, 25), time(9, 0)],
+                     },
+                    {'heading': "Bill on Silly Walks",
+                        'speeches': [2, date(2013, 3, 25), time(12, 0)],
+                     },
                 ]
-            },
+             },
             {
                 'heading': "Another nested section (but completely empty)",
                 'subsections': []

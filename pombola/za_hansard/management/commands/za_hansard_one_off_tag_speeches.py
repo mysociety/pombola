@@ -10,6 +10,7 @@ from speeches.models import Section, Tag
 
 from django.core.management.base import BaseCommand
 
+
 class Command(BaseCommand):
     help = 'Restructure the hansard section hierarchy'
 
@@ -22,23 +23,24 @@ class Command(BaseCommand):
 
     indent_depth = 0
 
-
     def handle(self, *args, **options):
         for section_heading, tag_name in self.mapping:
 
             # Get the top level section with the matching name
             try:
-                section = Section.objects.get(heading=section_heading, parent=None)
+                section = Section.objects.get(
+                    heading=section_heading, parent=None)
             except Section.DoesNotExist:
-                sys.stderr.write("Can't find top level section '%s'\n" % section_heading )
+                sys.stderr.write(
+                    "Can't find top level section '%s'\n" % section_heading)
                 continue
 
             # Get or create the tag
-            tag, tag_created = Tag.objects.get_or_create(name=tag_name, instance=section.instance)
+            tag, tag_created = Tag.objects.get_or_create(
+                name=tag_name, instance=section.instance)
 
             # Tag the speeches
             self.tag_speeches_under(section, tag)
-
 
     def tag_speeches_under(self, section, tag):
         """
@@ -60,5 +62,3 @@ class Command(BaseCommand):
             self.indent_depth += 2
             self.tag_speeches_under(child_section, tag)
             self.indent_depth -= 2
-
-

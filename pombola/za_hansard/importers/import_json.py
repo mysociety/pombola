@@ -7,7 +7,7 @@ from pombola.za_hansard.importers.import_base import ImportZAMixin
 from speeches.importers.import_base import ImporterBase
 from speeches.models import Section, Speech, Tag
 
-#{
+# {
 # "parent_section_titles": [
 #  "Top Section",
 #  "Middle Section",
@@ -26,27 +26,29 @@ from speeches.models import Section, Speech, Tag
 # "organization": "Agriculture, Forestry and Fisheries",
 # "reporturl": "http://www.pmg.org.za/report/20130621-report-back-from-departments-health-trade-and-industry-and-agriculture-forestry-and-fisheries-meat-inspection",
 # "title": "Report back from Departments of Health, Trade and Industry, and Agriculture, Forestry and Fisheries on meat inspection services and labelling in South Africa",
-## "committeeurl": "http://www.pmg.org.za/committees/Agriculture,%20Forestry%20and%20Fisheries"
-#}
+# "committeeurl": "http://www.pmg.org.za/committees/Agriculture,%20Forestry%20and%20Fisheries"
+# }
+
 
 class ImportJson (ImportZAMixin, ImporterBase):
     def __init__(self, **kwargs):
         super(ImportJson, self).__init__(**kwargs)
         self.delete_existing = kwargs.get('delete_existing', False)
-        self.do_not_import_duplicate = kwargs.get('do_not_import_duplicate', False)
+        self.do_not_import_duplicate = kwargs.get(
+            'do_not_import_duplicate', False)
 
     def import_document(self, document_path, limit=0):
 
-        data = json.load( open(document_path, 'r') )
+        data = json.load(open(document_path, 'r'))
 
-        start_date_string = data.get( 'date', None )
+        start_date_string = data.get('date', None)
         start_date = None
         if start_date_string:
             start_date = self.format_date(start_date_string)
 
         self.set_resolver_for_date(date=start_date)
 
-        self.title = data.get( 'title', data.get('organization', '') )
+        self.title = data.get('title', data.get('organization', ''))
 
         # Determine if speeches should be public
         speeches_premium = data.get('premium', False)
@@ -78,10 +80,10 @@ class ImportJson (ImportZAMixin, ImporterBase):
         if self.delete_existing and self.commit:
             section.speech_set.all().delete()
 
-        for s in data.get( 'speeches', [] ):
+        for s in data.get('speeches', []):
 
             if self.do_not_import_duplicate:
-                if section.speech_set.filter( text = s['text'] ).count():
+                if section.speech_set.filter(text=s['text']).count():
                     continue
 
             display_name = s['personname']
@@ -101,34 +103,35 @@ class ImportJson (ImportZAMixin, ImporterBase):
                 speech_start_date = self.format_date(start_date_string)
 
             speech = self.make(Speech,
-                    text = s['text'],
-                    section = section,
+                               text=s['text'],
+                               section=section,
 
-                    speaker = speaker,
-                    speaker_display = display_name,
+                               speaker=speaker,
+                               speaker_display=display_name,
 
-                    public = speeches_public,
+                               public=speeches_public,
 
-                    location = s.get('location', ''),
-                    heading  = s.get('title', ''),
-                    event    = s.get('event', ''),
-                    source_url = s.get('source_url', report_url),
+                               location=s.get('location', ''),
+                               heading=s.get('title', ''),
+                               event=s.get('event', ''),
+                               source_url=s.get('source_url', report_url),
 
-                    # Assume that the speech does not span several days
-                    start_date = speech_start_date,
-                    end_date   = speech_start_date,
+                               # Assume that the speech does not span several days
+                               start_date=speech_start_date,
+                               end_date=speech_start_date,
 
-                    # Time not implemented in JSON, but could easily be. For now set to None
-                    start_time = None,
-                    end_time   = None,
-            )
+                               # Time not implemented in JSON, but could easily be. For now set to None
+                               start_time=None,
+                               end_time=None,
+                               )
 
             for tagname in s.get('tags', []):
                 if self.commit:
-                    (tag,_) = Tag.objects.get_or_create( name=tagname, instance=self.instance )
+                    (tag, _) = Tag.objects.get_or_create(
+                        name=tagname, instance=self.instance)
                     speech.tags.add(tag)
 
         return section
 
     def format_date(self, date_string):
-        return datetime.strptime( date_string, '%Y-%m-%d' ).date()
+        return datetime.strptime(date_string, '%Y-%m-%d').date()

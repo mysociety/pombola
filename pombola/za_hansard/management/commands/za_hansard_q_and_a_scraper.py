@@ -1,7 +1,8 @@
 import httplib
 import urllib2
 import sys
-import re, os
+import re
+import os
 import dateutil.parser
 import string
 import parslepy
@@ -38,6 +39,7 @@ USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/601.4.
 
 CODE_RE_STRING = r'R?(?P<house>[NC])(?P<answer_type>[WO])(?P<id_number>\d+)(?P<lang>[AEX])?'
 
+
 def strip_dict(d):
     """
     Return a new dictionary, like d, but with any string value stripped
@@ -50,6 +52,7 @@ def strip_dict(d):
     [('a', 'foo'), ('b', 3), ('c', 'bar')]
     """
     return dict((k, v.strip() if 'strip' in dir(v) else v) for k, v in d.items())
+
 
 def all_from_api(start_url):
     next_url = start_url
@@ -64,6 +67,7 @@ def all_from_api(start_url):
         for member in data['results']:
             yield member
         next_url = data['next']
+
 
 def get_identifier_for_title(question_or_answer):
     if question_or_answer.identifier:
@@ -81,6 +85,7 @@ def get_identifier_for_title(question_or_answer):
         number = 'd' + str(question_or_answer.dp_number)
     return "{0}-{1}".format(question_or_answer.year, number)
 
+
 def convert_url_to_https(url):
     return re.sub(r'^http:', 'https:', url)
 
@@ -90,76 +95,79 @@ class Command(BaseCommand):
     help = 'Check for new sources'
     option_list = BaseCommand.option_list + (
         make_option('--scrape-questions',
-            default=False,
-            action='store_true',
-            help='Scrape questions (step 1)',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Scrape questions (step 1)',
+                    ),
         make_option('--scrape-answers',
-            default=False,
-            action='store_true',
-            help='Scrape answers (step 2)',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Scrape answers (step 2)',
+                    ),
         make_option('--scrape-from-pmg',
-            default=False,
-            action='store_true',
-            help='Scrape questions and answers from PMG (step 2.5)',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Scrape questions and answers from PMG (step 2.5)',
+                    ),
         make_option('--process-answers',
-            default=False,
-            action='store_true',
-            help='Process answers (step 3)',
+                    default=False,
+                    action='store_true',
+                    help='Process answers (step 3)',
                     ),
         make_option('--match-answers',
-            default=False,
-            action='store_true',
-            help='Match answers (step 4)',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Match answers (step 4)',
+                    ),
         make_option('--save',
-            default=False,
-            action='store_true',
-            help='Save Q&A as json (step 5)',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Save Q&A as json (step 5)',
+                    ),
         make_option('--import-into-sayit',
-            default=False,
-            action='store_true',
-            help='Import saved json to sayit (step 6)',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Import saved json to sayit (step 6)',
+                    ),
         make_option('--run-all-steps',
-            default=False,
-            action='store_true',
-            help='Run all of the steps',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Run all of the steps',
+                    ),
         make_option('--correct-existing-sayit-import',
-            default=False,
-            action='store_true',
-            help='Correct the structure of existing data',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Correct the structure of existing data',
+                    ),
         make_option('--instance',
-            type='str',
-            default='default',
-            help='Instance to import into',
-        ),
+                    type='str',
+                    default='default',
+                    help='Instance to import into',
+                    ),
         make_option('--limit',
-            default=0,
-            action='store',
-            type='int',
-            help='How far to go back (not set means all the way)',
-        ),
+                    default=0,
+                    action='store',
+                    type='int',
+                    help='How far to go back (not set means all the way)',
+                    ),
         make_option('--fetch-to-limit',
-            default=False,
-            action='store_true',
-            help="Don't stop when reaching seen questions, continue to --limit",
-        ),
+                    default=False,
+                    action='store_true',
+                    help="Don't stop when reaching seen questions, continue to --limit",
+                    ),
         make_option('--commit',
-            default=False,
-            action='store_true',
-            help='Whether to commit SayIt import corrections',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Whether to commit SayIt import corrections',
+                    ),
     )
 
-    start_url_q = ('http://www.parliament.gov.za/live/', 'content.php?Category_ID=236')
-    start_url_a_na = ('http://www.parliament.gov.za/live/', 'content.php?Category_ID=248')
-    start_url_a_ncop = ('http://www.parliament.gov.za/live/', 'content.php?Category_ID=249')
+    start_url_q = ('http://www.parliament.gov.za/live/',
+                   'content.php?Category_ID=236')
+    start_url_a_na = ('http://www.parliament.gov.za/live/',
+                      'content.php?Category_ID=248')
+    start_url_a_ncop = ('http://www.parliament.gov.za/live/',
+                        'content.php?Category_ID=249')
 
     def handle(self, *args, **options):
         if options['scrape_questions']:
@@ -210,7 +218,7 @@ class Command(BaseCommand):
         # }
 
         for detail in details:
-            count+=1
+            count += 1
 
             source_url = detail['url']
             sys.stdout.write(
@@ -226,22 +234,25 @@ class Command(BaseCommand):
                 if QuestionPaper.objects.filter(source_url=source_url).exists():
                     self.stdout.write('SKIPPING as file already handled\n')
                     if not options['fetch_to_limit']:
-                        self.stdout.write("Stopping as '--fetch-to-limit' not given\n")
+                        self.stdout.write(
+                            "Stopping as '--fetch-to-limit' not given\n")
                         break
                 else:
                     try:
                         self.stdout.write('PROCESSING')
-                        question_scraper.QuestionPaperParser(**detail).get_questions()
+                        question_scraper.QuestionPaperParser(
+                            **detail).get_questions()
                     except Exception as e:
-                        self.stdout.write('ERROR handling {0}: {1}\n'.format(source_url, str(e)))
+                        self.stdout.write(
+                            'ERROR handling {0}: {1}\n'.format(source_url, str(e)))
                         errors += 1
                         pass
 
             if options['limit'] and count >= options['limit']:
                 break
 
-        self.stdout.write( "Processed %d documents (%d errors)\n" % (count, errors) )
-
+        self.stdout.write(
+            "Processed %d documents (%d errors)\n" % (count, errors))
 
     def scrape_answers(self, start_url_a, *args, **options):
         start_url = start_url_a[0] + start_url_a[1]
@@ -257,18 +268,21 @@ class Command(BaseCommand):
             if Answer.objects.filter(url=url).exists():
                 self.stdout.write('Answer {0} already exists\n'.format(url))
                 if not options['fetch_to_limit']:
-                    self.stdout.write("Stopping as '--fetch-to-limit' not given\n")
+                    self.stdout.write(
+                        "Stopping as '--fetch-to-limit' not given\n")
                     break
             else:
                 existing_answers = Answer.objects.filter(
                     house=detail['house'],
                     year=detail['year'],
-                    )
+                )
 
                 if detail['oral_number']:
-                    existing_answers = existing_answers.filter(oral_number=detail['oral_number'])
+                    existing_answers = existing_answers.filter(
+                        oral_number=detail['oral_number'])
                 if detail['written_number']:
-                    existing_answers = existing_answers.filter(written_number=detail['written_number'])
+                    existing_answers = existing_answers.filter(
+                        written_number=detail['written_number'])
 
                 if existing_answers.exists():
                     # import pdb;pdb.set_trace()
@@ -277,8 +291,8 @@ class Command(BaseCommand):
                     self.stdout.write(
                         'DUPLICATE: answer for {0} O{1} W{2} {3} already exists\n'.format(
                             detail['house'], detail['oral_number'], detail['written_number'], detail['year'],
-                            )
                         )
+                    )
                 else:
                     # self.stdout.write('Adding answer for {0}\n'.format(url))
                     answer = Answer.objects.create(**detail)
@@ -288,7 +302,8 @@ class Command(BaseCommand):
 
     def handle_api_question_and_reply(self, data):
         if 'source_file' not in data:
-            print "Skipping {0} due to a missing source_file".format(data['url'])
+            print "Skipping {0} due to a missing source_file".format(
+                data['url'])
             return
         house = {
             'National Assembly': 'N'
@@ -330,7 +345,8 @@ class Command(BaseCommand):
             # already exists if we don't have one of these number, so
             # ignore the question and answer completely in that
             # case. (This is a rare occurence.)
-            print "Skipping {0} because no number was found".format(data['url'])
+            print "Skipping {0} because no number was found".format(
+                data['url'])
             return
         try:
             print "Found the existing question for", data['url']
@@ -486,27 +502,31 @@ class Command(BaseCommand):
                 except urllib2.HTTPError as e:
                     row.processed_code = Answer.PROCESSED_HTTP_ERROR
                     row.save()
-                    self.stderr.write('ERROR HTTPError while processing %d (%s)\n' % (row.id, e))
+                    self.stderr.write(
+                        'ERROR HTTPError while processing %d (%s)\n' % (row.id, e))
                     continue
 
                 except urllib2.URLError as e:
-                    self.stderr.write('ERROR URLError while processing %d (%s)\n' % (row.id, e))
+                    self.stderr.write(
+                        'ERROR URLError while processing %d (%s)\n' % (row.id, e))
                     continue
 
                 except httplib.BadStatusLine as e:
-                    self.stderr.write('ERROR BadStatusLine while processing %d (%s)\n' % (row.id, e))
+                    self.stderr.write(
+                        'ERROR BadStatusLine while processing %d (%s)\n' % (row.id, e))
                     continue
 
             try:
-                text = question_scraper.extract_answer_text_from_word_document(filename)
+                text = question_scraper.extract_answer_text_from_word_document(
+                    filename)
                 row.processed_code = Answer.PROCESSED_OK
                 row.text = text
                 row.save()
             except subprocess.CalledProcessError:
                 self.stdout.write('ERROR in antiword processing %d\n' % row.id)
             except UnicodeDecodeError:
-                self.stdout.write('ERROR in antiword processing (UnicodeDecodeError) %d\n' % row.id)
-
+                self.stdout.write(
+                    'ERROR in antiword processing (UnicodeDecodeError) %d\n' % row.id)
 
     def match_answers(self, *args, **options):
         # Only consider answers that aren't already associated with a
@@ -527,7 +547,7 @@ class Command(BaseCommand):
                 sys.stdout.write(
                     "Answer {0} {1} has no written or oral number - SKIPPING\n"
                     .format(answer.id, answer.document_name)
-                    )
+                )
                 continue
 
             try:
@@ -535,12 +555,12 @@ class Command(BaseCommand):
                     query,
                     year=answer.year,
                     house=answer.house,
-                    )
+                )
             except Question.DoesNotExist:
                 sys.stdout.write(
                     "No question found for {0} {1}\n"
                     .format(answer.id, answer.document_name)
-                    )
+                )
                 continue
 
             question.answer = answer
@@ -590,7 +610,7 @@ class Command(BaseCommand):
         )
 
     def question_to_json_data(self, question):
-        #{
+        # {
         # "speeches": [
         #  {
         #   "personname": "M Johnson",
@@ -603,7 +623,7 @@ class Command(BaseCommand):
         # "organization": "Agriculture, Forestry and Fisheries",
         # "reporturl": "http://www.pmg.org.za/report/20130621-report-back-from-departments-health-trade-and-industry-and-agriculture-forestry-and-fisheries-meat-inspection",
         # "title": "Report back from Departments of Health, Trade and Industry, and Agriculture, Forestry and Fisheries on meat inspection services and labelling in South Africa",
-        ## "committeeurl": "http://www.pmg.org.za/committees/Agriculture,%20Forestry%20and%20Fisheries"
+        # "committeeurl": "http://www.pmg.org.za/committees/Agriculture,%20Forestry%20and%20Fisheries"
 
         # As of Python 2.7.3, time.strftime can't be trusted to preserve
         # unicodeness, hence the extra calls to unicode.
@@ -628,7 +648,7 @@ class Command(BaseCommand):
             u'title': '{0} - {1}'.format(
                 get_identifier_for_title(question),
                 question.date.strftime(u'%d %B %Y'),
-                ),
+            ),
             u'date': self.format_date_for_json(question.date),
             u'speeches': [
                 {
@@ -675,7 +695,7 @@ class Command(BaseCommand):
             u'title': '{0} - {1}'.format(
                 get_identifier_for_title(question),
                 question.date.strftime(u'%d %B %Y'),
-                ),
+            ),
             u'date': self.format_date_for_json(question.date),
             u'speeches': [
                 {
@@ -687,7 +707,7 @@ class Command(BaseCommand):
                     u'source_url': answer.url,
 
                     # unused for import
-                    u'name' : answer.name,
+                    u'name': answer.name,
                     u'persontitle': question.questionto,
                     u'type': u'answer',
                 },
@@ -713,11 +733,12 @@ class Command(BaseCommand):
         try:
             instance = Instance.objects.get(label=options['instance'])
         except Instance.DoesNotExist:
-            raise CommandError("Instance specified not found (%s)" % options['instance'])
+            raise CommandError(
+                "Instance specified not found (%s)" % options['instance'])
 
         questions = (Question.objects
-                .filter( sayit_section = None ) # not already imported
-                )
+                     .filter(sayit_section=None)  # not already imported
+                     )
 
         section_ids = []
         for question in questions.iterator():
@@ -728,22 +749,22 @@ class Command(BaseCommand):
                 continue
 
             importer = ImportJson(instance=instance)
-            #try:
+            # try:
             self.stderr.write("TRYING %s\n" % path)
             section = importer.import_document(path)
             section_ids.append(section)
             question.sayit_section = section
             question.last_sayit_import = datetime.now().date()
             question.save()
-            #except Exception as e:
-                #self.stderr.write('WARN: failed to import %d: %s' %
-                    #(question.id, str(e)))
+            # except Exception as e:
+            # self.stderr.write('WARN: failed to import %d: %s' %
+            # (question.id, str(e)))
 
-        self.stdout.write( 'Questions:\n' )
+        self.stdout.write('Questions:\n')
         self.stdout.write(str(section_ids))
-        self.stdout.write( '\n' )
+        self.stdout.write('\n')
         self.stdout.write('Questions: Imported %d / %d sections\n' %
-                (len(section_ids), len(questions)))
+                          (len(section_ids), len(questions)))
 
         answers = (Answer.objects
                    .filter(sayit_section=None)  # not already imported
@@ -760,8 +781,8 @@ class Command(BaseCommand):
 
             importer = ImportJson(instance=instance)
             self.stderr.write("TRYING %s\n" % path)
-            #limit to 2 speeches per section to avoid duplicating speeches
-            #added prior to the addition of the answer sayit_section field
+            # limit to 2 speeches per section to avoid duplicating speeches
+            # added prior to the addition of the answer sayit_section field
             section = importer.import_document(path, 2)
             section_ids.append(section.id)
             answer.sayit_section = section
@@ -773,7 +794,7 @@ class Command(BaseCommand):
         self.stdout.write(str(section_ids))
         self.stdout.write('\n')
         self.stdout.write('Answers: Imported %d / %d sections\n' %
-            (len(section_ids), len(answers)))
+                          (len(section_ids), len(answers)))
 
     def correct_existing_sayit_import(self, *args, **options):
         from pombola.slug_helpers.models import SlugRedirect
@@ -784,7 +805,7 @@ class Command(BaseCommand):
             raise CommandError("Instance specified not found (%s)" %
                                options['instance'])
 
-        #check that sections are correctly named
+        # check that sections are correctly named
         sections = Section.objects.filter(parent__title='Questions')
 
         for section in sections:
@@ -792,9 +813,9 @@ class Command(BaseCommand):
             new_minister = self.correct_minister_title(minister)
 
             if minister != new_minister:
-                #the name needs to be corrected. this is achieved by moving
-                #children to the correct section and deleting the current one
-                #and by changing the relevant speakers
+                # the name needs to be corrected. this is achieved by moving
+                # children to the correct section and deleting the current one
+                # and by changing the relevant speakers
 
                 if options['commit']:
                     new_section = Section.objects.get_or_create_with_parents(
@@ -822,7 +843,8 @@ class Command(BaseCommand):
                     # as part of Pombola)
                     from pombola.slug_helpers.models import SlugRedirect
                     SlugRedirect.objects.create(
-                        content_type=ContentType.objects.get_for_model(Section),
+                        content_type=ContentType.objects.get_for_model(
+                            Section),
                         old_object_slug=section.get_path,
                         new_object_id=new_section.id,
                         new_object=new_section,
@@ -830,11 +852,12 @@ class Command(BaseCommand):
 
                     section.delete()
                 else:
-                    self.stdout.write('Correcting %s to %s' % (minister, new_minister))
+                    self.stdout.write('Correcting %s to %s' %
+                                      (minister, new_minister))
 
-        #check that answer dates and source urls are correct (previously,
-        #answer dates were set to those of their question and source_urls
-        #were not set - requiring checking and correction)
+        # check that answer dates and source urls are correct (previously,
+        # answer dates were set to those of their question and source_urls
+        # were not set - requiring checking and correction)
         answers = Answer.objects.exclude(sayit_section=None)
 
         for answer in answers:
@@ -864,22 +887,22 @@ class Command(BaseCommand):
                             answer.document_name,
                             speech.source_url,
                             answer.url
-                        ) )
+                        ))
 
                     if options['commit']:
                         speech.source_url = answer.url
                         speech.save()
 
             except MultipleObjectsReturned:
-                #only one answer should be returned - requires investigation
+                # only one answer should be returned - requires investigation
                 self.stdout.write(
                     'MultipleObjectsReturned %s - id %s' % (
                         answer.document_name,
                         answer.id
-                    ) )
+                    ))
 
-        #check that question source_urls are correct
-        questions = Question.objects.exclude( sayit_section = None )
+        # check that question source_urls are correct
+        questions = Question.objects.exclude(sayit_section=None)
 
         for question in questions:
             try:
@@ -893,19 +916,19 @@ class Command(BaseCommand):
                             question.identifier,
                             speech.source_url,
                             question.paper.source_url
-                        ) )
+                        ))
 
                     if options['commit']:
                         speech.source_url = question.paper.source_url
                         speech.save()
 
             except MultipleObjectsReturned:
-                #only one answer should be returned - requires investigation
+                # only one answer should be returned - requires investigation
                 self.stdout.write(
                     'MultipleObjectsReturned question %s - id %s' % (
                         question.identifier,
                         question.id
-                    ) )
+                    ))
 
         if not options['commit']:
             self.stdout.write('Corrections not saved. Use --commit.')
@@ -1025,22 +1048,22 @@ class Command(BaseCommand):
                 "Minister of Arts and Culture",
         }
 
-        #the most common error is the inclusion of a hyphen (presumably due to
-        #line breaks in the original document). No ministers have a hyphen in
-        #their title so we can do a simple replace.
+        # the most common error is the inclusion of a hyphen (presumably due to
+        # line breaks in the original document). No ministers have a hyphen in
+        # their title so we can do a simple replace.
         minister_title = minister_title.replace('-', '')
 
-        #correct mispellings of 'minister'
+        # correct mispellings of 'minister'
         minister_title = minister_title.replace('Minster', 'Minister')
 
-        #it is also common for a minister to be labelled "minister for" instead
-        #of "minister of"
+        # it is also common for a minister to be labelled "minister for" instead
+        # of "minister of"
         minister_title = minister_title.replace('Minister for', 'Minister of')
 
-        #remove any whitespace
+        # remove any whitespace
         minister_title = minister_title.strip()
 
-        #apply manual corrections
+        # apply manual corrections
         minister_title = corrections.get(minister_title, minister_title)
 
         return minister_title

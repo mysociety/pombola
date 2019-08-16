@@ -18,6 +18,7 @@ from lxml import etree
 
 import os
 
+
 class ZAHansardParsingTests(TestCase):
 
     docnames = ['502914_1', 'NA290307', 'EPC110512', 'NA210212', 'NA200912']
@@ -26,14 +27,16 @@ class ZAHansardParsingTests(TestCase):
     @classmethod
     def setUpClass(cls):
         if 'popolo_name_resolver' not in settings.INSTALLED_APPS:
-            raise ImproperlyConfigured("popolo_name_resolver is not in INSTALLED_APPS")
+            raise ImproperlyConfigured(
+                "popolo_name_resolver is not in INSTALLED_APPS")
 
         tests_dir = os.path.dirname(os.path.abspath(__file__))
-        cls._in_fixtures = os.path.join(tests_dir, 'test_inputs','hansard')
+        cls._in_fixtures = os.path.join(tests_dir, 'test_inputs', 'hansard')
         super(ZAHansardParsingTests, cls).setUpClass()
 
         def process(docname):
-            filename = os.path.join( cls._in_fixtures, '%s.%s' % (docname, 'doc') )
+            filename = os.path.join(
+                cls._in_fixtures, '%s.%s' % (docname, 'doc'))
             obj = ZAHansardParser.parse(filename)
             xml = obj.akomaNtoso
             xml_string = etree.tostring(xml, pretty_print=True)
@@ -47,35 +50,40 @@ class ZAHansardParsingTests(TestCase):
         for docname in iter(self.xml):
             (xml, xml_string) = self.xml.get(docname)
 
-            xml_path = os.path.join( self._in_fixtures, '%s.%s' % (docname, 'xml') )
-            xml_expected = open( xml_path ).read()
+            xml_path = os.path.join(
+                self._in_fixtures, '%s.%s' % (docname, 'xml'))
+            xml_expected = open(xml_path).read()
 
             if xml_string != xml_expected:
                 outname = './%s.%s' % (docname, 'xml')
-                open( outname, 'w').write(xml_string)
-                self.assertTrue( xml_string == xml_expected, "XML not correct.  Please diff %s %s (and update latter if required!)" % (outname, xml_path) )
+                open(outname, 'w').write(xml_string)
+                self.assertTrue(xml_string == xml_expected,
+                                "XML not correct.  Please diff %s %s (and update latter if required!)" % (outname, xml_path))
 
     def test_xsd(self):
-        xsd_path = os.path.join( self._in_fixtures, 'release-23.xsd')
+        xsd_path = os.path.join(self._in_fixtures, 'release-23.xsd')
         xsd_parser = etree.XMLParser(dtd_validation=False)
 
         xsd = etree.XMLSchema(
-                etree.parse(xsd_path, xsd_parser))
+            etree.parse(xsd_path, xsd_parser))
 
         for docname in iter(self.xml):
             (xml, xml_string) = self.xml.get(docname)
 
-            parser = etree.XMLParser(schema = xsd)
+            parser = etree.XMLParser(schema=xsd)
             try:
                 xml = etree.fromstring(xml_string, parser)
-                self.assertEqual(xml.tag, '{http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD03}akomaNtoso', 'Validated ok')
+                self.assertEqual(
+                    xml.tag, '{http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD03}akomaNtoso', 'Validated ok')
             except etree.XMLSyntaxError as e:
-                self.assertTrue(False, 'Document %s failed: %s' % (docname, str(e)) )
+                self.assertTrue(False, 'Document %s failed: %s' %
+                                (docname, str(e)))
 
     def test_properties(self):
         (xml, _) = self.xml.get('502914_1')
 
-        self.assertEqual(xml.tag, '{http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD03}akomaNtoso')
+        self.assertEqual(
+            xml.tag, '{http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD03}akomaNtoso')
 
         preface_p = xml.debate.preface.p
         self.assertEqual(preface_p.text, 'Thursday, ')
@@ -86,17 +94,21 @@ class ZAHansardParsingTests(TestCase):
         debateBody = xml.debate.debateBody
         mainSection = debateBody.debateSection
         self.assertEqual(mainSection.get('id'), 'db0')
-        self.assertEqual(mainSection.get('name'), 'proceedings-at-joint-sitting')
-        self.assertEqual(mainSection.heading.text, 'PROCEEDINGS AT JOINT SITTING')
-        self.assertEqual(mainSection.p.text, 'Members of the National Assembly and the National Council of Provinces assembled in the Chamber of the National Assembly at ')
+        self.assertEqual(mainSection.get('name'),
+                         'proceedings-at-joint-sitting')
+        self.assertEqual(mainSection.heading.text,
+                         'PROCEEDINGS AT JOINT SITTING')
+        self.assertEqual(
+            mainSection.p.text, 'Members of the National Assembly and the National Council of Provinces assembled in the Chamber of the National Assembly at ')
         recordedTime = mainSection.p.recordedTime
         self.assertEqual(recordedTime.text, '19:01')
         self.assertEqual(recordedTime.get('time'), '19:01:00')
-        self.assertEqual(mainSection.prayers.p.text, 'The Speaker took the Chair and requested members to observe a moment of silence for prayers or meditation.')
+        self.assertEqual(mainSection.prayers.p.text,
+                         'The Speaker took the Chair and requested members to observe a moment of silence for prayers or meditation.')
 
         subSections = mainSection.findall('{*}debateSection')
-        #for s in subSections:
-            # print >> sys.stderr, s.get('id')
+        # for s in subSections:
+        # print >> sys.stderr, s.get('id')
         self.assertEqual(len(subSections), 3)
 
         dbs1 = subSections[0]
@@ -105,11 +117,13 @@ class ZAHansardParsingTests(TestCase):
         speech = dbs1.speech
         self.assertEqual(speech.get('by'), '#the-speaker')
         self.assertEqual(speech['from'].text, 'The SPEAKER')
-        self.assertEqual(speech.p.text, 'Hon members, the President has called this Joint Sitting of the National Assembly and the National Council of Provinces in terms of section 84(2)(d) of the Constitution of the Republic of South Africa, read with Joint Rule 7(1)(a), to enable him to deliver his state of the nation address to Parliament. I now invite the honourable the President to address the Joint Sitting. [Applause.]')
+        self.assertEqual(
+            speech.p.text, 'Hon members, the President has called this Joint Sitting of the National Assembly and the National Council of Provinces in terms of section 84(2)(d) of the Constitution of the Republic of South Africa, read with Joint Rule 7(1)(a), to enable him to deliver his state of the nation address to Parliament. I now invite the honourable the President to address the Joint Sitting. [Applause.]')
 
         dbs2 = subSections[1]
         self.assertEqual(dbs2.get('id'), 'dbs2')
-        self.assertEqual(dbs2.heading.text, 'ADDRESS BY PRESIDENT OF THE REPUBLIC')
+        self.assertEqual(dbs2.heading.text,
+                         'ADDRESS BY PRESIDENT OF THE REPUBLIC')
         speech = dbs2.speech
         self.assertEqual(speech.get('by'), '#the-president-of-the-republic')
         self.assertEqual(speech['from'].text, 'The PRESIDENT OF THE REPUBLIC')
@@ -132,13 +146,13 @@ class ZAHansardParsingTests(TestCase):
 
         # TEST that references have been gathered correctly
         tlcpersons = xml.debate.meta.references.findall('{*}TLCPerson')
-        self.assertEqual( len(tlcpersons), 3 )
+        self.assertEqual(len(tlcpersons), 3)
         speeches_by_speaker = filter(
-                lambda s: s.get('by') == '#the-speaker',
-                mainSection.findall('.//{*}speech'))
-        self.assertEqual( len(speeches_by_speaker), 2 )
+            lambda s: s.get('by') == '#the-speaker',
+            mainSection.findall('.//{*}speech'))
+        self.assertEqual(len(speeches_by_speaker), 2)
         for speech in speeches_by_speaker:
-            self.assertEqual( speech['from'].text, 'The SPEAKER' )
+            self.assertEqual(speech['from'].text, 'The SPEAKER')
 
     def test_second_parse(self):
         (xml, _) = self.xml.get('NA290307')
@@ -148,26 +162,29 @@ class ZAHansardParsingTests(TestCase):
         subSections = mainSection.findall('{*}debateSection')
         self.assertEqual(len(subSections), 16)
 
+
 class ZAHansardSayitLoadingTests(TestCase):
 
     tests_dir = os.path.dirname(os.path.abspath(__file__))
-    test_hansard_cache_dir = os.path.join(tests_dir, 'test_inputs','hansard')
+    test_hansard_cache_dir = os.path.join(tests_dir, 'test_inputs', 'hansard')
 
     def setUp(self):
         Instance.objects.get_or_create(label='default')
 
         # create a source to test with
         self.source = Source.objects.create(
-            id                      = 10, # Needed to create the correct path in cache_file_path
-            title                   = 'HANSARD',
-            document_name           = 'NA080513',
-            document_number         = '539685',
-            date                    = date(2013, 5, 8),
-            url                     = 'commonrepository/Processed/20130910/539685_1.doc',
-            house                   = 'National Assembly',
-            language                = 'English',
-            last_processing_attempt = datetime(2013, 10, 15, 23, 0, 0, tzinfo=pytz.utc),
-            last_processing_success = datetime(2013, 10, 15, 23, 0, 0, tzinfo=pytz.utc),
+            id=10,  # Needed to create the correct path in cache_file_path
+            title='HANSARD',
+            document_name='NA080513',
+            document_number='539685',
+            date=date(2013, 5, 8),
+            url='commonrepository/Processed/20130910/539685_1.doc',
+            house='National Assembly',
+            language='English',
+            last_processing_attempt=datetime(
+                2013, 10, 15, 23, 0, 0, tzinfo=pytz.utc),
+            last_processing_success=datetime(
+                2013, 10, 15, 23, 0, 0, tzinfo=pytz.utc),
         )
 
     def test_source_section_parent_headings(self):
@@ -193,7 +210,8 @@ class ZAHansardSayitLoadingTests(TestCase):
         # Test section created as expected
         sayit_section = source.sayit_section
         self.assertTrue(sayit_section)
-        self.assertEqual(sayit_section.parent.heading, "08") # Hansards -> 2013 -> 05 -> *08* -> sayit_section
+        # Hansards -> 2013 -> 05 -> *08* -> sayit_section
+        self.assertEqual(sayit_section.parent.heading, "08")
 
         # Test that speeches are tagged
         speech = sayit_section.descendant_speeches().all()[0]

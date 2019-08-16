@@ -65,16 +65,19 @@ name_and_party_re = re.compile(
 
 # From: http://stackoverflow.com/q/600268/223092
 
+
 def mkdir_p(path):
     try:
         os.makedirs(path)
-    except OSError as exc: # Python >2.5
+    except OSError as exc:  # Python >2.5
         if exc.errno == errno.EEXIST and os.path.isdir(path):
             pass
         else:
             raise
 
+
 mkdir_p(source_cache_directory)
+
 
 def get_authenticated(url):
     """A wrapper for python-requests's get, but with the API auth header"""
@@ -86,10 +89,12 @@ def get_authenticated(url):
         }
     )
 
+
 def get_authenticated_json(url, cache_filename=None):
     """Return parsed JSON from an authenticated GET request"""
 
     return get_authenticated(url).json()
+
 
 def all_committees():
     """A generator function to yield all committees from the PMG API"""
@@ -103,6 +108,7 @@ def all_committees():
         for result in results:
             yield result
         page += 1
+
 
 def parse_api_datetime(s):
     """Turn a datetime string from the PMG API into a Python datetime
@@ -131,6 +137,7 @@ def parse_api_datetime(s):
     )
     return tzoffset.localize(dt)
 
+
 def find_chairpeople(soup):
     """Given BeautifulSoup of the page, find any named chairperson(s)
 
@@ -142,6 +149,7 @@ def find_chairpeople(soup):
         # whitespace with a single space:
         chairpeople = re.sub(r'(?ms)\s+', ' ', chairpeople)
         return chairpeople.strip()
+
 
 def write_prettified_html(html, meeting_id, dump_type):
     """For dumping a prettified version of some HTML
@@ -157,6 +165,7 @@ def write_prettified_html(html, meeting_id, dump_type):
     with open(join(source_cache_directory, filename), 'w') as f:
         f.write(soup.prettify().encode('utf-8'))
     return soup
+
 
 def get_names_from_appearance(appearance_text, allow_no_party=False):
     """Given some text, find all names of people within it
@@ -215,6 +224,7 @@ def get_names_from_appearance(appearance_text, allow_no_party=False):
                 name_matches.append(name_match)
     return name_matches
 
+
 def format_name_match(name_match):
     """Given a regex match object of a name, format it human-readably"""
 
@@ -230,6 +240,7 @@ def format_name_match(name_match):
     if party:
         result += u' ({0})'.format(party)
     return result.strip()
+
 
 def is_apologies_statement(appearance_text):
     """A predicate to test if some text represents apologies for the meeting"""
@@ -259,48 +270,49 @@ class Command(BaseCommand):
 
     option_list = BaseCommand.option_list + (
         make_option('--commit',
-            default=False,
-            action='store_true',
-            help='Actually make changes to the database',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Actually make changes to the database',
+                    ),
         make_option('--sayit-instance',
-            type='str',
-            default='default',
-            help='SayIt instance to import into (only applies to --import-to-sayit',
-        ),
+                    type='str',
+                    default='default',
+                    help='SayIt instance to import into (only applies to --import-to-sayit',
+                    ),
         make_option('--scrape',
-            default=False,
-            action='store_true',
-            help='Scrape committee minutes into the database',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Scrape committee minutes into the database',
+                    ),
         make_option('--save-json',
-            default=False,
-            action='store_true',
-            help='Save JSON files from already scraped minutes in the database',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Save JSON files from already scraped minutes in the database',
+                    ),
         make_option('--import-to-sayit',
-            default=False,
-            action='store_true',
-            help='Import JSON files to SayIt',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Import JSON files to SayIt',
+                    ),
         make_option('--delete-existing',
-            default=False,
-            action='store_true',
-            help='Delete existing SayIt speeches (with --import-to-sayit)',
-        ),
+                    default=False,
+                    action='store_true',
+                    help='Delete existing SayIt speeches (with --import-to-sayit)',
+                    ),
         make_option('--committee',
-            type='int',
-            help='Only process the committee with this ID',
-        ),
+                    type='int',
+                    help='Only process the committee with this ID',
+                    ),
         make_option('--meeting',
-            type='int',
-            help='Only process the meeting with this ID',
-        )
+                    type='int',
+                    help='Only process the meeting with this ID',
+                    )
     )
 
     def handle_committee(self, committee):
         self.stdout.write("=======================================\n")
-        self.stdout.write(u"handling committee: {0}\n".format(committee['name']))
+        self.stdout.write(
+            u"handling committee: {0}\n".format(committee['name']))
         full_committee_results = get_authenticated_json(committee['url'])
 
         if 'events' not in full_committee_results:
@@ -322,7 +334,8 @@ class Command(BaseCommand):
                 meeting_report.save()
             # Now parse the appearances out of the event body:
             if not event.get('body'):
-                self.stdout.write("Skipping an entry with an empty or missing body\n")
+                self.stdout.write(
+                    "Skipping an entry with an empty or missing body\n")
                 continue
             self.get_appearances(
                 meeting_report,
@@ -434,7 +447,7 @@ class Command(BaseCommand):
                 # create an appearance for each of the chairpersons'
                 # names:
                 if ('The Chairperson' in appearance and
-                    not found_chairperson_appearances):
+                        not found_chairperson_appearances):
                     found_chairperson_appearances = True
                     for name_match in chairperson_name_matches:
                         appearances.append(
@@ -501,10 +514,10 @@ class Command(BaseCommand):
             return self.options['meeting'] == int(meeting_id)
 
     def should_process_report(self, pcr):
-        if not (self.process_all_committees or \
+        if not (self.process_all_committees or
                 self.specified_committee(pcr.api_committee_id)):
             return False
-        if not (self.process_all_meetings or \
+        if not (self.process_all_meetings or
                 self.specified_meeting(pcr.api_meeting_id)):
             return False
         return True
@@ -515,7 +528,8 @@ class Command(BaseCommand):
 
         command_options = ('scrape', 'save_json', 'import_to_sayit')
         if not any(options[k] for k in command_options):
-            raise CommandError("You must specify one of --scrape, --save-json or --import-to-sayit")
+            raise CommandError(
+                "You must specify one of --scrape, --save-json or --import-to-sayit")
 
         if options['scrape']:
 
@@ -537,9 +551,11 @@ class Command(BaseCommand):
                     continue
 
                 if report.meeting_date:
-                    meeting_section_name = report.meeting_date.strftime('%d %B %Y')
+                    meeting_section_name = report.meeting_date.strftime(
+                        '%d %B %Y')
                 else:
-                    meeting_section_name = "Report with ID {0}".format(report.id)
+                    meeting_section_name = "Report with ID {0}".format(
+                        report.id)
 
                 if not report.meeting_date:
                     msg = "WARNING: skipping report with ID {0} due to a missing meeting_date\n"

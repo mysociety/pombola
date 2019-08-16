@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 import re
 import httplib2
 import calendar
@@ -25,12 +26,15 @@ if 'ON_HEROKU' not in os.environ:
             if not os.path.exists(directory):
                 os.makedirs(directory)
         except AttributeError:
-            raise ImproperlyConfigured("Could not find {0} setting - please set it".format(setting_name))
+            raise ImproperlyConfigured(
+                "Could not find {0} setting - please set it".format(setting_name))
 
 # EXCEPTIONS
 
+
 class SourceUrlCouldNotBeRetrieved(Exception):
     pass
+
 
 class SourceCouldNotParseTimeString(Exception):
     pass
@@ -38,12 +42,12 @@ class SourceCouldNotParseTimeString(Exception):
 
 class SourceQuerySet(models.query.QuerySet):
     def requires_processing(self):
-        return self.filter( last_processing_attempt=None )
+        return self.filter(last_processing_attempt=None)
 
     def requires_completion(self, retry_download=False):
-        objects = self.filter( last_processing_success=None )
+        objects = self.filter(last_processing_success=None)
         if not retry_download:
-            objects = objects.filter( is404=False )
+            objects = objects.filter(is404=False)
         return objects
 
 
@@ -54,40 +58,38 @@ class Source(models.Model):
     For example a Word transcript.
     """
 
-    title           = models.CharField(max_length=200)
-    document_name   = models.CharField(max_length=200) # bah, SHOULD be unique, but apparently isn't
+    title = models.CharField(max_length=200)
+    # bah, SHOULD be unique, but apparently isn't
+    document_name = models.CharField(max_length=200)
     document_number = models.CharField(unique=True, max_length=200)
-    date            = models.DateField()
-    url             = models.URLField(max_length=1000)
-    is404           = models.BooleanField( default=False )
-    house           = models.CharField(max_length=200)
-    language        = models.CharField(max_length=200)
+    date = models.DateField()
+    url = models.URLField(max_length=1000)
+    is404 = models.BooleanField(default=False)
+    house = models.CharField(max_length=200)
+    language = models.CharField(max_length=200)
 
     last_processing_attempt = models.DateTimeField(blank=True, null=True)
     last_processing_success = models.DateTimeField(blank=True, null=True)
 
     last_sayit_import = models.DateTimeField(blank=True, null=True)
     sayit_section = models.ForeignKey(Section, blank=True, null=True, on_delete=models.PROTECT,
-        help_text='Associated Sayit section object, if imported')
+                                      help_text='Associated Sayit section object, if imported')
 
     objects = SourceQuerySet.as_manager()
 
     class Meta:
-        ordering = [ '-date', 'document_name' ]
-
+        ordering = ['-date', 'document_name']
 
     def __unicode__(self):
         return self.document_name
 
-
     def delete(self):
         """After deleting from db, delete the cached file too"""
         cache_file_path = self.cache_file_path()
-        super( Source, self ).delete()
+        super(Source, self).delete()
 
-        if os.path.exists( cache_file_path ):
-            os.remove( cache_file_path )
-
+        if os.path.exists(cache_file_path):
+            os.remove(cache_file_path)
 
     def file(self, debug=False):
         """
@@ -119,7 +121,8 @@ class Source(models.Model):
                 print >> sys.stderr, 'Requesting %s' % url
             (response, content) = h.request(url, headers=HTTPLIB2_HEADERS)
             if response.status != 200:
-                raise SourceUrlCouldNotBeRetrieved("status code: %s, url: %s" % (response.status, self.url) )
+                raise SourceUrlCouldNotBeRetrieved(
+                    "status code: %s, url: %s" % (response.status, self.url))
             self.is404 = False
             self.save()
             return (response, content)
@@ -156,7 +159,7 @@ class Source(models.Model):
     def cache_file_path(self):
         """Absolute path to the cache file for this source"""
 
-        id_str= "%05u" % self.id
+        id_str = "%05u" % self.id
 
         # do some simple partitioning
         # FIXME - put in something to prevent the test suite overwriting non-test files.
@@ -165,13 +168,14 @@ class Source(models.Model):
         cache_dir = os.path.join(settings.HANSARD_CACHE, aaa, bbb)
 
         # check that the dir exists
-        if not os.path.exists( cache_dir ):
-            os.makedirs( cache_dir )
+        if not os.path.exists(cache_dir):
+            os.makedirs(cache_dir)
 
         d = self.date.strftime('%Y-%m-%d')
 
         # create the path to the file
-        cache_file_path = os.path.join(cache_dir, '-'.join([d, id_str, self.document_name]))
+        cache_file_path = os.path.join(
+            cache_dir, '-'.join([d, id_str, self.document_name]))
         return cache_file_path
 
     def xml_file_path(self):
@@ -180,13 +184,14 @@ class Source(models.Model):
             return xml_file_path
         return None
 
+
 class PMGCommitteeReport(models.Model):
     """
     Committe reports, scraped from PMG site
     """
-    premium         = models.BooleanField(default=None)
-    processed       = models.BooleanField(default=None)
-    meeting_url     = models.TextField()
+    premium = models.BooleanField(default=None)
+    processed = models.BooleanField(default=None)
+    meeting_url = models.TextField()
     meeting_name = models.TextField(blank=True, null=True)
     committee_url = models.URLField(blank=True, null=True)
     committee_name = models.TextField(default='')
@@ -199,7 +204,7 @@ class PMGCommitteeReport(models.Model):
 
     last_sayit_import = models.DateTimeField(blank=True, null=True)
     sayit_section = models.ForeignKey(Section, blank=True, null=True, on_delete=models.PROTECT,
-        help_text='Associated Sayit section object, if imported')
+                                      help_text='Associated Sayit section object, if imported')
 
     def old_meeting_url(self):
         return self.meeting_url and 'api.pmg.org.za' not in self.meeting_url
@@ -209,18 +214,20 @@ class PMGCommitteeAppearance(models.Model):
     """
     Committe appearances, scraped from PMG site
     """
-    party           = models.TextField()
-    person          = models.TextField()
+    party = models.TextField()
+    person = models.TextField()
     report = models.ForeignKey(PMGCommitteeReport,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name='appearances')
-    text            = models.TextField()
+                               null=True,
+                               on_delete=models.CASCADE,
+                               related_name='appearances')
+    text = models.TextField()
+
 
 house_choices = (
     ('N', 'National Assembly'),
     ('C', 'National Council of Provinces'),
-    )
+)
+
 
 class Answer (models.Model):
     # Various values that the processed_code can have
@@ -229,12 +236,12 @@ class Answer (models.Model):
     PROCESSED_HTTP_ERROR = 2
 
     PROCESSED_CHOICES = (
-        ( PROCESSED_PENDING, 'pending'),
-        ( PROCESSED_OK, 'OK' ),
-        ( PROCESSED_HTTP_ERROR, 'HTTP error'),
+        (PROCESSED_PENDING, 'pending'),
+        (PROCESSED_OK, 'OK'),
+        (PROCESSED_HTTP_ERROR, 'HTTP error'),
     )
 
-    #------------------------------------------------------------
+    # ------------------------------------------------------------
     document_name = models.TextField()
 
     # The next few fields are all inferred from document_name
@@ -251,11 +258,13 @@ class Answer (models.Model):
 
     date = models.DateField()
     year = models.IntegerField(db_index=True)
-    house = models.CharField(max_length=1, choices=house_choices, db_index=True)
-    #------------------------------------------------------------
+    house = models.CharField(
+        max_length=1, choices=house_choices, db_index=True)
+    # ------------------------------------------------------------
 
     text = models.TextField()
-    processed_code = models.IntegerField(null=False, default=PROCESSED_PENDING, choices=PROCESSED_CHOICES, db_index=True)
+    processed_code = models.IntegerField(
+        null=False, default=PROCESSED_PENDING, choices=PROCESSED_CHOICES, db_index=True)
     name = models.TextField()
     language = models.TextField()
     url = models.TextField(db_index=True)
@@ -266,7 +275,7 @@ class Answer (models.Model):
     sayit_section = models.ForeignKey(
         Section, blank=True, null=True, on_delete=models.PROTECT,
         help_text='Associated Sayit section object, if imported',
-        )
+    )
 
     # For answer that we fetch from the PMG API, we should store the
     # API URL; we also set it if we discover that an answer originally
@@ -280,13 +289,14 @@ class Answer (models.Model):
             ('written_number', 'house', 'year'),
             ('president_number', 'house', 'year'),
             ('dp_number', 'house', 'year'),
-            )
+        )
 
         # FIXME - When we have Django 1.5 we can have these indices...
         # index_together = (
         #     ('oral_number', 'house', 'year'),
         #     ('written_number', 'house', 'year'),
         #     )
+
 
 class QuestionPaper(models.Model):
     """Models a group of questions.
@@ -305,14 +315,16 @@ class QuestionPaper(models.Model):
     # Body metadata from inside the question paper file
     # Question papers are by unique year/issue number/house
     year = models.IntegerField()
-    issue_number = models.IntegerField() # within year.
+    issue_number = models.IntegerField()  # within year.
     parliament_number = models.IntegerField()
-    session_number = models.IntegerField() # Unique within parliament
+    session_number = models.IntegerField()  # Unique within parliament
     text = models.TextField()
 
     class Meta:
-        unique_together = ('year', 'issue_number', 'house', 'parliament_number')
+        unique_together = ('year', 'issue_number',
+                           'house', 'parliament_number')
         # index_together = ('year', 'issue_number', 'house', 'parliament_number')
+
 
 int_to_text = {
     1: 'FIRST',
@@ -325,21 +337,21 @@ int_to_text = {
     8: 'EIGHTH',
     9: 'NINTH',
     10: 'TENTH',
-    }
+}
+
 
 class Question(models.Model):
     paper = models.ForeignKey(
         QuestionPaper,
-        null=True, # FIXME - eventually, this should not be nullable.
+        null=True,  # FIXME - eventually, this should not be nullable.
         on_delete=models.SET_NULL,
-        )
+    )
     answer = models.ForeignKey(
         Answer,
         null=True,
         on_delete=models.CASCADE,
         related_name='question',
-        )
-
+    )
 
     # number1 - order questions published
     # Strts at 1 for calendar year, separate sequences for oral, written for both NA and NCOP
@@ -383,15 +395,16 @@ class Question(models.Model):
 
     # This is in the identifier above. It should correspond to the house
     # on the referenced QuestionPaper.
-    house = models.CharField(max_length=1, choices=house_choices, db_index=True)
+    house = models.CharField(
+        max_length=1, choices=house_choices, db_index=True)
 
     answer_type = models.CharField(
         max_length=1,
         choices=(
             ('O', 'Oral Answer'),
             ('W', 'Written Answer'),
-            )
         )
+    )
 
     # Date the question was asked on. Not to be confused with the date the
     # question was published, which is date_published on the QuestionPaper.
@@ -431,7 +444,7 @@ class Question(models.Model):
     sayit_section = models.ForeignKey(
         Section, blank=True, null=True, on_delete=models.PROTECT,
         help_text='Associated Sayit section object, if imported',
-        )
+    )
 
     # For questions that we fetch from the PMG API, we should store
     # the API URL and the speaker's People's Aseembly URL:
@@ -447,7 +460,7 @@ class Question(models.Model):
             ('oral_number', 'house', 'year'),
             ('president_number', 'house', 'year'),
             ('dp_number', 'house', 'year'),
-            )
+        )
         # index_together(
         #     ('written_number', 'house', 'year'),
         #     ('oral_number', 'house', 'year'),
@@ -458,4 +471,4 @@ class Question(models.Model):
         # be done in postgres directly, I think.
         # 1) At least one of written_number and oral_number must be non-null.
 
-#CREATE TABLE completed_documents (`url` string);
+# CREATE TABLE completed_documents (`url` string);

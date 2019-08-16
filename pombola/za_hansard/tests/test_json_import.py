@@ -16,7 +16,8 @@ class ImportJsonTests(InstanceTestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls._in_fixtures = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test_inputs', 'committee')
+        cls._in_fixtures = os.path.join(os.path.abspath(
+            os.path.dirname(__file__)), 'test_inputs', 'committee')
         super(ImportJsonTests, cls).setUpClass()
         call_command('update_index', interactive=False, verbosity=0)
         recreate_entities()
@@ -66,9 +67,11 @@ class ImportJsonTests(InstanceTestCase):
         sections = []
 
         for expected in expecteds:
-            document_path = os.path.join(self._in_fixtures, expected["filename"])
+            document_path = os.path.join(
+                self._in_fixtures, expected["filename"])
 
-            aj = ImportJson(instance=self.instance, category_field="title", commit=True)
+            aj = ImportJson(instance=self.instance,
+                            category_field="title", commit=True)
             section = aj.import_document(document_path)
 
             sections.append(section)
@@ -97,22 +100,21 @@ class ImportJsonTests(InstanceTestCase):
 
             resolved = filter(lambda s: s.speaker.person != None, speeches)
 
-            self.assertEquals( len(speeches), expected["speech_count"],
-                   'Speeches %d == %d (%s)' %
-                   (len(speeches), expected["speech_count"], expected["filename"]) )
-            self.assertEquals( len(resolved), expected["resolved_count"],
-                   'Resolved %d == %d (%s)' %
-                   (len(resolved), expected["resolved_count"], expected["filename"]) )
+            self.assertEquals(len(speeches), expected["speech_count"],
+                              'Speeches %d == %d (%s)' %
+                              (len(speeches), expected["speech_count"], expected["filename"]))
+            self.assertEquals(len(resolved), expected["resolved_count"],
+                              'Resolved %d == %d (%s)' %
+                              (len(resolved), expected["resolved_count"], expected["filename"]))
 
         s0 = sections[0]
         s1 = sections[1]
 
-        self.assertEquals( s0.title, s1.title )
-        self.assertNotEquals( s0.id, s1.id )
+        self.assertEquals(s0.title, s1.title)
+        self.assertNotEquals(s0.id, s1.id)
 
         s0_grandparent = s0.parent.parent.parent
         s1_grandparent = s1.parent.parent.parent
-        self.assertEquals( s0_grandparent.title, 'Top Section' )
-        self.assertEquals( s1_grandparent.title, 'Top Section' )
-        self.assertEquals( s0_grandparent.id, s1_grandparent.id )
-
+        self.assertEquals(s0_grandparent.title, 'Top Section')
+        self.assertEquals(s1_grandparent.title, 'Top Section')
+        self.assertEquals(s0_grandparent.id, s1_grandparent.id)

@@ -22,11 +22,16 @@ from pombola.za_hansard.models import Question, QuestionPaper
 # Copied rather than included as the scraperwiki __init__.py was having trouble
 # loading the sqlite code, which is something we don't actually need.
 
+
 def ensure_executable_found(name):
     if not distutils.spawn.find_executable(name):
-        raise ImproperlyConfigured("Can't find executable '{0}' which is needed by this code".format(name))
+        raise ImproperlyConfigured(
+            "Can't find executable '{0}' which is needed by this code".format(name))
+
 
 ensure_executable_found("pdftohtml")
+
+
 def pdftoxml(pdfdata):
     """converts pdf file to xml file"""
     pdffout = tempfile.NamedTemporaryFile(suffix='.pdf')
@@ -34,9 +39,11 @@ def pdftoxml(pdfdata):
     pdffout.flush()
 
     xmlin = tempfile.NamedTemporaryFile(mode='r', suffix='.xml')
-    tmpxml = xmlin.name # "temph.xml"
-    cmd = 'pdftohtml -xml -nodrm -zoom 1.5 -enc UTF-8 -noframes "%s" "%s"' % (pdffout.name, os.path.splitext(tmpxml)[0])
-    cmd = cmd + " >/dev/null 2>&1" # can't turn off output, so throw away even stderr yeuch
+    tmpxml = xmlin.name  # "temph.xml"
+    cmd = 'pdftohtml -xml -nodrm -zoom 1.5 -enc UTF-8 -noframes "%s" "%s"' % (
+        pdffout.name, os.path.splitext(tmpxml)[0])
+    # can't turn off output, so throw away even stderr yeuch
+    cmd = cmd + " >/dev/null 2>&1"
     os.system(cmd)
 
     pdffout.close()
@@ -54,14 +61,18 @@ def pdftoxml(pdfdata):
 
 
 ensure_executable_found("antiword")
+
+
 def extract_answer_text_from_word_document(filename):
-    text = check_output_wrapper(['antiword', filename]).decode('unicode-escape')
+    text = check_output_wrapper(
+        ['antiword', filename]).decode('unicode-escape')
 
     # strip out lines that are just '________'
     bar_regex = re.compile(r'^_+$', re.MULTILINE)
     text = bar_regex.sub('', text)
 
     return text
+
 
 def check_output_wrapper(*args, **kwargs):
 
@@ -80,6 +91,7 @@ def check_output_wrapper(*args, **kwargs):
             error.output = output
             raise error
         return output
+
 
 class BaseDetailIterator(object):
 
@@ -114,13 +126,14 @@ class BaseDetailIterator(object):
             raise
         return r.text
 
+
 class QuestionDetailIterator(BaseDetailIterator):
 
     question_parsing_rules = {
         "papers(table.tableOrange_sep tr)":
-            [{"cell(td)":[{"contents":".","url(a)":"@href"}]}],
+            [{"cell(td)": [{"contents": ".", "url(a)": "@href"}]}],
         "next(table.tableOrange_sep table table td a)":
-            [{"contents":".","url":"@href"}]
+            [{"contents": ".", "url": "@href"}]
     }
 
     def get_details(self):
@@ -146,7 +159,7 @@ class QuestionDetailIterator(BaseDetailIterator):
                     # This is also in the pdf's metadata, but it's easier to
                     # get it from here
                     "document_number": int(root.split('_')[0]),
-                    })
+                })
 
         # check for next page of links (or None if not found)
         self.next_list_url = None
@@ -154,14 +167,16 @@ class QuestionDetailIterator(BaseDetailIterator):
             if cell['contents'] == 'Next':
                 next_url = self.base_url + cell['url']
                 if self.next_list_url == next_url:
-                    raise Exception("Possible url loop detected, next url '{0}' has not changed.".format(next_url))
+                    raise Exception(
+                        "Possible url loop detected, next url '{0}' has not changed.".format(next_url))
                 self.next_list_url = next_url
                 break
 
+
 class AnswerDetailIterator(BaseDetailIterator):
     answer_parsing_rules = {
-        "papers(table.tableOrange_sep tr)" : [{"cell(td)":[{"contents":".","url(a)":"@href"}]}],
-        "next(table.tableOrange_sep table table td a)": [{"contents":".","url":"@href"}]
+        "papers(table.tableOrange_sep tr)": [{"cell(td)": [{"contents": ".", "url(a)": "@href"}]}],
+        "next(table.tableOrange_sep table table td a)": [{"contents": ".", "url": "@href"}]
     }
 
     # RNW2562-131119
@@ -188,18 +203,20 @@ class AnswerDetailIterator(BaseDetailIterator):
     # RNODP05-130424
 
     known_bad_document_names = (
-    # Bad Dates
-    'RNW2949-1311114',
-    'RNW1920-13823',
+        # Bad Dates
+        'RNW2949-1311114',
+        'RNW1920-13823',
     )
 
-    document_name_regex = re.compile(r'^R(?P<house>[NC])(?:O(?P<president>D?P)?(?P<oral_number>\d+))?(?:W(?P<written_number>\d+))?-+(?P<date_string>\d{6})$')
+    document_name_regex = re.compile(
+        r'^R(?P<house>[NC])(?:O(?P<president>D?P)?(?P<oral_number>\d+))?(?:W(?P<written_number>\d+))?-+(?P<date_string>\d{6})$')
 
     def get_details(self):
         sys.stdout.write('Answers {0}\n'.format(self.next_list_url))
 
         contents = self.url_get(self.next_list_url)
-        page = parslepy.Parselet(self.answer_parsing_rules).parse_fromstring(contents)
+        page = parslepy.Parselet(
+            self.answer_parsing_rules).parse_fromstring(contents)
 
         for row in page['papers']:
             if len(row['cell']) == 11:
@@ -207,7 +224,8 @@ class AnswerDetailIterator(BaseDetailIterator):
                 types = url.partition(".")
                 date_published = row['cell'][2]['contents'].strip()
                 try:
-                    date_published = datetime.datetime.strptime(date_published, '%d %B %Y').date()
+                    date_published = datetime.datetime.strptime(
+                        date_published, '%d %B %Y').date()
                 except:
                     warnings.warn("Failed to parse date (%s)" % date_published)
                     date_published = None
@@ -216,7 +234,8 @@ class AnswerDetailIterator(BaseDetailIterator):
                 document_name = row['cell'][0]['contents'].strip().upper()
 
                 try:
-                    document_data = self.document_name_regex.match(document_name).groupdict()
+                    document_data = self.document_name_regex.match(
+                        document_name).groupdict()
                 except:
                     if document_name not in self.known_bad_document_names:
                         sys.stdout.write('SKIPPING bad document_name {0}\n'
@@ -233,9 +252,11 @@ class AnswerDetailIterator(BaseDetailIterator):
                 president = document_data.pop('president')
 
                 if president == 'P':
-                    document_data['president_number'] = document_data.pop('oral_number')
+                    document_data['president_number'] = document_data.pop(
+                        'oral_number')
                 if president == 'DP':
-                    document_data['dp_number'] = document_data.pop('oral_number')
+                    document_data['dp_number'] = document_data.pop(
+                        'oral_number')
 
                 document_data.update(dict(
                     document_name=document_name,
@@ -243,18 +264,18 @@ class AnswerDetailIterator(BaseDetailIterator):
                     language=row['cell'][6]['contents'],
                     url=self.base_url + url,
                     type=types[2],
-                    ))
+                ))
 
                 try:
                     document_data['date'] = datetime.datetime.strptime(
                         document_data.pop('date_string'),
                         '%y%m%d',
-                        ).date()
+                    ).date()
                 except:
                     sys.stdout.write(
                         "BAILING on {0} - problem converting date\n"
                         .format(document_name)
-                        )
+                    )
                     continue
 
                 # We don't want anything from before the 2009 election.
@@ -272,17 +293,19 @@ class AnswerDetailIterator(BaseDetailIterator):
                 next_url = self.base_url + cell['url']
 
                 if self.next_list_url == next_url:
-                    raise Exception("Possible url loop detected, next url '{0}' has not changed.".format(next_url))
+                    raise Exception(
+                        "Possible url loop detected, next url '{0}' has not changed.".format(next_url))
 
                 self.next_list_url = next_url
                 break
 
 
 page_header_regex = re.compile(ur"\s*(?:{0}|{1})\s*".format(
-        ur'(?:\d+ \[)?[A-Z][a-z]+day, \d+ [A-Z][a-z]+ \d{4}(?:\] \d+)? INTERNAL QUESTION PAPER: (?:NATIONAL ASSEMBLY|NATIONAL COUNCIL OF PROVINCES) NO \d+[─-]\d{4}',
-        ur'[A-Z][a-z]+day, \d+ [A-Z][a-z]+ \d{4} INTERNAL QUESTION PAPER: (?:NATIONAL ASSEMBLY|NATIONAL COUNCIL OF PROVINCES) NO \d+\s*[─-]\s*\d{4} \d+',
-        )
-                               )
+    ur'(?:\d+ \[)?[A-Z][a-z]+day, \d+ [A-Z][a-z]+ \d{4}(?:\] \d+)? INTERNAL QUESTION PAPER: (?:NATIONAL ASSEMBLY|NATIONAL COUNCIL OF PROVINCES) NO \d+[─-]\d{4}',
+    ur'[A-Z][a-z]+day, \d+ [A-Z][a-z]+ \d{4} INTERNAL QUESTION PAPER: (?:NATIONAL ASSEMBLY|NATIONAL COUNCIL OF PROVINCES) NO \d+\s*[─-]\s*\d{4} \d+',
+)
+)
+
 
 def remove_headers_from_page(page):
     ur"""Remove unwanted headers at top of page.
@@ -328,7 +351,8 @@ def remove_headers_from_page(page):
     # the headers, and few enough to prevent us interfering
     # with more than one question if it all goes wrong.
     for text_el in page.xpath('text[position()<=10]'):
-        accumulated += re.match(ur'(?s)<text.*?>(.*?)</text>', lxml.etree.tostring(text_el, encoding='unicode')).group(1)
+        accumulated += re.match(ur'(?s)<text.*?>(.*?)</text>',
+                                lxml.etree.tostring(text_el, encoding='unicode')).group(1)
         accumulated = re.sub(ur'(?u)<i>(.*?)</i>', ur'\1', accumulated)
         accumulated = re.sub(ur'(?u)</i>(.*?)<i>', ur'\1', accumulated)
         accumulated = re.sub(ur'(?u)(\s+)', ur' ', accumulated)
@@ -370,7 +394,7 @@ class QuestionPaperParser(object):
         contents_filename = os.path.join(
             settings.QUESTION_CACHE,
             hashlib.md5(url).hexdigest(),
-            )
+        )
 
         if os.path.exists(contents_filename):
             with open(contents_filename) as f:
@@ -391,7 +415,6 @@ class QuestionPaperParser(object):
 
     def get_question_xml_from_pdf(self, pdfdata):
         return pdftoxml(pdfdata)
-
 
     session_re = re.compile(
         ur"\[No\s*(?P<issue_number>\d+)\s*[\u2013\u2014]\s*(?P<year>\d{4})\]\s+(?P<session>[a-zA-Z]+)\s+SESSION,\s+(?P<parliament>[a-zA-Z]+)\s+PARLIAMENT",
@@ -415,17 +438,18 @@ class QuestionPaperParser(object):
             'SECOND': 2,
             'THIRD': 3,
             'FOURTH': 4,
-            'FOURH': 4, # Yes, really.
+            'FOURH': 4,  # Yes, really.
             'FIFTH': 5,
             'SIXTH': 6,
             'SEVENTH': 7,
             'EIGHTH': 8,
             'NINTH': 9,
             'TENTH': 10,
-            }
+        }
 
         house = self.kwargs['house']
-        date_published = datetime.datetime.strptime(self.kwargs['date'], '%d %B %Y').date()
+        date_published = datetime.datetime.strptime(
+            self.kwargs['date'], '%d %B %Y').date()
 
         question_paper = QuestionPaper(
             document_name=self.kwargs['name'],
@@ -434,22 +458,25 @@ class QuestionPaperParser(object):
             language=self.kwargs['language'],
             document_number=self.kwargs['document_number'],
             source_url=self.kwargs['url'],
-            text='', #lxml.etree.tostring(chunk, pretty_print=True),
-            )
+            text='',  # lxml.etree.tostring(chunk, pretty_print=True),
+        )
 
         session_match = self.session_re.search(chunk)
 
         if session_match:
-            question_paper.session_number = text_to_int.get(session_match.group('session').upper())
-            parliament_number = question_paper.parliament_number = text_to_int.get(session_match.group('parliament').upper())
-            question_paper.issue_number = int(session_match.group('issue_number'))
+            question_paper.session_number = text_to_int.get(
+                session_match.group('session').upper())
+            parliament_number = question_paper.parliament_number = text_to_int.get(
+                session_match.group('parliament').upper())
+            question_paper.issue_number = int(
+                session_match.group('issue_number'))
             question_paper.year = int(session_match.group('year'))
 
             if parliament_number < 4:
                 sys.stdout.write(
                     '\nBAILING OUT: Parliament {0} is too long ago\n'
                     .format(parliament_number)
-                    )
+                )
                 return
 
         else:
@@ -464,10 +491,12 @@ class QuestionPaperParser(object):
                 issue_number=question_paper.issue_number,
                 house=question_paper.house,
                 parliament_number=parliament_number,
-                )
+            )
             # FIXME - We need to be able to cope with reprints of question papers.
-            sys.stdout.write("\nBAILING OUT: Question Paper {0} too similar to\n".format(question_paper.source_url))
-            sys.stdout.write("                            {0}\n".format(old_qp.source_url))
+            sys.stdout.write("\nBAILING OUT: Question Paper {0} too similar to\n".format(
+                question_paper.source_url))
+            sys.stdout.write(
+                "                            {0}\n".format(old_qp.source_url))
         except QuestionPaper.DoesNotExist:
             question_paper.save()
             return question_paper
@@ -540,13 +569,15 @@ class QuestionPaperParser(object):
             elif answer_type == 'W':
                 match_dict[u'written_number'] = number1
             else:
-                sys.stdout.write("SKIPPING: Unrecognised answer type for {0}\n".format(match_dict['identifier']))
+                sys.stdout.write("SKIPPING: Unrecognised answer type for {0}\n".format(
+                    match_dict['identifier']))
                 continue
 
             match_dict[u'paper'] = self.question_paper
 
             match_dict[u'translated'] = bool(match_dict[u'translated'])
-            match_dict[u'questionto'] = match_dict[u'questionto'].replace(':', '')
+            match_dict[u'questionto'] = match_dict[u'questionto'].replace(
+                ':', '')
 
             match_dict[u'date'] = date
             match_dict[u'year'] = date.year
@@ -560,9 +591,9 @@ class QuestionPaperParser(object):
 
         return questions
 
-
     # FIXME - can this be replaced with a call to dateutil?
-    date_re = re.compile(ur"\s*<b>\s*(?P<day_of_week>MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY|SUNDAY),\s*(?P<day>\d{1,2})\s*(?P<month>JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)\s*(?P<year>\d{4})\s*</b>\s*")
+    date_re = re.compile(
+        ur"\s*<b>\s*(?P<day_of_week>MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY|SUNDAY),\s*(?P<day>\d{1,2})\s*(?P<month>JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)\s*(?P<year>\d{4})\s*</b>\s*")
 
     def chunkify(self, root):
         """
@@ -573,9 +604,10 @@ class QuestionPaperParser(object):
 
         """
         text_bits = [
-            re.match(ur'(?s)<text.*?>(.*?)</text>', lxml.etree.tostring(el, encoding='unicode')).group(1)
+            re.match(ur'(?s)<text.*?>(.*?)</text>',
+                     lxml.etree.tostring(el, encoding='unicode')).group(1)
             for el in root.iterfind('.//text')
-            ]
+        ]
 
         # Let's split text_bits up by dates
         chunk = []
@@ -608,13 +640,14 @@ class QuestionPaperParser(object):
 
                 if text_bits:
                     chunk = []
-                    date_str = "{day_of_week}, {day} {month} {year}".format(**date_match.groupdict())
-                    date = datetime.datetime.strptime(date_str, "%A, %d %B %Y").date()
+                    date_str = "{day_of_week}, {day} {month} {year}".format(
+                        **date_match.groupdict())
+                    date = datetime.datetime.strptime(
+                        date_str, "%A, %d %B %Y").date()
 
         intro_chunk = chunks.pop(0)[1]
 
         return intro_chunk, chunks
-
 
     def create_questions_from_xml(self, xmldata, url):
         # Sanity check on number of questions
@@ -643,7 +676,8 @@ class QuestionPaperParser(object):
         sys.stdout.write(' found {0} questions'.format(len(questions)))
 
         if len(questions) != expected_question_count:
-            sys.stdout.write(" expected {0} - SUSPICIOUS".format(expected_question_count))
+            sys.stdout.write(
+                " expected {0} - SUSPICIOUS".format(expected_question_count))
 
         sys.stdout.write('\n')
 
@@ -670,22 +704,25 @@ class QuestionPaperParser(object):
                     # we need to be able to cope with a revised question or a question
                     # changing from oral to written, etc.
                     if question.identifier != existing_question.identifier:
-                        sys.stdout.write("IDENTIFIER CHANGE: {0} already exists as {1} - keeping original version\n".format(question.identifier, existing_question.identifier))
+                        sys.stdout.write("IDENTIFIER CHANGE: {0} already exists as {1} - keeping original version\n".format(
+                            question.identifier, existing_question.identifier))
                     else:
-                        sys.stdout.write("DUPLICATE: {0} already exists - keeping original version\n".format(question.identifier))
+                        sys.stdout.write(
+                            "DUPLICATE: {0} already exists - keeping original version\n".format(question.identifier))
 
                 else:
-                    sys.stdout.write("BAD DUPLICATE: {0} already exists as {1} - keeping OLD VERSION\n".format(question.identifier, existing_question.identifier))
+                    sys.stdout.write("BAD DUPLICATE: {0} already exists as {1} - keeping OLD VERSION\n".format(
+                        question.identifier, existing_question.identifier))
             except Question.DoesNotExist:
                 if Question.objects.filter(
                     written_number=question.written_number,
                     house=question.house,
                     year=question.year,
-                    ).exists():
+                ).exists():
                     sys.stdout.write(
                         "DUPLICATE written_number {0} {1} {2} - SKIPPING\n"
                         .format(question.written_number, question.house, question.year)
-                        )
+                    )
 
                     # Interesting failures here:
                     # 998 - a typo, should have been 898
@@ -693,4 +730,3 @@ class QuestionPaperParser(object):
                     continue
 
                 question.save()
-
