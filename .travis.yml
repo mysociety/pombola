@@ -27,7 +27,6 @@ install:
   - bundle install --deployment --path data/gems --binstubs data/gem-bin
   # Now install the rest of the required Python packages:
   - CFLAGS="-O0" pip install -r requirements.txt
-  - pip install python-coveralls
   # - pip check
   # Create a basic general.yml file:
   - sed -r
@@ -41,20 +40,10 @@ before_script:
   - psql -c 'CREATE EXTENSION postgis;' -U postgres -d pombola
   - ./manage.py migrate --noinput
   - ./manage.py collectstatic --noinput
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 
 script:
   - wget -q --waitretry=1 --retry-connrefused -T 10 -O - http://127.0.0.1:9200
-  - ./run-tests --coverage
-
-after_script:
-  - coverage xml
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-after_success:
-  - coveralls
+  - ./run-tests
 
 env:
-  - ES_VERSION=0.90.13 ES_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz CC_TEST_REPORTER_ID=cd1a0499050b1eba77e364d2795fae1a2e899607ee6ce307e7351f5b42a34d2d
+  - ES_VERSION=0.90.13 ES_DOWNLOAD_URL=https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz

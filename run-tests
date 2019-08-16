@@ -4,14 +4,6 @@ EXIT_CODE=0
 
 cd $(dirname "$BASH_SOURCE")
 
-if [ "$1" = "--coverage" ]
-then
-    shift
-    COVERAGE_PREFIX="coverage run -a --source=pombola,pombola_sayit,wordcloud"
-    coverage erase
-fi
-
-
 update_exit_code() {
     LAST_EXIT_CODE=$?
     if [ $LAST_EXIT_CODE != 0 ]
@@ -29,16 +21,11 @@ TEST_SETTINGS_MODULES=(
 
 for TEST_SETTINGS_MODULE in "${TEST_SETTINGS_MODULES[@]}"
 do
-    COMMAND="$COVERAGE_PREFIX ./manage.py test --settings=$TEST_SETTINGS_MODULE"
+    COMMAND="./manage.py test --settings=$TEST_SETTINGS_MODULE"
     echo Running: $COMMAND "$@"
     $COMMAND "$@"
     update_exit_code
 done
-
-if [ x"$COVERAGE_PREFIX" != x ]
-then
-    coverage html
-fi
 
 # If any test failed, make sure we output an error message in red at
 # the end of the test run, just in case the test failures from the
