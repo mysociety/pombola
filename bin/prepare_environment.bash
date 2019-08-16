@@ -29,6 +29,7 @@ source $virtualenv_activate
 rm -rf $virtualenv_dir/src/popit-resolver
 rm -rf $virtualenv_dir/src/popit-django
 rm -rf $virtualenv_dir/src/pygeocoder
+rm -rf $virtualenv_dir/src/za_hansard
 
 # Install all the packages, making sure that a couple of packages that
 # used to be required, but which would now cause problems, aren't present:
