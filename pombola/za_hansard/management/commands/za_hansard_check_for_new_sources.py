@@ -32,7 +32,7 @@ class Command(BaseCommand):
         make_option('--delete-existing',
                     default=False,
                     action='store_true',
-                    help='Delete existing sources (implies --check-all)',
+                    help='Delete existing sources',
                     ),
     )
 
