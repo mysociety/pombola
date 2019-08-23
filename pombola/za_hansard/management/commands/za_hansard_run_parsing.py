@@ -74,7 +74,7 @@ class Command(BaseCommand):
 
         sources.defer('xml')
         for s in (sources[:limit] if limit else sources):
-            if s.language != 'English':
+            if s.language != 'English' and s.language != 'ENG':
                 continue
             s.last_processing_attempt = datetime.datetime.now().date()
             s.save()
