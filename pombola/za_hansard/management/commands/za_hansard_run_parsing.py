@@ -94,4 +94,4 @@ class Command(BaseCommand):
                 self.stdout.write("Processed %s (%d)\n" %
                                   (s.document_name, s.document_number))
             except Exception as e:
-                self.stderr.write("WARN: Failed to run parsing: %s" % str(e))
+                self.stderr.write("WARN: Failed to run parsing for %s: %s" % (s.id, str(e)))
