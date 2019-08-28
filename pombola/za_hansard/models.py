@@ -114,7 +114,7 @@ class Source(models.Model):
 
         # If not fetch the file, save to cache and then return fh
         h = httplib2.Http()
-        url = 'http://www.parliament.gov.za/live/' + self.url
+        url = self.url
 
         def request_url(url):
             if debug:
