@@ -20,7 +20,7 @@ from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
 
 from pombola.za_hansard.models import Source, SourceUrlCouldNotBeRetrieved
-from pombola.za_hansard.parse import ZAHansardParser
+from pombola.za_hansard.parse import ZAHansardParser, ConversionException
 
 
 class FailedToRetrieveSourceException (Exception):
@@ -91,7 +91,7 @@ class Command(BaseCommand):
 
                 open('%s.xml' % filename, 'w').write(xml)
                 s.save()
-                self.stdout.write("Processed %s (%d)\n" %
+                self.stdout.write(u"Processed %s (%d)\n" %
                                   (s.document_name, s.document_number))
-            except Exception as e:
-                self.stderr.write("WARN: Failed to run parsing for %s: %s" % (s.id, str(e)))
+            except ConversionException as e:
+                self.stderr.write(u"WARN: Failed to run parsing for %s: %s" % (s.id, unicode(e)))

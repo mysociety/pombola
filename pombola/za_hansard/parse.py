@@ -388,8 +388,7 @@ class ZAHansardParser(object):
         (stdoutdata, stderrdata) = antiword.communicate()
         if antiword.returncode:
             # e.g. not 0 (success) or None (still running) so presumably an error
-            raise ConversionException("Could not convert %s (%s)" % (
-                document_path, stdoutdata.rstrip()))
+            raise ConversionException(u"antiword error: %s" % stdoutdata.decode('utf-8').rstrip())
 
         # lines = imap(cleanLine, iter(antiword.stdout.readline, b''))
         lines = imap(cleanLine, iter(stdoutdata.split('\n')))
