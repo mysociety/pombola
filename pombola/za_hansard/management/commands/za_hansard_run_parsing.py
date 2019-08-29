@@ -87,7 +87,7 @@ class Command(BaseCommand):
 
                 open('%s.xml' % filename, 'w').write(xml)
                 s.save()
-                self.stdout.write(u"Processed %s (%d)\n" %
-                                  (s.document_name, s.document_number))
+                self.stdout.write(u"Processed {} ({})\n".format(
+                                  s.document_name, s.document_number))
             except ConversionException as e:
                 self.stderr.write(u"WARN: Failed to run parsing for %s: %s" % (s.id, unicode(e)))
