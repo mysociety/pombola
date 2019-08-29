@@ -6,6 +6,8 @@ from pombola.za_hansard.models import Source
 
 
 class Command(BaseCommand):
+    help = 'Check for new sources from the PMG API'
+
     def add_arguments(self, parser):
         parser.add_argument('--delete-existing', action='store_true', default=False, help='Delete all existing sources')
 
@@ -15,14 +17,16 @@ class Command(BaseCommand):
 
         hansard_url = 'https://api.pmg.org.za/hansard/'
         while True:
-            self.stdout.write(u"Fetching {}\n".format(hansard_url))
+            if options['verbosity'] > 1:
+                self.stdout.write(u"Fetching {}\n".format(hansard_url))
             response = requests.get(hansard_url)
             response.raise_for_status()
             response_json = response.json()
             hansards = response_json['results']
             urls = [h['url'] for h in hansards]
             for url in urls:
-                self.stdout.write(u"Fetching {}\n".format(url))
+                if options['verbosity'] > 1:
+                    self.stdout.write(u"Fetching {}\n".format(url))
                 response = requests.get(url)
                 response.raise_for_status()
                 hansard = response.json()
@@ -42,10 +46,11 @@ class Command(BaseCommand):
                         'date': hansard['date'].split('T')[0],
                     }
                 })
-                if created:
-                    self.stdout.write(u"Created one new source: {}\n".format(db_source))
-                else:
-                    self.stdout.write(u"Existing source found: {}\n".format(db_source))
+                if options['verbosity'] > 1:
+                    if created:
+                        self.stdout.write(u"Created one new source: {}\n".format(db_source))
+                    else:
+                        self.stdout.write(u"Existing source found: {}\n".format(db_source))
             if not response_json['next']:
                 break
             hansard_url = response_json['next']
