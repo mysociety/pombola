@@ -6,7 +6,13 @@ from pombola.za_hansard.models import Source
 
 
 class Command(BaseCommand):
-    def handle(self, *args, **kwargs):
+    def add_arguments(self, parser):
+        parser.add_argument('--delete-existing', action='store_true', default=False, help='Delete all existing sources')
+
+    def handle(self, *args, **options):
+        if options['delete_existing']:
+            Source.objects.all().delete()
+
         hansard_url = 'https://api.pmg.org.za/hansard/'
         while True:
             self.stdout.write(u"Fetching {}\n".format(hansard_url))
