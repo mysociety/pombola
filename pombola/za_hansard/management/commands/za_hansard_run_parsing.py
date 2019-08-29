@@ -23,10 +23,6 @@ from pombola.za_hansard.models import Source, SourceUrlCouldNotBeRetrieved
 from pombola.za_hansard.parse import ZAHansardParser, ConversionException
 
 
-class FailedToRetrieveSourceException (Exception):
-    pass
-
-
 class Command(BaseCommand):
     help = 'Parse unparsed'
     option_list = BaseCommand.option_list + (
