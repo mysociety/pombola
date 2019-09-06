@@ -5,7 +5,7 @@
 ### General useful bits
 py-bcrypt==0.4
 PyYAML==5.1
-Pillow==3.2.0
+Pillow==6.1.0
 
 ### Database drivers
 psycopg2==2.8.2
@@ -28,7 +28,7 @@ djangorestframework==3.3.2
 django-registration-defaults==0.3
 
 ### Pombola dependencies
-sorl-thumbnail==12.3
+sorl-thumbnail==12.4.1
 django_date_extensions==0.1dev
 django-ajax-selects==1.4.2
 django-autocomplete-light==2.3.3
