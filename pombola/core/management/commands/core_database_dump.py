@@ -5,7 +5,7 @@ import sys
 from tempfile import NamedTemporaryFile
 
 from django.conf import settings
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.db import connection
 
 
@@ -264,7 +264,10 @@ publicly) add them to 'tables_to_ignore'.'''
                         shell_command = 'PGPASSWORD={0} '.format(
                             shellquote(db_settings['PASSWORD']))
                     shell_command += ' '.join(shellquote(p) for p in command)
-                    subprocess.check_call(['ssh', host, shell_command], stdout=f)
+                    try:
+                        subprocess.check_call(['ssh', host, shell_command], stdout=f)
+                    except subprocess.CalledProcessError:
+                        raise CommandError('Problem trying to ssh to {}'.format(host))
                 else:
                     subprocess.check_call(command, stdout=f)
             os.chmod(ntf.name, 0o644)
