@@ -990,6 +990,15 @@ class SAMpAttendancePageTest(TestCase):
         self.assertEqual(context['attendance_data'], expected)
 
 
+        # When filtered by party, only display ministers with active memberships
+        url = "%s?year=2000&party=PARTY1" % reverse('mp-attendance')
+        context = self.client.get(url).context
+
+        expected = [
+            {'name': u'3, P', 'pa_url': u'/person/person3/', 'party_name': u'PARTY1', 'position': u'deputy-minister', 'present': 0}]
+        self.assertEqual(context['attendance_data'], expected)
+
+
     def test_divide_2019_attendance_records_pre_and_post_elections(self):
         # Pre election: 01/01/2019 - 30/06/2019
         # Post election: 01/07/2019 - 31/12/2019
