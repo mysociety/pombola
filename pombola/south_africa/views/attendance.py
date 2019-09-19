@@ -193,8 +193,12 @@ class SAMpAttendanceView(TemplateView):
             for slug in minister_slugs:
                 minister = ministers[slug][0].person
                 position = ministers[slug][-1].title.slug
-                if ctx_party and minister.parties()[0].slug.upper() != ctx_party:
-                    # Only include ministers belonging to the party selected.
+                if ctx_party and not minister.parties():
+                    # Some previous ministers are not currently a member of a party.
+                    # Don't display them when a party is selected, but do all parties are shown.
+                    continue
+                if ctx_party and minister.parties() and minister.parties()[0].slug.upper() != ctx_party:
+                    # Don't show ministers who aren't currently members of the party selected.
                     continue
                 else:
                     minister_attendance.append(self.build_minister_zero_attendance(minister, position))
