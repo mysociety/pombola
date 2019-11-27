@@ -126,7 +126,7 @@ class KenyaParser():
             shell = False,
             stderr = subprocess.PIPE,
         ).communicate()
-        wanted_version = 'pdftohtml version 0.18.4'
+        wanted_version = 'pdftohtml version 0.48.0'
         if wanted_version not in version_error:
             raise Exception( "Bad pdftohtml version - got '%s' but want '%s'" % (version_error, wanted_version) )
 
