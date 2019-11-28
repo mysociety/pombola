@@ -16,7 +16,7 @@ OPTIONAL_APPS = [
 TWITTER_USERNAME = 'MzalendoWatch'
 TWITTER_WIDGET_ID = '354553209517404160'
 
-BLOG_RSS_FEED = 'http://www.mzalendo.com/feed/'
+BLOG_RSS_FEED = 'https://www.mzalendo.com/feed/'
 
 MAP_BOUNDING_BOX_NORTH = 5.06
 MAP_BOUNDING_BOX_EAST = 41.91
